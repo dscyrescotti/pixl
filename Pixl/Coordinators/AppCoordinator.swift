@@ -2,22 +2,35 @@
 //  AppCoordinator.swift
 //  Pixl
 //
-//  Created by Dscyre Scotti on 20/04/2021.
+//  Created by Dscyre Scotti on 21/04/2021.
 //
 
-import Foundation
-import UIKit
+import XCoordinator
 
-final class AppCoordinator: Coordinator {
-    var childCoordinator: [Coordinator] = .init()
-    let navigationController: UINavigationController
-    
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
+enum AppRoute: Route {
+    case login
+    case home
+}
+
+class AppCoordinator: NavigationCoordinator<AppRoute> {
+
+    init() {
+        super.init(initialRoute: .login)
+        rootViewController.navigationBar.prefersLargeTitles = true
     }
     
-    func start() {
-        let vc = ViewController()
-        navigationController.pushViewController(vc, animated: true)
+    override func prepareTransition(for route: RouteType) -> NavigationTransition {
+        switch route {
+        case .login:
+            let viewModel = LoginViewModel(unownedRouter)
+            let loginViewController = LoginViewController()
+            loginViewController.bind(viewModel)
+            return .push(loginViewController)
+        case .home:
+            let coordinator = HomeCoordinator()
+            coordinator.rootViewController.modalPresentationStyle = .fullScreen
+            return .presentOnRoot(coordinator.strongRouter)
+        }
     }
+    
 }
