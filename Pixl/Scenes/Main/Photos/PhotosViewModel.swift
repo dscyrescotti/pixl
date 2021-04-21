@@ -14,6 +14,8 @@ import Action
 
 class PhotosViewModel {
     
+    private var isLoading = false
+    
     var photos = BehaviorRelay<[UIImage]>(value: [])
     
     private let router: UnownedRouter<HomeRoute>
@@ -23,12 +25,16 @@ class PhotosViewModel {
         self.photos.accept(testPhotos)
     }
     
-    var testPhotos = [1,2,3,2,3,1,2,3,1,3,1,2].compactMap {
+    var testPhotos = [1,2,3,1,2,3,1,2,3].shuffled().compactMap {
         UIImage(named: String($0))
     }
     
     func nextPhotos() {
-        photos.accept(testPhotos)
+        if !isLoading {
+            isLoading = true
+            photos.accept(photos.value + testPhotos)
+            isLoading = false
+        }
     }
     
 }

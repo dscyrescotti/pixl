@@ -24,10 +24,12 @@ class PhotosViewController: UIViewController, Bindable {
     
     func bindViewModel() {
         viewModel.photos
-            .bind(to: collectionView.rx.items(cellIdentifier: PhotoCell.identifier)) { _, image, cell in
-                guard let cell = cell as? PhotoCell else { return }
+            .bind(to: collectionView.rx.items(cellIdentifier: PhotoCell.identifier, cellType: PhotoCell.self)) { _, image, cell in
                 cell.configure(with: image)
             }
+            .disposed(by: bag)
+        
+        collectionView.rx.setDelegate(self)
             .disposed(by: bag)
     }
 }
@@ -47,6 +49,7 @@ extension PhotosViewController {
         collectionView.backgroundColor = .systemBackground
         collectionView.contentInset = .init(top: 5, left: 5, bottom: 5, right: 5)
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: PhotoCell.identifier)
+        collectionView.alwaysBounceVertical = true
         
         view.addSubview(collectionView)
     }
@@ -69,8 +72,16 @@ extension PhotosViewController {
     }
 }
 
-extension PhotosViewController: WaterfallLayoutDelegate {
+extension PhotosViewController: WaterfallLayoutDelegate, UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, heightForCellAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
         viewModel.photos.value[indexPath.item].height(forWidth: withWidth)
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentOffsetX = scrollView.contentOffset.x
+        if contentOffsetX >= (scrollView.contentSize.width - scrollView.bounds.width) {
+            self.viewModel.nextPhotos()
+        }
+    }
+
 }
