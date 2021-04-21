@@ -18,6 +18,7 @@ class MainCoordinator: TabBarCoordinator<MainRoute> {
     
     init(_ router: UnownedRouter<HomeRoute>) {
         let photosViewController = PhotosViewController()
+        photosViewController.bind(PhotosViewModel(router))
         photosViewController.tabBarItem = .init(title: "Photos", image: UIImage(systemName: "photo.on.rectangle.angled"), tag: 0)
         
         let collectionsViewController = CollectionsViewController()

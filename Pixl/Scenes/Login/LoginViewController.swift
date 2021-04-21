@@ -21,7 +21,6 @@ class LoginViewController: UIViewController, Bindable {
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 10
         $0.backgroundColor = .systemGreen
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
     override func viewDidLoad() {
