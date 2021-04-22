@@ -25,8 +25,10 @@ class PhotosViewModel {
         self.photos.accept(testPhotos)
     }
     
-    var testPhotos = [1,2,3,1,2,3,1,2,3].shuffled().compactMap {
-        UIImage(named: String($0))
+    var testPhotos: [UIImage] {
+        [1,2,3,1,2,3,1,2,3].shuffled().compactMap {
+            UIImage(named: String($0))
+        }
     }
     
     func nextPhotos() {

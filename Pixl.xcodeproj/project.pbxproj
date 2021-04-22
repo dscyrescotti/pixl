@@ -39,7 +39,6 @@
 		E6EF7A9526307F6900CFFE5E /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EF7A9426307F6800CFFE5E /* UIImage+.swift */; };
 		E6FE84F026305FA90018E269 /* WaterfallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FE84EF26305FA90018E269 /* WaterfallLayout.swift */; };
 		E6FE84F5263062770018E269 /* PhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FE84F4263062770018E269 /* PhotosViewModel.swift */; };
-		E6FE84FA263065DB0018E269 /* Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FE84F9263065DB0018E269 /* Orientation.swift */; };
 		E6FE850026306BB30018E269 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FE84FF26306BB30018E269 /* PhotoCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -88,7 +87,6 @@
 		E6EF7A9426307F6800CFFE5E /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		E6FE84EF26305FA90018E269 /* WaterfallLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterfallLayout.swift; sourceTree = "<group>"; };
 		E6FE84F4263062770018E269 /* PhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewModel.swift; sourceTree = "<group>"; };
-		E6FE84F9263065DB0018E269 /* Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orientation.swift; sourceTree = "<group>"; };
 		E6FE84FF26306BB30018E269 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -243,7 +241,6 @@
 			isa = PBXGroup;
 			children = (
 				E68BFFAD262FDE5B00CC908F /* Bindable.swift */,
-				E6FE84F9263065DB0018E269 /* Orientation.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -467,7 +464,6 @@
 				E6A5E92C262FD666006576D5 /* AppCoordinator.swift in Sources */,
 				E64AB36B263006D50099101C /* MainViewModel.swift in Sources */,
 				E68BFFAE262FDE5B00CC908F /* Bindable.swift in Sources */,
-				E6FE84FA263065DB0018E269 /* Orientation.swift in Sources */,
 				E68BFFA2262FDB2100CC908F /* LoginViewModel.swift in Sources */,
 				E633AAC0262EE6DB00ACB20E /* AppDelegate.swift in Sources */,
 				E68BFF97262FD96700CC908F /* LoginViewController.swift in Sources */,

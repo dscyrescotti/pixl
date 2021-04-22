@@ -12,11 +12,11 @@ class PhotosViewController: UIViewController, Bindable {
     
     var viewModel: PhotosViewModel!
     private var bag = DisposeBag()
-    
-    var photos: [UIImage] = .init()
-    var testPhotos = [1,2,3,1,2,3,1,2,3].shuffled().compactMap {
-        UIImage(named: String($0))
-    }
+//
+//    var photos: [UIImage] = .init()
+//    var testPhotos = [1,2,3,1,2,3,1,2,3].shuffled().compactMap {
+//        UIImage(named: String($0))
+//    }
     
     private var collectionView: UICollectionView!
 
@@ -28,6 +28,24 @@ class PhotosViewController: UIViewController, Bindable {
     }
     
     func bindViewModel() {
+        viewModel.photos
+            .bind(to: collectionView.rx.items(cellIdentifier: PhotoCell.identifier, cellType: PhotoCell.self)) { item, element, cell in
+                cell.configure(with: element)
+            }
+            .disposed(by: bag)
+        
+        collectionView.rx.didScroll
+            .filter {
+                let offsetY = self.collectionView.contentOffset.y
+                let contentHeight = self.collectionView.contentSize.height
+
+                return offsetY > contentHeight - self.collectionView.frame.size.height
+            }
+            .subscribe(onNext: {
+                self.viewModel.nextPhotos()
+            })
+            .disposed(by: bag)
+            
     }
 }
 
@@ -46,13 +64,13 @@ extension PhotosViewController {
         collectionView.backgroundColor = .systemBackground
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: PhotoCell.identifier)
         collectionView.alwaysBounceVertical = true
-        collectionView.delegate = self
-        collectionView.dataSource = self
+//        collectionView.delegate = self
+//        collectionView.dataSource = self
         
         view.addSubview(collectionView)
         
-        photos.append(contentsOf: testPhotos)
-        collectionView.reloadData()
+//        photos.append(contentsOf: testPhotos)
+//        collectionView.reloadData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -80,36 +98,35 @@ extension PhotosViewController {
     }
 }
 
-extension PhotosViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+//extension PhotosViewController: UICollectionViewDelegate {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        photos.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.identifier, for: indexPath) as? PhotoCell else { fatalError() }
-        cell.configure(with: photos[indexPath.item])
-        return cell
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-       let offsetY = scrollView.contentOffset.y
-       let contentHeight = scrollView.contentSize.height
-
-       if offsetY > contentHeight - scrollView.frame.size.height {
-        self.photos.append(contentsOf: testPhotos)
-          self.collectionView.reloadData()
-       }
-    }
-
-}
+//    func numberOfSections(in collectionView: UICollectionView) -> Int {
+//        1
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        photos.count
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.identifier, for: indexPath) as? PhotoCell else { fatalError() }
+//        cell.configure(with: photos[indexPath.item])
+//        return cell
+//    }
+//
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let offsetY = scrollView.contentOffset.y
+//        let contentHeight = scrollView.contentSize.height
+//
+//        if offsetY > contentHeight - scrollView.frame.size.height {
+//            self.viewModel.nextPhotos()
+//        }
+//    }
+//
+//}
 
 extension PhotosViewController: WaterfallLayoutDelegate {
     func collectionView(collectionView: UICollectionView, heightForCellAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
-        photos[indexPath.item].height(forWidth: withWidth)
+        viewModel.photos.value[indexPath.item].height(forWidth: withWidth)
     }
 }
