@@ -15,7 +15,7 @@ enum AppRoute: Route {
 class AppCoordinator: NavigationCoordinator<AppRoute> {
 
     init() {
-        super.init(initialRoute: .login)
+        super.init(initialRoute: .home)
         rootViewController.navigationBar.prefersLargeTitles = true
     }
     

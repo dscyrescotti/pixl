@@ -16,7 +16,7 @@ class PhotosViewModel {
     
     private var isLoading = false
     
-    var photos = BehaviorRelay<[UIImage]>(value: [])
+    lazy var photos = BehaviorRelay<[UIImage]>(value: [])
     
     private let router: UnownedRouter<HomeRoute>
     

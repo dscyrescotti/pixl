@@ -15,6 +15,7 @@ class PhotoCell: UICollectionViewCell {
         $0.contentMode = .scaleAspectFill
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 10
+        $0.backgroundColor = .systemTeal
     }
     
     override init(frame: CGRect) {
@@ -35,5 +36,10 @@ class PhotoCell: UICollectionViewCell {
     
     func configure(with image: UIImage) {
         imageView.image = image
+    }
+    
+    override func prepareForReuse() {
+        imageView.image = nil
+        super.prepareForReuse()
     }
 }

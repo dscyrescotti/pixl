@@ -34,6 +34,8 @@
 		E6A5E91C262FD586006576D5 /* RxAlamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E6A5E91B262FD586006576D5 /* RxAlamofire */; };
 		E6A5E924262FD5F3006576D5 /* XCoordinator in Frameworks */ = {isa = PBXBuildFile; productRef = E6A5E923262FD5F3006576D5 /* XCoordinator */; };
 		E6A5E92C262FD666006576D5 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A5E92B262FD666006576D5 /* AppCoordinator.swift */; };
+		E6D9E631263182D2005BB2A7 /* UIScrollView_InfiniteScroll in Frameworks */ = {isa = PBXBuildFile; productRef = E6D9E630263182D2005BB2A7 /* UIScrollView_InfiniteScroll */; };
+		E6D9E636263189B2005BB2A7 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D9E635263189B2005BB2A7 /* UIView+.swift */; };
 		E6EF7A9526307F6900CFFE5E /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EF7A9426307F6800CFFE5E /* UIImage+.swift */; };
 		E6FE84F026305FA90018E269 /* WaterfallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FE84EF26305FA90018E269 /* WaterfallLayout.swift */; };
 		E6FE84F5263062770018E269 /* PhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FE84F4263062770018E269 /* PhotosViewModel.swift */; };
@@ -82,6 +84,7 @@
 		E68BFFE4262FFA8500CC908F /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		E68BFFED263001FC00CC908F /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E6A5E92B262FD666006576D5 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		E6D9E635263189B2005BB2A7 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		E6EF7A9426307F6800CFFE5E /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		E6FE84EF26305FA90018E269 /* WaterfallLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterfallLayout.swift; sourceTree = "<group>"; };
 		E6FE84F4263062770018E269 /* PhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewModel.swift; sourceTree = "<group>"; };
@@ -101,6 +104,7 @@
 				E6A5E912262FD50F006576D5 /* RxRelay in Frameworks */,
 				E68BFFA8262FDC1E00CC908F /* Action in Frameworks */,
 				E6A5E91C262FD586006576D5 /* RxAlamofire in Frameworks */,
+				E6D9E631263182D2005BB2A7 /* UIScrollView_InfiniteScroll in Frameworks */,
 				E6A5E924262FD5F3006576D5 /* XCoordinator in Frameworks */,
 				E6A5E910262FD50F006576D5 /* RxSwift in Frameworks */,
 				E68BFFBA262FE6A200CC908F /* SnapKit in Frameworks */,
@@ -273,6 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				E6EF7A9426307F6800CFFE5E /* UIImage+.swift */,
+				E6D9E635263189B2005BB2A7 /* UIView+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -329,6 +334,7 @@
 				E68BFFA7262FDC1E00CC908F /* Action */,
 				E68BFFB3262FE14500CC908F /* Then */,
 				E68BFFB9262FE6A200CC908F /* SnapKit */,
+				E6D9E630263182D2005BB2A7 /* UIScrollView_InfiniteScroll */,
 			);
 			productName = Pixl;
 			productReference = E633AABC262EE6DB00ACB20E /* Pixl.app */;
@@ -408,6 +414,7 @@
 				E68BFFA6262FDC1E00CC908F /* XCRemoteSwiftPackageReference "Action" */,
 				E68BFFB2262FE14500CC908F /* XCRemoteSwiftPackageReference "Then" */,
 				E68BFFB8262FE6A200CC908F /* XCRemoteSwiftPackageReference "SnapKit" */,
+				E6D9E62F263182D2005BB2A7 /* XCRemoteSwiftPackageReference "UIScrollView-InfiniteScroll" */,
 			);
 			productRefGroup = E633AABD262EE6DB00ACB20E /* Products */;
 			projectDirPath = "";
@@ -466,6 +473,7 @@
 				E68BFF97262FD96700CC908F /* LoginViewController.swift in Sources */,
 				E68BFFE5262FFA8500CC908F /* HomeCoordinator.swift in Sources */,
 				E6FE84F5263062770018E269 /* PhotosViewModel.swift in Sources */,
+				E6D9E636263189B2005BB2A7 /* UIView+.swift in Sources */,
 				E6EF7A9526307F6900CFFE5E /* UIImage+.swift in Sources */,
 				E633AAC2262EE6DB00ACB20E /* SceneDelegate.swift in Sources */,
 				E68BFFD7262FF19400CC908F /* MainCoordinator.swift in Sources */,
@@ -837,6 +845,14 @@
 				kind = branch;
 			};
 		};
+		E6D9E62F263182D2005BB2A7 /* XCRemoteSwiftPackageReference "UIScrollView-InfiniteScroll" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pronebird/UIScrollView-InfiniteScroll.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -889,6 +905,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E6A5E920262FD5F3006576D5 /* XCRemoteSwiftPackageReference "XCoordinator" */;
 			productName = XCoordinator;
+		};
+		E6D9E630263182D2005BB2A7 /* UIScrollView_InfiniteScroll */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E6D9E62F263182D2005BB2A7 /* XCRemoteSwiftPackageReference "UIScrollView-InfiniteScroll" */;
+			productName = UIScrollView_InfiniteScroll;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

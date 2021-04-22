@@ -13,6 +13,11 @@ class PhotosViewController: UIViewController, Bindable {
     var viewModel: PhotosViewModel!
     private var bag = DisposeBag()
     
+    var photos: [UIImage] = .init()
+    var testPhotos = [1,2,3,1,2,3,1,2,3].shuffled().compactMap {
+        UIImage(named: String($0))
+    }
+    
     private var collectionView: UICollectionView!
 
     override func viewDidLoad() {
@@ -23,14 +28,6 @@ class PhotosViewController: UIViewController, Bindable {
     }
     
     func bindViewModel() {
-        viewModel.photos
-            .bind(to: collectionView.rx.items(cellIdentifier: PhotoCell.identifier, cellType: PhotoCell.self)) { _, image, cell in
-                cell.configure(with: image)
-            }
-            .disposed(by: bag)
-        
-        collectionView.rx.setDelegate(self)
-            .disposed(by: bag)
     }
 }
 
@@ -41,17 +38,21 @@ extension PhotosViewController {
     
     func setUpCollectionView() {
         let layout = WaterfallLayout()
-        layout.cellPadding = 5
         layout.delegate = self
-        layout.numberOfColumns = Orientation.if(portrait: 2, landscape: 3)
+        layout.cellPadding = 5
+        layout.numberOfColumns = view.orientation(portrait: 2, landscape: 3)
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .systemBackground
-        collectionView.contentInset = .init(top: 5, left: 5, bottom: 5, right: 5)
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: PhotoCell.identifier)
         collectionView.alwaysBounceVertical = true
+        collectionView.delegate = self
+        collectionView.dataSource = self
         
         view.addSubview(collectionView)
+        
+        photos.append(contentsOf: testPhotos)
+        collectionView.reloadData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -64,24 +65,51 @@ extension PhotosViewController {
         }
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        print("Warning")
+    }
+    
+    
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         guard let layout = collectionView.collectionViewLayout as? WaterfallLayout else { return }
-        layout.numberOfColumns = Orientation.if(portrait: 2, landscape: 3)
+        layout.numberOfColumns = view.orientation(portrait: 2, landscape: 3)
         layout.invalidateLayout()
     }
 }
 
-extension PhotosViewController: WaterfallLayoutDelegate, UICollectionViewDelegate {
-    func collectionView(collectionView: UICollectionView, heightForCellAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
-        viewModel.photos.value[indexPath.item].height(forWidth: withWidth)
+extension PhotosViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        photos.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.identifier, for: indexPath) as? PhotoCell else { fatalError() }
+        cell.configure(with: photos[indexPath.item])
+        return cell
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let contentOffsetX = scrollView.contentOffset.x
-        if contentOffsetX >= (scrollView.contentSize.width - scrollView.bounds.width) {
-            self.viewModel.nextPhotos()
-        }
+       let offsetY = scrollView.contentOffset.y
+       let contentHeight = scrollView.contentSize.height
+
+       if offsetY > contentHeight - scrollView.frame.size.height {
+        self.photos.append(contentsOf: testPhotos)
+          self.collectionView.reloadData()
+       }
     }
 
+}
+
+extension PhotosViewController: WaterfallLayoutDelegate {
+    func collectionView(collectionView: UICollectionView, heightForCellAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
+        photos[indexPath.item].height(forWidth: withWidth)
+    }
 }
