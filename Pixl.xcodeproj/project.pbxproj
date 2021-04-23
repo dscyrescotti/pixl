@@ -22,6 +22,7 @@
 		E64BB25926330AD50053C309 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64BB25826330AD50053C309 /* AppCoordinator.swift */; };
 		E660BB0C2631B83200739F15 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660BB0B2631B83200739F15 /* APIService.swift */; };
 		E660BB122631D03200739F15 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660BB112631D03200739F15 /* Photo.swift */; };
+		E677E54726332C40007AAB6A /* PhotoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E677E54626332C40007AAB6A /* PhotoDetailsViewController.swift */; };
 		E68BFF97262FD96700CC908F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68BFF96262FD96700CC908F /* LoginViewController.swift */; };
 		E68BFF9D262FDA2200CC908F /* XCoordinatorRx in Frameworks */ = {isa = PBXBuildFile; productRef = E68BFF9C262FDA2200CC908F /* XCoordinatorRx */; };
 		E68BFFA2262FDB2100CC908F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68BFFA1262FDB2100CC908F /* LoginViewModel.swift */; };
@@ -85,6 +86,7 @@
 		E64BB25826330AD50053C309 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		E660BB0B2631B83200739F15 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		E660BB112631D03200739F15 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		E677E54626332C40007AAB6A /* PhotoDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsViewController.swift; sourceTree = "<group>"; };
 		E68BFF96262FD96700CC908F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E68BFFA1262FDB2100CC908F /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E68BFFAD262FDE5B00CC908F /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 		E677E542263317F6007AAB6A /* PhotoDetails */ = {
 			isa = PBXGroup;
 			children = (
+				E677E54626332C40007AAB6A /* PhotoDetailsViewController.swift */,
 			);
 			path = PhotoDetails;
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 				E68BFFE5262FFA8500CC908F /* HomeCoordinator.swift in Sources */,
 				E6FE84F5263062770018E269 /* PhotosViewModel.swift in Sources */,
 				E6D9E636263189B2005BB2A7 /* UIView+.swift in Sources */,
+				E677E54726332C40007AAB6A /* PhotoDetailsViewController.swift in Sources */,
 				E6EF7A9526307F6900CFFE5E /* UIImage+.swift in Sources */,
 				E633AAC2262EE6DB00ACB20E /* SceneDelegate.swift in Sources */,
 				E68BFFD7262FF19400CC908F /* MainCoordinator.swift in Sources */,
