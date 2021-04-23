@@ -35,6 +35,7 @@ extension MainViewController {
     func setUp() {
         title = "pixl"
         
+        view.backgroundColor = .systemBackground
         navigationItem.rightBarButtonItem = barButton
     }
 }

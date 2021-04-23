@@ -19,6 +19,7 @@
 		E64BB2342632863F0053C309 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E64BB2332632863F0053C309 /* Kingfisher */; };
 		E64BB2412632BFED0053C309 /* BlurHash.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64BB2402632BFED0053C309 /* BlurHash.swift */; };
 		E64BB2462632C7070053C309 /* CGSize+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64BB2452632C7070053C309 /* CGSize+.swift */; };
+		E64BB25926330AD50053C309 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64BB25826330AD50053C309 /* AppCoordinator.swift */; };
 		E660BB0C2631B83200739F15 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660BB0B2631B83200739F15 /* APIService.swift */; };
 		E660BB122631D03200739F15 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660BB112631D03200739F15 /* Photo.swift */; };
 		E68BFF97262FD96700CC908F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68BFF96262FD96700CC908F /* LoginViewController.swift */; };
@@ -39,7 +40,7 @@
 		E6A5E916262FD50F006576D5 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = E6A5E915262FD50F006576D5 /* RxBlocking */; };
 		E6A5E91C262FD586006576D5 /* RxAlamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E6A5E91B262FD586006576D5 /* RxAlamofire */; };
 		E6A5E924262FD5F3006576D5 /* XCoordinator in Frameworks */ = {isa = PBXBuildFile; productRef = E6A5E923262FD5F3006576D5 /* XCoordinator */; };
-		E6A5E92C262FD666006576D5 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A5E92B262FD666006576D5 /* AppCoordinator.swift */; };
+		E6A5E92C262FD666006576D5 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A5E92B262FD666006576D5 /* AuthCoordinator.swift */; };
 		E6D9E636263189B2005BB2A7 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D9E635263189B2005BB2A7 /* UIView+.swift */; };
 		E6EF7A9526307F6900CFFE5E /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EF7A9426307F6800CFFE5E /* UIImage+.swift */; };
 		E6FE84F026305FA90018E269 /* WaterfallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FE84EF26305FA90018E269 /* WaterfallLayout.swift */; };
@@ -81,6 +82,7 @@
 		E64AB36A263006D50099101C /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		E64BB2402632BFED0053C309 /* BlurHash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurHash.swift; sourceTree = "<group>"; };
 		E64BB2452632C7070053C309 /* CGSize+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+.swift"; sourceTree = "<group>"; };
+		E64BB25826330AD50053C309 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		E660BB0B2631B83200739F15 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		E660BB112631D03200739F15 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		E68BFF96262FD96700CC908F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -91,7 +93,7 @@
 		E68BFFDC262FF31300CC908F /* CollectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsViewController.swift; sourceTree = "<group>"; };
 		E68BFFE4262FFA8500CC908F /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		E68BFFED263001FC00CC908F /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		E6A5E92B262FD666006576D5 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		E6A5E92B262FD666006576D5 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		E6D9E635263189B2005BB2A7 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		E6EF7A9426307F6800CFFE5E /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		E6FE84EF26305FA90018E269 /* WaterfallLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterfallLayout.swift; sourceTree = "<group>"; };
@@ -205,9 +207,10 @@
 		E633AAF9262EE77E00ACB20E /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				E6A5E92B262FD666006576D5 /* AppCoordinator.swift */,
+				E6A5E92B262FD666006576D5 /* AuthCoordinator.swift */,
 				E68BFFD6262FF19400CC908F /* MainCoordinator.swift */,
 				E68BFFE4262FFA8500CC908F /* HomeCoordinator.swift */,
+				E64BB25826330AD50053C309 /* AppCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -493,10 +496,11 @@
 				E68BFFEE263001FC00CC908F /* SettingsViewController.swift in Sources */,
 				E6FE84F026305FA90018E269 /* WaterfallLayout.swift in Sources */,
 				E660BB122631D03200739F15 /* Photo.swift in Sources */,
+				E64BB25926330AD50053C309 /* AppCoordinator.swift in Sources */,
 				E68BFFC9262FEF9C00CC908F /* PhotosViewController.swift in Sources */,
 				E64AB366263006540099101C /* MainViewController.swift in Sources */,
 				E6FE850026306BB30018E269 /* PhotoCell.swift in Sources */,
-				E6A5E92C262FD666006576D5 /* AppCoordinator.swift in Sources */,
+				E6A5E92C262FD666006576D5 /* AuthCoordinator.swift in Sources */,
 				E64AB36B263006D50099101C /* MainViewModel.swift in Sources */,
 				E68BFFAE262FDE5B00CC908F /* Bindable.swift in Sources */,
 				E64BB2412632BFED0053C309 /* BlurHash.swift in Sources */,
