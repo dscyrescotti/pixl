@@ -18,9 +18,9 @@ class LoginViewModel {
         self.router.rx.trigger(.home)
     }
     
-    private let router: UnownedRouter<AppRoute>
+    private let router: UnownedRouter<AuthRoute>
     
-    init(_ router: UnownedRouter<AppRoute>) {
+    init(_ router: UnownedRouter<AuthRoute>) {
         self.router = router
     }
 }

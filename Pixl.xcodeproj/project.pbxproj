@@ -197,9 +197,9 @@
 			isa = PBXGroup;
 			children = (
 				E633AABF262EE6DB00ACB20E /* AppDelegate.swift */,
-				E633AAC1262EE6DB00ACB20E /* SceneDelegate.swift */,
 				E633AAC8262EE6DD00ACB20E /* Assets.xcassets */,
 				E633AACA262EE6DD00ACB20E /* LaunchScreen.storyboard */,
+				E633AAC1262EE6DB00ACB20E /* SceneDelegate.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -207,10 +207,10 @@
 		E633AAF9262EE77E00ACB20E /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				E6A5E92B262FD666006576D5 /* AuthCoordinator.swift */,
-				E68BFFD6262FF19400CC908F /* MainCoordinator.swift */,
-				E68BFFE4262FFA8500CC908F /* HomeCoordinator.swift */,
 				E64BB25826330AD50053C309 /* AppCoordinator.swift */,
+				E6A5E92B262FD666006576D5 /* AuthCoordinator.swift */,
+				E68BFFE4262FFA8500CC908F /* HomeCoordinator.swift */,
+				E68BFFD6262FF19400CC908F /* MainCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -234,9 +234,17 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		E677E542263317F6007AAB6A /* PhotoDetails */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PhotoDetails;
+			sourceTree = "<group>";
+		};
 		E68BFF94262FD92000CC908F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				E677E542263317F6007AAB6A /* PhotoDetails */,
 				E68BFFEC263001E900CC908F /* Settings */,
 				E64AB361263006250099101C /* Main */,
 				E68BFF95262FD95300CC908F /* Login */,
@@ -305,9 +313,9 @@
 		E6EF7A9326307F5900CFFE5E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				E64BB2452632C7070053C309 /* CGSize+.swift */,
 				E6EF7A9426307F6800CFFE5E /* UIImage+.swift */,
 				E6D9E635263189B2005BB2A7 /* UIView+.swift */,
-				E64BB2452632C7070053C309 /* CGSize+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";

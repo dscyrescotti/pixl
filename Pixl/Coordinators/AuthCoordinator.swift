@@ -7,14 +7,17 @@
 
 import XCoordinator
 
-enum AppRoute: Route {
+enum AuthRoute: Route {
     case login
     case home
 }
 
-class AuthCoordinator: NavigationCoordinator<AppRoute> {
+class AuthCoordinator: NavigationCoordinator<AuthRoute> {
+    
+    weak var parent: AppCoordinator?
 
-    init() {
+    init(_ parent: AppCoordinator? = nil) {
+        self.parent = parent
         super.init(initialRoute: .login)
         rootViewController.navigationBar.prefersLargeTitles = true
         rootViewController.navigationBar.tintColor = .label
@@ -29,10 +32,8 @@ class AuthCoordinator: NavigationCoordinator<AppRoute> {
             loginViewController.bind(viewModel)
             return .push(loginViewController)
         case .home:
-            let coordinator = HomeCoordinator()
-            coordinator.rootViewController.modalPresentationStyle = .fullScreen
-            coordinator.rootViewController.modalTransitionStyle = .crossDissolve
-            return .presentOnRoot(coordinator.strongRouter)
+            parent?.trigger(for: .home)
+            return .none()
         }
     }
     

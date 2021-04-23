@@ -16,7 +16,11 @@ enum HomeRoute: Route {
 }
 
 class HomeCoordinator: NavigationCoordinator<HomeRoute> {
-    init() {
+    
+    weak var parent: AppCoordinator?
+    
+    init(_ parent: AppCoordinator? = nil) {
+        self.parent = parent
         super.init(initialRoute: .main)
         rootViewController.navigationBar.prefersLargeTitles = true
         rootViewController.navigationBar.tintColor = .label
@@ -32,10 +36,8 @@ class HomeCoordinator: NavigationCoordinator<HomeRoute> {
             let settingsViewController = SettingsViewController()
             return .push(settingsViewController)
         case .logout:
-            let coordinator = AuthCoordinator()
-            coordinator.rootViewController.modalPresentationStyle = .fullScreen
-            coordinator.rootViewController.modalTransitionStyle = .crossDissolve
-            return .presentOnRoot(coordinator.strongRouter)
+            parent?.trigger(for: .auth)
+            return .none()
         }
     }
 }
