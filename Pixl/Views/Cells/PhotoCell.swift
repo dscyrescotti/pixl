@@ -7,15 +7,18 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 class PhotoCell: UICollectionViewCell {
     static let identifier = "PhotoCell"
+    
+    private var placeholder: UIImage?
+//    private var shouldAnimate: Bool = true
     
     let imageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 10
-        $0.backgroundColor = .systemTeal
     }
     
     override init(frame: CGRect) {
@@ -34,12 +37,18 @@ class PhotoCell: UICollectionViewCell {
         }
     }
     
-    func configure(with image: UIImage) {
-        imageView.image = image
+    func placeholder(with photo: Photo) {
+        placeholder = UIImage(blurHash: photo.blurHash, size: bounds.size.multiple(by: 0.055))
+        imageView.image = placeholder
+    }
+    
+    func configure(with photo: Photo) {
+        self.imageView.kf.setImage(with: URL(string: photo.urls.small), placeholder: self.placeholder, options: [.cacheOriginalImage, .diskCacheExpiration(.days(2))])
     }
     
     override func prepareForReuse() {
         imageView.image = nil
+        placeholder = nil
         super.prepareForReuse()
     }
 }

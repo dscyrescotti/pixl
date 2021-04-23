@@ -176,7 +176,6 @@ class WaterfallLayout: UICollectionViewLayout {
                 layoutAttributes.append(attributes)
             }
         }
-        
         return layoutAttributes
     }
 }

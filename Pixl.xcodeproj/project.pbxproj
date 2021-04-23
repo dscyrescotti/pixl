@@ -15,6 +15,12 @@
 		E633AAE2262EE6DD00ACB20E /* PixlUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E633AAE1262EE6DD00ACB20E /* PixlUITests.swift */; };
 		E64AB366263006540099101C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64AB365263006540099101C /* MainViewController.swift */; };
 		E64AB36B263006D50099101C /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64AB36A263006D50099101C /* MainViewModel.swift */; };
+		E64BB22E263282690053C309 /* CodableX in Frameworks */ = {isa = PBXBuildFile; productRef = E64BB22D263282690053C309 /* CodableX */; };
+		E64BB2342632863F0053C309 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E64BB2332632863F0053C309 /* Kingfisher */; };
+		E64BB2412632BFED0053C309 /* BlurHash.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64BB2402632BFED0053C309 /* BlurHash.swift */; };
+		E64BB2462632C7070053C309 /* CGSize+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64BB2452632C7070053C309 /* CGSize+.swift */; };
+		E660BB0C2631B83200739F15 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660BB0B2631B83200739F15 /* APIService.swift */; };
+		E660BB122631D03200739F15 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660BB112631D03200739F15 /* Photo.swift */; };
 		E68BFF97262FD96700CC908F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68BFF96262FD96700CC908F /* LoginViewController.swift */; };
 		E68BFF9D262FDA2200CC908F /* XCoordinatorRx in Frameworks */ = {isa = PBXBuildFile; productRef = E68BFF9C262FDA2200CC908F /* XCoordinatorRx */; };
 		E68BFFA2262FDB2100CC908F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68BFFA1262FDB2100CC908F /* LoginViewModel.swift */; };
@@ -34,7 +40,6 @@
 		E6A5E91C262FD586006576D5 /* RxAlamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E6A5E91B262FD586006576D5 /* RxAlamofire */; };
 		E6A5E924262FD5F3006576D5 /* XCoordinator in Frameworks */ = {isa = PBXBuildFile; productRef = E6A5E923262FD5F3006576D5 /* XCoordinator */; };
 		E6A5E92C262FD666006576D5 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A5E92B262FD666006576D5 /* AppCoordinator.swift */; };
-		E6D9E631263182D2005BB2A7 /* UIScrollView_InfiniteScroll in Frameworks */ = {isa = PBXBuildFile; productRef = E6D9E630263182D2005BB2A7 /* UIScrollView_InfiniteScroll */; };
 		E6D9E636263189B2005BB2A7 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D9E635263189B2005BB2A7 /* UIView+.swift */; };
 		E6EF7A9526307F6900CFFE5E /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EF7A9426307F6800CFFE5E /* UIImage+.swift */; };
 		E6FE84F026305FA90018E269 /* WaterfallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FE84EF26305FA90018E269 /* WaterfallLayout.swift */; };
@@ -74,6 +79,10 @@
 		E633AAE3262EE6DD00ACB20E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E64AB365263006540099101C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E64AB36A263006D50099101C /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		E64BB2402632BFED0053C309 /* BlurHash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurHash.swift; sourceTree = "<group>"; };
+		E64BB2452632C7070053C309 /* CGSize+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+.swift"; sourceTree = "<group>"; };
+		E660BB0B2631B83200739F15 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		E660BB112631D03200739F15 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		E68BFF96262FD96700CC908F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E68BFFA1262FDB2100CC908F /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E68BFFAD262FDE5B00CC908F /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
@@ -95,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E64BB2342632863F0053C309 /* Kingfisher in Frameworks */,
 				E68BFF9D262FDA2200CC908F /* XCoordinatorRx in Frameworks */,
 				E68BFFB4262FE14500CC908F /* Then in Frameworks */,
 				E6A5E914262FD50F006576D5 /* RxCocoa in Frameworks */,
@@ -102,7 +112,7 @@
 				E6A5E912262FD50F006576D5 /* RxRelay in Frameworks */,
 				E68BFFA8262FDC1E00CC908F /* Action in Frameworks */,
 				E6A5E91C262FD586006576D5 /* RxAlamofire in Frameworks */,
-				E6D9E631263182D2005BB2A7 /* UIScrollView_InfiniteScroll in Frameworks */,
+				E64BB22E263282690053C309 /* CodableX in Frameworks */,
 				E6A5E924262FD5F3006576D5 /* XCoordinator in Frameworks */,
 				E6A5E910262FD50F006576D5 /* RxSwift in Frameworks */,
 				E68BFFBA262FE6A200CC908F /* SnapKit in Frameworks */,
@@ -150,13 +160,15 @@
 		E633AABE262EE6DB00ACB20E /* Pixl */ = {
 			isa = PBXGroup;
 			children = (
-				E6EF7A9326307F5900CFFE5E /* Extensions */,
-				E6FE84ED26305F640018E269 /* Views */,
-				E68BFFAC262FDE3300CC908F /* Utils */,
-				E633AAF2262EE6F800ACB20E /* Common */,
 				E633AAF9262EE77E00ACB20E /* Coordinators */,
+				E633AAF2262EE6F800ACB20E /* Core */,
+				E6EF7A9326307F5900CFFE5E /* Extensions */,
 				E633AACD262EE6DD00ACB20E /* Info.plist */,
+				E660BB102631D01C00739F15 /* Models */,
 				E68BFF94262FD92000CC908F /* Scenes */,
+				E6D9E6402631B6A2005BB2A7 /* Services */,
+				E68BFFAC262FDE3300CC908F /* Utils */,
+				E6FE84ED26305F640018E269 /* Views */,
 			);
 			path = Pixl;
 			sourceTree = "<group>";
@@ -179,7 +191,7 @@
 			path = PixlUITests;
 			sourceTree = "<group>";
 		};
-		E633AAF2262EE6F800ACB20E /* Common */ = {
+		E633AAF2262EE6F800ACB20E /* Core */ = {
 			isa = PBXGroup;
 			children = (
 				E633AABF262EE6DB00ACB20E /* AppDelegate.swift */,
@@ -187,7 +199,7 @@
 				E633AAC8262EE6DD00ACB20E /* Assets.xcassets */,
 				E633AACA262EE6DD00ACB20E /* LaunchScreen.storyboard */,
 			);
-			path = Common;
+			path = Core;
 			sourceTree = "<group>";
 		};
 		E633AAF9262EE77E00ACB20E /* Coordinators */ = {
@@ -209,6 +221,14 @@
 				E64AB36A263006D50099101C /* MainViewModel.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		E660BB102631D01C00739F15 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E660BB112631D03200739F15 /* Photo.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		E68BFF94262FD92000CC908F /* Scenes */ = {
@@ -241,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				E68BFFAD262FDE5B00CC908F /* Bindable.swift */,
+				E64BB2402632BFED0053C309 /* BlurHash.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -270,11 +291,20 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		E6D9E6402631B6A2005BB2A7 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E660BB0B2631B83200739F15 /* APIService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		E6EF7A9326307F5900CFFE5E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				E6EF7A9426307F6800CFFE5E /* UIImage+.swift */,
 				E6D9E635263189B2005BB2A7 /* UIView+.swift */,
+				E64BB2452632C7070053C309 /* CGSize+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -331,7 +361,8 @@
 				E68BFFA7262FDC1E00CC908F /* Action */,
 				E68BFFB3262FE14500CC908F /* Then */,
 				E68BFFB9262FE6A200CC908F /* SnapKit */,
-				E6D9E630263182D2005BB2A7 /* UIScrollView_InfiniteScroll */,
+				E64BB22D263282690053C309 /* CodableX */,
+				E64BB2332632863F0053C309 /* Kingfisher */,
 			);
 			productName = Pixl;
 			productReference = E633AABC262EE6DB00ACB20E /* Pixl.app */;
@@ -411,7 +442,8 @@
 				E68BFFA6262FDC1E00CC908F /* XCRemoteSwiftPackageReference "Action" */,
 				E68BFFB2262FE14500CC908F /* XCRemoteSwiftPackageReference "Then" */,
 				E68BFFB8262FE6A200CC908F /* XCRemoteSwiftPackageReference "SnapKit" */,
-				E6D9E62F263182D2005BB2A7 /* XCRemoteSwiftPackageReference "UIScrollView-InfiniteScroll" */,
+				E64BB22C263282690053C309 /* XCRemoteSwiftPackageReference "CodableX" */,
+				E64BB2322632863F0053C309 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = E633AABD262EE6DB00ACB20E /* Products */;
 			projectDirPath = "";
@@ -456,14 +488,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				E68BFFDD262FF31300CC908F /* CollectionsViewController.swift in Sources */,
+				E660BB0C2631B83200739F15 /* APIService.swift in Sources */,
+				E64BB2462632C7070053C309 /* CGSize+.swift in Sources */,
 				E68BFFEE263001FC00CC908F /* SettingsViewController.swift in Sources */,
 				E6FE84F026305FA90018E269 /* WaterfallLayout.swift in Sources */,
+				E660BB122631D03200739F15 /* Photo.swift in Sources */,
 				E68BFFC9262FEF9C00CC908F /* PhotosViewController.swift in Sources */,
 				E64AB366263006540099101C /* MainViewController.swift in Sources */,
 				E6FE850026306BB30018E269 /* PhotoCell.swift in Sources */,
 				E6A5E92C262FD666006576D5 /* AppCoordinator.swift in Sources */,
 				E64AB36B263006D50099101C /* MainViewModel.swift in Sources */,
 				E68BFFAE262FDE5B00CC908F /* Bindable.swift in Sources */,
+				E64BB2412632BFED0053C309 /* BlurHash.swift in Sources */,
 				E68BFFA2262FDB2100CC908F /* LoginViewModel.swift in Sources */,
 				E633AAC0262EE6DB00ACB20E /* AppDelegate.swift in Sources */,
 				E68BFF97262FD96700CC908F /* LoginViewController.swift in Sources */,
@@ -793,6 +829,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E64BB22C263282690053C309 /* XCRemoteSwiftPackageReference "CodableX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dscyrescotti/CodableX";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.1;
+			};
+		};
+		E64BB2322632863F0053C309 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.3.0;
+			};
+		};
 		E68BFFA6262FDC1E00CC908F /* XCRemoteSwiftPackageReference "Action" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RxSwiftCommunity/Action.git";
@@ -841,17 +893,19 @@
 				kind = branch;
 			};
 		};
-		E6D9E62F263182D2005BB2A7 /* XCRemoteSwiftPackageReference "UIScrollView-InfiniteScroll" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pronebird/UIScrollView-InfiniteScroll.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E64BB22D263282690053C309 /* CodableX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E64BB22C263282690053C309 /* XCRemoteSwiftPackageReference "CodableX" */;
+			productName = CodableX;
+		};
+		E64BB2332632863F0053C309 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E64BB2322632863F0053C309 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		E68BFF9C262FDA2200CC908F /* XCoordinatorRx */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E6A5E920262FD5F3006576D5 /* XCRemoteSwiftPackageReference "XCoordinator" */;
@@ -901,11 +955,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E6A5E920262FD5F3006576D5 /* XCRemoteSwiftPackageReference "XCoordinator" */;
 			productName = XCoordinator;
-		};
-		E6D9E630263182D2005BB2A7 /* UIScrollView_InfiniteScroll */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E6D9E62F263182D2005BB2A7 /* XCRemoteSwiftPackageReference "UIScrollView-InfiniteScroll" */;
-			productName = UIScrollView_InfiniteScroll;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

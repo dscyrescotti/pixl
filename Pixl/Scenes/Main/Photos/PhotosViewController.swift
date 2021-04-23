@@ -12,11 +12,6 @@ class PhotosViewController: UIViewController, Bindable {
     
     var viewModel: PhotosViewModel!
     private var bag = DisposeBag()
-//
-//    var photos: [UIImage] = .init()
-//    var testPhotos = [1,2,3,1,2,3,1,2,3].shuffled().compactMap {
-//        UIImage(named: String($0))
-//    }
     
     private var collectionView: UICollectionView!
 
@@ -27,23 +22,24 @@ class PhotosViewController: UIViewController, Bindable {
         setUpCollectionView()
     }
     
-    func bindViewModel() {
+    func bindViewModel() {        
         viewModel.photos
-            .bind(to: collectionView.rx.items(cellIdentifier: PhotoCell.identifier, cellType: PhotoCell.self)) { item, element, cell in
-                cell.configure(with: element)
+            .bind(to: collectionView.rx.items(cellIdentifier: PhotoCell.identifier, cellType: PhotoCell.self)) { item, photo, cell in
+                cell.placeholder(with: photo)
             }
             .disposed(by: bag)
         
+        collectionView.rx.willDisplayCell
+            .bind(to: viewModel.willDisplayCell)
+            .disposed(by: bag)
+        
         collectionView.rx.didScroll
-            .filter {
+            .filter { [unowned self] in
                 let offsetY = self.collectionView.contentOffset.y
                 let contentHeight = self.collectionView.contentSize.height
-
-                return offsetY > contentHeight - self.collectionView.frame.size.height
+                return offsetY > contentHeight - self.collectionView.frame.size.height - 100
             }
-            .subscribe(onNext: {
-                self.viewModel.nextPhotos()
-            })
+            .bind(to: viewModel.didScrollToBottom)
             .disposed(by: bag)
             
     }
@@ -61,16 +57,11 @@ extension PhotosViewController {
         layout.numberOfColumns = view.orientation(portrait: 2, landscape: 3)
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.contentInset = .init(top: 5, left: 5, bottom: 5, right: 5)
         collectionView.backgroundColor = .systemBackground
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: PhotoCell.identifier)
-        collectionView.alwaysBounceVertical = true
-//        collectionView.delegate = self
-//        collectionView.dataSource = self
         
         view.addSubview(collectionView)
-        
-//        photos.append(contentsOf: testPhotos)
-//        collectionView.reloadData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -87,9 +78,7 @@ extension PhotosViewController {
         super.didReceiveMemoryWarning()
         print("Warning")
     }
-    
-    
-    
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         guard let layout = collectionView.collectionViewLayout as? WaterfallLayout else { return }
@@ -98,35 +87,8 @@ extension PhotosViewController {
     }
 }
 
-//extension PhotosViewController: UICollectionViewDelegate {
-    
-//    func numberOfSections(in collectionView: UICollectionView) -> Int {
-//        1
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        photos.count
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.identifier, for: indexPath) as? PhotoCell else { fatalError() }
-//        cell.configure(with: photos[indexPath.item])
-//        return cell
-//    }
-//
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let offsetY = scrollView.contentOffset.y
-//        let contentHeight = scrollView.contentSize.height
-//
-//        if offsetY > contentHeight - scrollView.frame.size.height {
-//            self.viewModel.nextPhotos()
-//        }
-//    }
-//
-//}
-
 extension PhotosViewController: WaterfallLayoutDelegate {
     func collectionView(collectionView: UICollectionView, heightForCellAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
-        viewModel.photos.value[indexPath.item].height(forWidth: withWidth)
+        viewModel.photos.value[indexPath.item].size(for: withWidth).height
     }
 }

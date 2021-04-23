@@ -15,28 +15,75 @@ import Action
 class PhotosViewModel {
     
     private var isLoading = false
+    private let bag = DisposeBag()
     
-    lazy var photos = BehaviorRelay<[UIImage]>(value: [])
+    lazy var photos = BehaviorRelay<[Photo]>(value: [])
+    private lazy var page = BehaviorRelay<Int>(value: 1)
+    private lazy var isFetching = BehaviorRelay<Bool>(value: false)
+    
+    lazy var didScrollToBottom = PublishRelay<Void>()
+    lazy var willDisplayCell = PublishRelay<(cell: UICollectionViewCell, at: IndexPath)>()
     
     private let router: UnownedRouter<HomeRoute>
     
     init(_ router: UnownedRouter<HomeRoute>) {
         self.router = router
-        self.photos.accept(testPhotos)
+        bind()
     }
     
-    var testPhotos: [UIImage] {
-        [1,2,3,1,2,3,1,2,3].shuffled().compactMap {
-            UIImage(named: String($0))
-        }
+    func bind() {
+        bindPhotos()
+        bindPage()
+        bindWillDisplayCell()
+        bindDidScrollToBottom()
     }
     
-    func nextPhotos() {
-        if !isLoading {
-            isLoading = true
-            photos.accept(photos.value + testPhotos)
-            isLoading = false
-        }
+    private func bindPhotos() {
+        photos
+            .subscribe(onNext: { _ in
+                self.isLoading = false
+            })
+            .disposed(by: bag)
     }
     
+    private func bindDidScrollToBottom() {
+        didScrollToBottom
+            .filter { !self.isLoading }
+            .flatMap { [unowned self] _ -> Observable<Int> in
+                let next = self.page.value + 1
+                return Observable.just(next)
+            }
+            .bind(to: page)
+            .disposed(by: bag)
+    }
+    
+    private func bindPage() {
+        page
+            .do(onNext: {
+                print("[Fetch]: Start fetching page \($0)")
+            })
+            .flatMap { [unowned self] page -> Observable<[Photo]> in
+                self.isLoading = true
+                return APIService.shared.getPhotos(page: page)
+            }
+            .asDriver(onErrorRecover: { [unowned self] _ in
+                self.isLoading = false
+                return Driver.just([])
+            })
+            .filter { !$0.isEmpty }
+            .map { [unowned self] new in
+                self.photos.value + new
+            }
+            .drive(photos)
+            .disposed(by: bag)
+    }
+    
+    private func bindWillDisplayCell() {
+        willDisplayCell
+            .subscribe(onNext: { [unowned self] cell, indexPath in
+                guard let photoCell = cell as? PhotoCell else { return }
+                photoCell.configure(with: photos.value[indexPath.item])
+            })
+            .disposed(by: bag)
+    }
 }
