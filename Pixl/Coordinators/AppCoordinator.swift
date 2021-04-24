@@ -26,13 +26,14 @@ class AppCoordinator {
         coordinator?.setRoot(for: window)
     }
     
-    func trigger(for route: AppRoute) {
+    func trigger(_ route: AppRoute) {
         let coordinator = presenter(route)
         coordinator.viewController.view.alpha = 0
-        window.rootViewController = coordinator.viewController
+        coordinator.setRoot(for: window)
         UIView.animate(withDuration: 0.2) {
             coordinator.viewController.view.alpha = 1
         }
+        self.coordinator = coordinator
     }
     
     private func presenter(_ route: AppRoute) -> Presentable {
@@ -44,3 +45,4 @@ class AppCoordinator {
         }
     }
 }
+

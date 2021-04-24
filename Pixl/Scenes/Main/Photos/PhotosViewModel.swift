@@ -23,6 +23,7 @@ class PhotosViewModel {
     
     lazy var didScrollToBottom = PublishRelay<Void>()
     lazy var willDisplayCell = PublishRelay<(cell: UICollectionViewCell, at: IndexPath)>()
+    lazy var selectedItem = PublishRelay<IndexPath>()
     
     private let router: UnownedRouter<HomeRoute>
     
@@ -34,8 +35,19 @@ class PhotosViewModel {
     func bind() {
         bindPhotos()
         bindPage()
+        bindSelectedItem()
         bindWillDisplayCell()
         bindDidScrollToBottom()
+    }
+    
+    private func bindSelectedItem() {
+        selectedItem
+            .flatMap { [unowned self] indexPath -> Observable<Void> in
+                let photo = self.photos.value[indexPath.item]
+                return self.router.rx.trigger(.photo(id: photo.id))
+            }
+            .subscribe()
+            .disposed(by: bag)
     }
     
     private func bindPhotos() {

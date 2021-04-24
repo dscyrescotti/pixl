@@ -12,7 +12,15 @@ class PhotoDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        setUp()
     }
 
+}
+
+extension PhotoDetailsViewController {
+    func setUp() {
+        title = "Details"
+        navigationItem.largeTitleDisplayMode = .never
+        view.backgroundColor = .systemPink
+    }
 }

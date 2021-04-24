@@ -21,7 +21,7 @@ class AuthCoordinator: NavigationCoordinator<AuthRoute> {
         super.init(initialRoute: .login)
         rootViewController.navigationBar.prefersLargeTitles = true
         rootViewController.navigationBar.tintColor = .label
-        rootViewController.view.backgroundColor = .systemBackground
+        rootViewController.navigationBar.barTintColor = .systemBackground
     }
     
     override func prepareTransition(for route: RouteType) -> NavigationTransition {
@@ -32,7 +32,7 @@ class AuthCoordinator: NavigationCoordinator<AuthRoute> {
             loginViewController.bind(viewModel)
             return .push(loginViewController)
         case .home:
-            parent?.trigger(for: .home)
+            parent?.trigger(.home)
             return .none()
         }
     }

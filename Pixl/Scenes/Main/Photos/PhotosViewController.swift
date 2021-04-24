@@ -41,13 +41,17 @@ class PhotosViewController: UIViewController, Bindable {
             }
             .bind(to: viewModel.didScrollToBottom)
             .disposed(by: bag)
+        
+        collectionView.rx.itemSelected
+            .bind(to: viewModel.selectedItem)
+            .disposed(by: bag)     
             
     }
 }
 
 extension PhotosViewController {
     func setUp() {
-        view.backgroundColor = .systemPink
+        view.backgroundColor = .systemBackground
     }
     
     func setUpCollectionView() {

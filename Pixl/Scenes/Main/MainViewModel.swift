@@ -17,7 +17,7 @@ class MainViewModel {
         self.router.rx.trigger(.settings)
     }
     
-    private let router: UnownedRouter<HomeRoute>
+    let router: UnownedRouter<HomeRoute>
     
     init(_ router: UnownedRouter<HomeRoute>) {
         self.router = router

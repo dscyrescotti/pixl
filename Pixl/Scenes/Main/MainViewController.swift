@@ -36,6 +36,15 @@ extension MainViewController {
         title = "pixl"
         
         view.backgroundColor = .systemBackground
+        tabBar.barTintColor = .systemBackground
+        tabBar.tintColor = .label
+        
         navigationItem.rightBarButtonItem = barButton
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(logout))
+    }
+    
+    
+    @objc func logout() {
+        viewModel.router.trigger(.logout)
     }
 }
