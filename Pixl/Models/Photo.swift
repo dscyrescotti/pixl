@@ -7,23 +7,27 @@
 
 import Foundation
 import AVFoundation
+import CodableX
 
 struct Photo: Codable, Equatable {
     static func == (lhs: Photo, rhs: Photo) -> Bool {
         lhs.id == rhs.id
     }
     
-    let id: String
-    let createdAt, updatedAt: String
-    let width, height: Int
-    let color, blurHash: String
-    let likes: Int
-    let likedByUser: Bool
-    let photoDescription: String?
-    let user: User
-//    let currentUserCollections: [CurrentUserCollection]
-    let urls: Urls
-    let links: PhotoLinks
+    var id: String
+    var createdAt, updatedAt: String
+    var width, height: Int
+    var color, blurHash: String
+    var likes: Int
+    var likedByUser: Bool
+    var photoDescription: String?
+    var user: User
+//    var currentUserCollections: [CurrentUserCollection]
+    var urls: Urls
+    var links: PhotoLinks
+    var exif: Exif?
+    var location: Location?
+    @Defaultable var tags: [Tag]
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -36,7 +40,7 @@ struct Photo: Codable, Equatable {
         case photoDescription = "description"
         case user
 //        case currentUserCollections = "current_user_collections"
-        case urls, links
+        case urls, links, exif, location, tags
     }
     
     func size(for width: CGFloat) -> CGSize {
@@ -54,11 +58,39 @@ struct Photo: Codable, Equatable {
     }
 }
 
+struct Exif: Codable {
+    var make, model, exposureTime, aperture: String?
+    var focalLength: String?
+    var iso: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case make, model
+        case exposureTime = "exposure_time"
+        case aperture
+        case focalLength = "focal_length"
+        case iso
+    }
+}
+
+struct Location: Codable {
+    var city, country: String?
+    var position: Position
+}
+
+struct Position: Codable {
+    var latitude, longitude: Double?
+}
+
+struct Tag: AnyCodable {
+    var title: String
+}
+
+
 //struct CurrentUserCollection: Codable {
-//    let id: Int
-//    let title: String
-//    let publishedAt, lastCollectedAt, updatedAt: Date
-//    let coverPhoto, user: JSONNull?
+//    var id: Int
+//    var title: String
+//    var publishedAt, lastCollectedAt, updatedAt: Date
+//    var coverPhoto, user: JSONNull?
 //
 //    enum CodingKeys: String, CodingKey {
 //        case id, title
@@ -71,7 +103,7 @@ struct Photo: Codable, Equatable {
 //}
 
 struct PhotoLinks: Codable {
-    let linksSelf, html, download, downloadLocation: String
+    var linksSelf, html, download, downloadLocation: String
 
     enum CodingKeys: String, CodingKey {
         case linksSelf = "self"
@@ -81,18 +113,18 @@ struct PhotoLinks: Codable {
 }
 
 struct Urls: Codable {
-    let raw, full, regular, small: String
-    let thumb: String
+    var raw, full, regular, small: String
+    var thumb: String
 }
 
 struct User: Codable {
-    let id, username, name: String
-    let portfolioURL: String?
-    let bio, location: String?
-    let totalLikes, totalPhotos, totalCollections: Int
-    let instagramUsername, twitterUsername: String?
-    let profileImage: ProfileImage
-    let links: UserLinks
+    var id, username, name: String
+    var portfolioURL: String?
+    var bio, location: String?
+    var totalLikes, totalPhotos, totalCollections: Int
+    var instagramUsername, twitterUsername: String?
+    var profileImage: ProfileImage
+    var links: UserLinks
 
     enum CodingKeys: String, CodingKey {
         case id, username, name
@@ -109,8 +141,8 @@ struct User: Codable {
 }
 
 struct UserLinks: Codable {
-    let linksSelf, html, photos, likes: String
-    let portfolio: String
+    var linksSelf, html, photos, likes: String
+    var portfolio: String
 
     enum CodingKeys: String, CodingKey {
         case linksSelf = "self"
@@ -119,5 +151,5 @@ struct UserLinks: Codable {
 }
 
 struct ProfileImage: Codable {
-    let small, medium, large: String
+    var small, medium, large: String
 }

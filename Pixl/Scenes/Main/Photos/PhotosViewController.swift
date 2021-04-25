@@ -71,10 +71,7 @@ extension PhotosViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(view.snp.top)
-            make.bottom.equalTo(view.snp.bottom)
-            make.leading.equalTo(view.snp.leading)
-            make.trailing.equalTo(view.snp.trailing)
+            make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
