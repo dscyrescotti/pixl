@@ -22,7 +22,7 @@ class AppCoordinator {
     }
     
     func start() {
-        coordinator = presenter(.auth)
+        coordinator = presenter(.home)
         coordinator?.setRoot(for: window)
     }
     

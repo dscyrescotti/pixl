@@ -52,4 +52,18 @@ class APIService {
             .decode(type: [Photo].self, decoder: JSONDecoder())
             .asObservable()
     }
+    
+    func getPhoto(id: String) -> Observable<Photo> {
+        guard let request = urlRequest(endpoint: "photos/\(id)", query: [:]) else {
+            print("[Error]: Invalid url")
+            return Observable.empty()
+        }
+        
+        return RxAlamofire.request(request)
+            .subscribe(on: API_SCHEDULER)
+            .validate(statusCode: 200..<300)
+            .data()
+            .decode(type: Photo.self, decoder: JSONDecoder())
+            .asObservable()
+    }
 }

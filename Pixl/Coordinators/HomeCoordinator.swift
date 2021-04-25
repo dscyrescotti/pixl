@@ -13,7 +13,7 @@ enum HomeRoute: Route {
     case main
     case settings
     case logout
-    case photo(id: String)
+    case photo(photo: Photo)
 }
 
 class HomeCoordinator: NavigationCoordinator<HomeRoute> {
@@ -39,9 +39,11 @@ class HomeCoordinator: NavigationCoordinator<HomeRoute> {
         case .logout:
             parent?.trigger(.auth)
             return .none()
-        case .photo:
-            let photoDetailsViewController = PhotoDetailsViewController()
-            return .push(photoDetailsViewController)
+        case let .photo(photo):
+            let photoViewController = PhotoViewController()
+            let photoViewModel = PhotoViewModel(photo: photo)
+            photoViewController.bind(photoViewModel)
+            return .push(photoViewController)
         }
     }
 }

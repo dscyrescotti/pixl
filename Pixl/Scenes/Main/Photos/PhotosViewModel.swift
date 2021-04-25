@@ -44,7 +44,7 @@ class PhotosViewModel {
         selectedItem
             .flatMap { [unowned self] indexPath -> Observable<Void> in
                 let photo = self.photos.value[indexPath.item]
-                return self.router.rx.trigger(.photo(id: photo.id))
+                return self.router.rx.trigger(.photo(photo: photo))
             }
             .subscribe()
             .disposed(by: bag)

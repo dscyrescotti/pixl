@@ -38,7 +38,7 @@ class PhotoCell: UICollectionViewCell {
     }
     
     func placeholder(with photo: Photo) {
-        placeholder = UIImage(blurHash: photo.blurHash, size: CGSize(width: 30, height: 30))
+        placeholder = UIImage(blurHash: photo.blurHash, size: CGSize(width: 20, height: 20))
         imageView.image = placeholder
     }
     
