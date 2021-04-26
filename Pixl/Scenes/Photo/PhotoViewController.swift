@@ -13,7 +13,6 @@ import Then
 class PhotoViewController: UIViewController, Bindable {
     
     var viewModel: PhotoViewModel!
-    private var firstLoad = true
     
     private let bag = DisposeBag()
     
@@ -58,21 +57,13 @@ class PhotoViewController: UIViewController, Bindable {
             }
             .disposed(by: bag)
         
-        let photo = viewModel.photo.share()
-        
-        photo.map { UIImage(blurHash: $0.blurHash, size: CGSize(width: 20, height: 20)) }
-            .bind(to: imageView.rx.image)
-            .disposed(by: bag)
+        let photo = viewModel.photo.asObservable()
         
         photo.map { ($0.urls.regular, $0.blurHash) }
             .subscribe(onNext: { [unowned self] in
                 let placeholder = UIImage(blurHash: $0.1, size: CGSize(width: 20, height: 20))
-                imageView.kf.setImage(with: URL(string: $0.0), placeholder: placeholder, options: [.cacheOriginalImage, .diskCacheExpiration(.days(2))])
+                imageView.kf.setImage(with: URL(string: $0.0), placeholder: placeholder, options: [.cacheOriginalImage, .diskCacheExpiration(.days(2)), .keepCurrentImageWhileLoading])
             })
-            .disposed(by: bag)
-        photo.compactMap { UIColor(hex: $0.color) }
-            .asDriver(onErrorJustReturn: .systemBackground)
-            .drive(headerView.rx.backgroundColor)
             .disposed(by: bag)
             
     }
@@ -89,23 +80,13 @@ extension PhotoViewController {
         scrollView.addSubview(headerView)
         headerView.addSubview(imageView)
         
-//        headerView.frame = .init(x: 0, y: -view.safeAreaInsets.top, width: view.frame.width, height: 250 + view.safeAreaInsets.top)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Profile", style: .plain, target: self, action: #selector(toProfile))
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
+    @objc func toProfile() {
+        viewModel.toProfile()
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
-        navigationController?.navigationBar.shadowImage = nil
-        navigationController?.navigationBar.isTranslucent = false
-    }
-    
+        
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -123,10 +104,5 @@ extension PhotoViewController {
         imageView.snp.makeConstraints { make in
             make.edges.equalTo(headerView)
         }
-        
-//        if firstLoad {
-//            headerView.frame = .init(x: 0, y: -view.safeAreaInsets.top, width: view.frame.width, height: 250 + view.safeAreaInsets.top)
-//            firstLoad = false
-//        }
     }
 }

@@ -9,13 +9,16 @@ import UIKit
 import RxSwift
 
 
-class MainViewController: UITabBarController, Bindable {
+class MainViewController: UITabBarController, Bindable, AppBarInjectable {
     
     var viewModel: MainViewModel!
     
     let barButton = UIBarButtonItem().then {
         $0.image = UIImage(systemName: "gear")
     }
+    
+    internal var appBar = AppBar()
+    
     private let bag = DisposeBag()
 
     override func viewDidLoad() {
@@ -41,10 +44,17 @@ extension MainViewController {
         
         navigationItem.rightBarButtonItem = barButton
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(logout))
+        
+        addAppBar()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        registerLayout()
+    }
     
     @objc func logout() {
         viewModel.router.trigger(.logout)
     }
 }
+

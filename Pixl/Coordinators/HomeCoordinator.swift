@@ -13,7 +13,7 @@ enum HomeRoute: Route {
     case main
     case settings
     case logout
-    case photo(photo: Photo)
+    case photo(PhotoRoute)
 }
 
 class HomeCoordinator: NavigationCoordinator<HomeRoute> {
@@ -23,9 +23,9 @@ class HomeCoordinator: NavigationCoordinator<HomeRoute> {
     init(_ parent: AppCoordinator? = nil) {
         self.parent = parent
         super.init(initialRoute: .main)
-        rootViewController.navigationBar.prefersLargeTitles = true
+        rootViewController.navigationBar.prefersLargeTitles = false
         rootViewController.navigationBar.tintColor = .label
-        rootViewController.navigationBar.barTintColor = .systemBackground
+        rootViewController.setTransparency()
     }
     
     override func prepareTransition(for route: HomeRoute) -> NavigationTransition {
@@ -39,11 +39,10 @@ class HomeCoordinator: NavigationCoordinator<HomeRoute> {
         case .logout:
             parent?.trigger(.auth)
             return .none()
-        case let .photo(photo):
-            let photoViewController = PhotoViewController()
-            let photoViewModel = PhotoViewModel(photo: photo)
-            photoViewController.bind(photoViewModel)
-            return .push(photoViewController)
+        case let .photo(photoRoute):
+            let coordinator = PhotoCoordinator(rootViewController: rootViewController)
+            addChild(coordinator)
+            return .trigger(photoRoute, on: coordinator)
         }
     }
 }
