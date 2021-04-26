@@ -19,9 +19,9 @@ class AuthCoordinator: NavigationCoordinator<AuthRoute> {
     init(_ parent: AppCoordinator? = nil) {
         self.parent = parent
         super.init(initialRoute: .login)
-        rootViewController.navigationBar.prefersLargeTitles = true
+        rootViewController.navigationBar.prefersLargeTitles = false
         rootViewController.navigationBar.tintColor = .label
-        rootViewController.navigationBar.barTintColor = .systemBackground
+        rootViewController.setTransparency()
     }
     
     override func prepareTransition(for route: RouteType) -> NavigationTransition {
