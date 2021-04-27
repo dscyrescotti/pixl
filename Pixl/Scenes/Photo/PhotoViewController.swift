@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import RxSwift
 import Then
+import RxCocoa
 
 class PhotoViewController: UIViewController, Bindable {
     
@@ -16,7 +17,9 @@ class PhotoViewController: UIViewController, Bindable {
     
     private let bag = DisposeBag()
     
-    private let scrollView = UIScrollView()
+    private let scrollView = UIScrollView().then {
+        $0.alwaysBounceVertical = true
+    }
     
     private let headerView = UIView().then {
         $0.backgroundColor = .systemBackground
@@ -27,9 +30,16 @@ class PhotoViewController: UIViewController, Bindable {
         $0.clipsToBounds = true
     }
     
-    private let contentView = UIView().then {
-        $0.backgroundColor = .systemTeal
+    private let contentView = UIStackView().then {
+        $0.axis = .vertical
+        $0.alignment = .leading
+        $0.distribution = .fill
     }
+    
+    private let userProfileRow = UserProfileRow()
+    private let descriptionRow = DescriptionRow()
+    private let statisticsRow = StatisticsRow()
+    private let exifRow = ExifRow()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,13 +69,42 @@ class PhotoViewController: UIViewController, Bindable {
         
         let photo = viewModel.photo.asObservable()
         
+        let skipped = photo.skip(1)
+        
         photo.map { ($0.urls.regular, $0.blurHash) }
             .subscribe(onNext: { [unowned self] in
                 let placeholder = UIImage(blurHash: $0.1, size: CGSize(width: 20, height: 20))
                 imageView.kf.setImage(with: URL(string: $0.0), placeholder: placeholder, options: [.cacheOriginalImage, .diskCacheExpiration(.days(2)), .keepCurrentImageWhileLoading])
             })
             .disposed(by: bag)
-            
+        
+        skipped
+            .map { $0.user }
+            .bind(to: userProfileRow.user)
+            .disposed(by: bag)
+        
+        skipped
+            .map { $0.photoDescription }
+            .subscribe(onNext: { [unowned self] text in
+                guard let text = text else { return }
+                descriptionRow.configure(with: text, for: "Description")
+            })
+            .disposed(by: bag)
+        
+        skipped
+            .map { photo -> [(String, String)] in
+                return [("Likes", photo.likes.shorted()), ("Downloads", photo.downloads.shorted()), ("Views", photo.views.shorted())]
+            }
+            .bind(to: statisticsRow.observer)
+            .disposed(by: bag)
+        
+        skipped
+            .map { $0.exif }
+            .subscribe(onNext: { [unowned self] exif in
+                guard let exif = exif, exif.notNil else { return }
+                exifRow.configure(with: exif, for: "Exif")
+            })
+            .disposed(by: bag)
     }
     
 }
@@ -79,6 +118,10 @@ extension PhotoViewController {
         scrollView.addSubview(contentView)
         scrollView.addSubview(headerView)
         headerView.addSubview(imageView)
+        contentView.addArrangedSubview(descriptionRow)
+        contentView.addArrangedSubview(userProfileRow)
+        contentView.addArrangedSubview(statisticsRow)
+        contentView.addArrangedSubview(exifRow)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Profile", style: .plain, target: self, action: #selector(toProfile))
     }
@@ -95,14 +138,22 @@ extension PhotoViewController {
         }
         
         contentView.snp.makeConstraints { make in
-            make.top.equalTo(scrollView).offset(250 + 10)
+            make.top.equalTo(scrollView).offset(255)
             make.bottom.equalTo(scrollView).offset(-10)
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(1500)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(5)
         }
         
         imageView.snp.makeConstraints { make in
             make.edges.equalTo(headerView)
+        }
+        
+        statisticsRow.snp.makeConstraints { make in
+            make.leading.trailing.equalTo(contentView)
+            make.height.equalTo(90)
+        }
+        
+        exifRow.snp.makeConstraints { make in
+            make.leading.trailing.equalTo(contentView)
         }
     }
 }

@@ -20,6 +20,7 @@ class PhotoViewModel {
     init(_ router: UnownedRouter<PhotoRoute>, photo: Photo) {
         self.router = router
         self.photo = BehaviorRelay<Photo>(value: photo)
+        bindPhoto(id: photo.id)
     }
     
     private func bindPhoto(id: String) {

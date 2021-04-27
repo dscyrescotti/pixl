@@ -17,8 +17,11 @@ struct Photo: Codable, Equatable {
     var id: String
     var createdAt, updatedAt: String
     var width, height: Int
-    var color, blurHash: String
+    var color: String
+    @Defaultable var blurHash: String
     var likes: Int
+    @Defaultable var views: Int
+    @Defaultable var downloads: Int
     var likedByUser: Bool
     var photoDescription: String?
     var user: User
@@ -39,6 +42,7 @@ struct Photo: Codable, Equatable {
         case likedByUser = "liked_by_user"
         case photoDescription = "description"
         case user
+        case views, downloads
 //        case currentUserCollections = "current_user_collections"
         case urls, links, exif, location, tags
     }
@@ -69,6 +73,10 @@ struct Exif: Codable {
         case aperture
         case focalLength = "focal_length"
         case iso
+    }
+    
+    var notNil: Bool {
+        make != nil || exposureTime != nil || aperture != nil || focalLength != nil || iso != nil
     }
 }
 
