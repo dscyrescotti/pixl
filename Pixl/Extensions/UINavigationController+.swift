@@ -19,5 +19,11 @@ extension UINavigationController {
         navigationBar.shadowImage = nil
         navigationBar.isTranslucent = false
     }
+    
+//    func customizeBackBarButtonItem() {
+//        let customImage = UIImage(systemName: "chevron.left.circle.fill")
+//        navigationBar.backIndicatorImage = customImage
+//        navigationBar.backIndicatorTransitionMaskImage = customImage
+//    }
 }
 

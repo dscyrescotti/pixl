@@ -15,6 +15,8 @@ class PhotoViewController: UIViewController, Bindable {
     
     var viewModel: PhotoViewModel!
     
+    var color: UIColor
+    
     private let bag = DisposeBag()
     
     private let scrollView = UIScrollView().then {
@@ -40,6 +42,15 @@ class PhotoViewController: UIViewController, Bindable {
     private let exifRow = ExifRow()
     private let mapRow = MapRow()
     private let tagRow = TagRow()
+    
+    init(color: UIColor) {
+        self.color = color
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,8 +132,17 @@ class PhotoViewController: UIViewController, Bindable {
                 tagRow.configure(with: tags.map { $0.title }, for: "Tags")
             })
             .disposed(by: bag)
-            
+        
+        isLandscape
+            .distinctUntilChanged()
+            .subscribe(onNext: { [unowned self] _ in
+                updateBackButton()
+            })
+            .disposed(by: bag)
     }
+    
+    private let backButton = UIButton()
+    lazy var isLandscape = PublishRelay<Bool>()
     
 }
 
@@ -141,16 +161,26 @@ extension PhotoViewController {
         contentView.addArrangedSubview(exifRow)
         contentView.addArrangedSubview(mapRow)
         contentView.addArrangedSubview(tagRow)
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Profile", style: .plain, target: self, action: #selector(toProfile))
+    }
+    
+    @objc func back() {
+        navigationController?.popViewController(animated: true)
     }
     
     @objc func toProfile() {
         viewModel.toProfile()
     }
+    
+    func updateBackButton() {
+        backButton.frame = .init(origin: .zero, size: .init(width: view.orientation(portrait: 34, landscape: 25), height: view.orientation(portrait: 34, landscape: 25)))
+        backButton.layer.cornerRadius = view.orientation(portrait: 17, landscape: 12.5)
+        backButton.setImage(UIImage(systemName: "chevron.backward", withConfiguration: UIImage.SymbolConfiguration(pointSize: view.orientation(portrait: 20, landscape: 17))), for: .normal)
+    }
         
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        isLandscape.accept(view.isLandscape)
         
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(view)
@@ -183,5 +213,74 @@ extension PhotoViewController {
             make.leading.trailing.equalTo(contentView)
         }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.tintColor = .label
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.tintColor = color.revert
+        backButton.addTarget(self, action: #selector(back), for: .touchUpInside)
+        backButton.backgroundColor = color.similar.withAlphaComponent(0.6)
+        backButton.layer.masksToBounds = true
+        isLandscape.accept(view.isLandscape)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+    }
 }
 
+extension UIColor {
+    func isLight(threshold: Float = 0.5) -> Bool? {
+        let originalCGColor = self.cgColor
+
+        let RGBCGColor = originalCGColor.converted(to: CGColorSpaceCreateDeviceRGB(), intent: .defaultIntent, options: nil)
+        guard let components = RGBCGColor?.components else {
+            return nil
+        }
+        guard components.count >= 3 else {
+            return nil
+        }
+
+        let brightness = Float(((components[0] * 299) + (components[1] * 587) + (components[2] * 114)) / 1000)
+        return (brightness > threshold)
+    }
+    
+    var revert: UIColor {
+        guard let flag = isLight() else { return .label }
+        return flag ? .black : .white
+    }
+    
+    var similar: UIColor {
+        guard let flag = isLight() else { return .label }
+        return flag ? .white : .black
+    }
+}
+
+extension UIImage {
+    func scalePreservingAspectRatio(targetSize: CGSize) -> UIImage {
+        let widthRatio = targetSize.width / size.width
+        let heightRatio = targetSize.height / size.height
+        
+        let scaleFactor = min(widthRatio, heightRatio)
+        
+        let scaledImageSize = CGSize(
+            width: size.width * scaleFactor,
+            height: size.height * scaleFactor
+        )
+
+        let renderer = UIGraphicsImageRenderer(
+            size: scaledImageSize
+        )
+
+        let scaledImage = renderer.image { _ in
+            self.draw(in: CGRect(
+                origin: .zero,
+                size: scaledImageSize
+            ))
+        }
+        
+        return scaledImage
+    }
+}

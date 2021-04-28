@@ -6,6 +6,7 @@
 //
 
 import XCoordinator
+import UIKit
 
 enum PhotoRoute: Route {
     case details(photo: Photo)
@@ -21,10 +22,9 @@ class PhotoCoordinator: NavigationCoordinator<PhotoRoute> {
     override func prepareTransition(for route: PhotoRoute) -> NavigationTransition {
         switch route {
         case let .details(photo):
-            let photoViewController = PhotoViewController()
+            let photoViewController = PhotoViewController(color: UIColor(hex: photo.color) ?? .label)
             let photoViewModel = PhotoViewModel(unownedRouter, photo: photo)
             photoViewController.bind(photoViewModel)
-//            rootViewController.setTransparency()
             return .push(photoViewController)
         case .user:
             let userViewController = UserViewController()

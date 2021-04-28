@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension UIView {
-    private var isLandscape: Bool {
+    var isLandscape: Bool {
         view.frame.width > view.frame.height
     }
     func orientation<T>(portrait: T, landscape: T) -> T {
