@@ -63,9 +63,6 @@ class APIService {
             .subscribe(on: API_SCHEDULER)
             .validate(statusCode: 200..<300)
             .data()
-//            .do(onNext: {
-//                print(try? JSONSerialization.jsonObject(with: $0, options: .allowFragments))
-//            })
             .decode(type: Photo.self, decoder: JSONDecoder())
             .asObservable()
     }

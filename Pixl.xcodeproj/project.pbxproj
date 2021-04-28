@@ -57,6 +57,8 @@
 		E6D1DA6C26368ED7009C6A78 /* UINavigationController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D1DA6B26368ED7009C6A78 /* UINavigationController+.swift */; };
 		E6D1DA75263695E8009C6A78 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D1DA74263695E8009C6A78 /* UserViewController.swift */; };
 		E6D9E636263189B2005BB2A7 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D9E635263189B2005BB2A7 /* UIView+.swift */; };
+		E6EDACFE263972470062EAD9 /* TagListView in Frameworks */ = {isa = PBXBuildFile; productRef = E6EDACFD263972470062EAD9 /* TagListView */; };
+		E6EDAD0326397A8D0062EAD9 /* TagRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EDAD0226397A8D0062EAD9 /* TagRow.swift */; };
 		E6EF7A9526307F6900CFFE5E /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EF7A9426307F6800CFFE5E /* UIImage+.swift */; };
 		E6FE84F026305FA90018E269 /* WaterfallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FE84EF26305FA90018E269 /* WaterfallLayout.swift */; };
 		E6FE84F5263062770018E269 /* PhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FE84F4263062770018E269 /* PhotosViewModel.swift */; };
@@ -126,6 +128,7 @@
 		E6D1DA6B26368ED7009C6A78 /* UINavigationController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+.swift"; sourceTree = "<group>"; };
 		E6D1DA74263695E8009C6A78 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		E6D9E635263189B2005BB2A7 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		E6EDAD0226397A8D0062EAD9 /* TagRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagRow.swift; sourceTree = "<group>"; };
 		E6EF7A9426307F6800CFFE5E /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		E6FE84EF26305FA90018E269 /* WaterfallLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterfallLayout.swift; sourceTree = "<group>"; };
 		E6FE84F4263062770018E269 /* PhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewModel.swift; sourceTree = "<group>"; };
@@ -143,6 +146,7 @@
 				E68BFFB4262FE14500CC908F /* Then in Frameworks */,
 				E6A5E914262FD50F006576D5 /* RxCocoa in Frameworks */,
 				E6A5E916262FD50F006576D5 /* RxBlocking in Frameworks */,
+				E6EDACFE263972470062EAD9 /* TagListView in Frameworks */,
 				E6A5E912262FD50F006576D5 /* RxRelay in Frameworks */,
 				E68BFFA8262FDC1E00CC908F /* Action in Frameworks */,
 				E6A5E91C262FD586006576D5 /* RxAlamofire in Frameworks */,
@@ -268,6 +272,7 @@
 				E62C67BF2638549400F1FDFE /* DescriptionRow.swift */,
 				E62C67C42638703300F1FDFE /* ExifRow.swift */,
 				E62B2F132639223000604A1C /* MapRow.swift */,
+				E6EDAD0226397A8D0062EAD9 /* TagRow.swift */,
 			);
 			path = Photo;
 			sourceTree = "<group>";
@@ -438,6 +443,7 @@
 				E68BFFB9262FE6A200CC908F /* SnapKit */,
 				E64BB22D263282690053C309 /* CodableX */,
 				E64BB2332632863F0053C309 /* Kingfisher */,
+				E6EDACFD263972470062EAD9 /* TagListView */,
 			);
 			productName = Pixl;
 			productReference = E633AABC262EE6DB00ACB20E /* Pixl.app */;
@@ -519,6 +525,7 @@
 				E68BFFB8262FE6A200CC908F /* XCRemoteSwiftPackageReference "SnapKit" */,
 				E64BB22C263282690053C309 /* XCRemoteSwiftPackageReference "CodableX" */,
 				E64BB2322632863F0053C309 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				E6EDACFC263972470062EAD9 /* XCRemoteSwiftPackageReference "TagListView" */,
 			);
 			productRefGroup = E633AABD262EE6DB00ACB20E /* Products */;
 			projectDirPath = "";
@@ -565,6 +572,7 @@
 				E68BFFDD262FF31300CC908F /* CollectionsViewController.swift in Sources */,
 				E6D1DA75263695E8009C6A78 /* UserViewController.swift in Sources */,
 				E6FEA14A2637D6210062AE72 /* UserProfileRow.swift in Sources */,
+				E6EDAD0326397A8D0062EAD9 /* TagRow.swift in Sources */,
 				E62C67BB2638546200F1FDFE /* ReusableRow.swift in Sources */,
 				E6559E40263701DD00F6F041 /* UIEdgeInsets+.swift in Sources */,
 				E660BB0C2631B83200739F15 /* APIService.swift in Sources */,
@@ -985,6 +993,14 @@
 				kind = branch;
 			};
 		};
+		E6EDACFC263972470062EAD9 /* XCRemoteSwiftPackageReference "TagListView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ElaWorkshop/TagListView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1047,6 +1063,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E6A5E920262FD5F3006576D5 /* XCRemoteSwiftPackageReference "XCoordinator" */;
 			productName = XCoordinator;
+		};
+		E6EDACFD263972470062EAD9 /* TagListView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E6EDACFC263972470062EAD9 /* XCRemoteSwiftPackageReference "TagListView" */;
+			productName = TagListView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -39,6 +39,7 @@ class PhotoViewController: UIViewController, Bindable {
     private let statisticsRow = StatisticsRow()
     private let exifRow = ExifRow()
     private let mapRow = MapRow()
+    private let tagRow = TagRow()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,6 +113,14 @@ class PhotoViewController: UIViewController, Bindable {
                 mapRow.configure(with: coordinate, for: location.title)
             })
             .disposed(by: bag)
+        
+        skipped
+            .map { $0.tags }
+            .filter { !$0.isEmpty }
+            .subscribe(onNext: { [unowned self] tags in
+                tagRow.configure(with: tags.map { $0.title }, for: "Tags")
+            })
+            .disposed(by: bag)
             
     }
     
@@ -131,6 +140,7 @@ extension PhotoViewController {
         contentView.addArrangedSubview(descriptionRow)
         contentView.addArrangedSubview(exifRow)
         contentView.addArrangedSubview(mapRow)
+        contentView.addArrangedSubview(tagRow)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Profile", style: .plain, target: self, action: #selector(toProfile))
     }
@@ -168,8 +178,10 @@ extension PhotoViewController {
         mapRow.snp.makeConstraints { make in
             make.leading.trailing.equalTo(contentView)
         }
+        
+        tagRow.snp.makeConstraints { make in
+            make.leading.trailing.equalTo(contentView)
+        }
     }
 }
-
-
 
