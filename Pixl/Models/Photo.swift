@@ -8,6 +8,7 @@
 import Foundation
 import AVFoundation
 import CodableX
+import MapKit
 
 struct Photo: Codable, Equatable {
     static func == (lhs: Photo, rhs: Photo) -> Bool {
@@ -83,6 +84,20 @@ struct Exif: Codable {
 struct Location: Codable {
     var city, country: String?
     var position: Position
+    
+    var title: String {
+        let name = [city, country].compactMap { $0 }.joined(separator: ", ")
+        if name.isEmpty {
+            return "Unknown place"
+        }
+        return name
+    }
+    
+    var coordinate: CLLocation? {
+        guard let latitude = position.latitude, let longitude = position.longitude else { return nil }
+        return CLLocation(latitude: latitude, longitude: longitude)
+    }
+    
 }
 
 struct Position: Codable {

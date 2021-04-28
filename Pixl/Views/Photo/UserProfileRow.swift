@@ -16,6 +16,8 @@ class UserProfileRow: UIView {
         $0.layer.cornerRadius = 30
         $0.layer.masksToBounds = true
         $0.contentMode = .scaleAspectFill
+        $0.backgroundColor = .secondarySystemBackground
+        $0.isHidden = true
     }
     
     private let displayNameLabel = UILabel().then {
@@ -55,6 +57,7 @@ class UserProfileRow: UIView {
             .map { $0.profileImage.medium }
             .subscribe(onNext: { [unowned self] in
                 imageView.kf.setImage(with: URL(string: $0), placeholder: imageView.image, options: [.cacheOriginalImage, .diskCacheExpiration(.days(2)), .keepCurrentImageWhileLoading])
+                imageView.isHidden = false
             })
             .disposed(by: bag)
         user

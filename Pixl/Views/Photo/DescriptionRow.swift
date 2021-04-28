@@ -25,7 +25,7 @@ class DescriptionRow: ReusableRow {
         super.layoutSubviews()
         if !subviews.isEmpty {
             descriptionLabel.snp.makeConstraints { make in
-                make.top.equalTo(titleLabel.snp.bottom).offset(5)
+                make.top.equalTo(titleLabel.snp.bottom).offset(10)
                 make.leading.trailing.equalTo(titleLabel)
                 make.bottom.equalTo(self).offset(-10)
             }

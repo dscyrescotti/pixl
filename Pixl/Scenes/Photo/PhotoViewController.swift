@@ -21,9 +21,7 @@ class PhotoViewController: UIViewController, Bindable {
         $0.alwaysBounceVertical = true
     }
     
-    private let headerView = UIView().then {
-        $0.backgroundColor = .systemBackground
-    }
+    private let headerView = AppBar()
     
     private let imageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
@@ -40,6 +38,7 @@ class PhotoViewController: UIViewController, Bindable {
     private let descriptionRow = DescriptionRow()
     private let statisticsRow = StatisticsRow()
     private let exifRow = ExifRow()
+    private let mapRow = MapRow()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +69,7 @@ class PhotoViewController: UIViewController, Bindable {
         let photo = viewModel.photo.asObservable()
         
         let skipped = photo.skip(1)
+            .subscribe(on: MainScheduler.instance)
         
         photo.map { ($0.urls.regular, $0.blurHash) }
             .subscribe(onNext: { [unowned self] in
@@ -86,8 +86,7 @@ class PhotoViewController: UIViewController, Bindable {
         skipped
             .map { $0.photoDescription }
             .subscribe(onNext: { [unowned self] text in
-                guard let text = text else { return }
-                descriptionRow.configure(with: text, for: "Description")
+                descriptionRow.configure(with: text ?? "No description", for: "Description")
             })
             .disposed(by: bag)
         
@@ -105,6 +104,15 @@ class PhotoViewController: UIViewController, Bindable {
                 exifRow.configure(with: exif, for: "Exif")
             })
             .disposed(by: bag)
+        
+        skipped
+            .map { $0.location }
+            .subscribe(onNext: { [unowned self] location in
+                guard let location = location, let coordinate = location.coordinate else { return }
+                mapRow.configure(with: coordinate, for: location.title)
+            })
+            .disposed(by: bag)
+            
     }
     
 }
@@ -118,10 +126,11 @@ extension PhotoViewController {
         scrollView.addSubview(contentView)
         scrollView.addSubview(headerView)
         headerView.addSubview(imageView)
-        contentView.addArrangedSubview(descriptionRow)
         contentView.addArrangedSubview(userProfileRow)
         contentView.addArrangedSubview(statisticsRow)
+        contentView.addArrangedSubview(descriptionRow)
         contentView.addArrangedSubview(exifRow)
+        contentView.addArrangedSubview(mapRow)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Profile", style: .plain, target: self, action: #selector(toProfile))
     }
@@ -155,5 +164,12 @@ extension PhotoViewController {
         exifRow.snp.makeConstraints { make in
             make.leading.trailing.equalTo(contentView)
         }
+        
+        mapRow.snp.makeConstraints { make in
+            make.leading.trailing.equalTo(contentView)
+        }
     }
 }
+
+
+

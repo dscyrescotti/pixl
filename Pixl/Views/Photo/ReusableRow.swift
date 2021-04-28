@@ -26,7 +26,7 @@ class ReusableRow: UIView {
         super.layoutSubviews()
         if !subviews.isEmpty {
             titleLabel.snp.makeConstraints { make in
-                make.top.equalTo(self)
+                make.top.equalTo(self).inset(5)
                 make.leading.trailing.equalTo(self).inset(10)
             }
         }

@@ -8,12 +8,13 @@
 import UIKit
 import SnapKit
 import Kingfisher
+import RxSwift
+import RxCocoa
 
 class PhotoCell: UICollectionViewCell {
     static let identifier = "PhotoCell"
     
     private var placeholder: UIImage?
-//    private var shouldAnimate: Bool = true
     
     let imageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
@@ -43,10 +44,11 @@ class PhotoCell: UICollectionViewCell {
     }
     
     func configure(with photo: Photo) {
-        self.imageView.kf.setImage(with: URL(string: photo.urls.small), placeholder: self.placeholder, options: [.cacheOriginalImage, .diskCacheExpiration(.days(2))])
+        self.imageView.kf.setImage(with: URL(string: photo.urls.thumb), placeholder: self.placeholder, options: [.cacheOriginalImage, .diskCacheExpiration(.days(2))])
     }
     
     override func prepareForReuse() {
+        imageView.kf.cancelDownloadTask()
         imageView.image = nil
         placeholder = nil
         super.prepareForReuse()

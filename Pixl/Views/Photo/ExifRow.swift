@@ -61,7 +61,7 @@ class ExifRow: ReusableRow {
         let vstack = UIStackView().then {
             $0.axis = .vertical
             $0.alignment = .center
-            $0.distribution = .equalSpacing
+            $0.distribution = .fillEqually
         }
         let indices = (0, 1)
         for i in 0..<3 {

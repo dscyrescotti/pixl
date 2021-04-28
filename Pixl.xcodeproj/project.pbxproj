@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E62B2F142639223000604A1C /* MapRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B2F132639223000604A1C /* MapRow.swift */; };
 		E62C67B1263842FB00F1FDFE /* StatisticsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62C67B0263842FB00F1FDFE /* StatisticsRow.swift */; };
 		E62C67B62638503D00F1FDFE /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62C67B52638503D00F1FDFE /* Int+.swift */; };
 		E62C67BB2638546200F1FDFE /* ReusableRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62C67BA2638546200F1FDFE /* ReusableRow.swift */; };
@@ -81,6 +82,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E62B2F132639223000604A1C /* MapRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRow.swift; sourceTree = "<group>"; };
 		E62C67B0263842FB00F1FDFE /* StatisticsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsRow.swift; sourceTree = "<group>"; };
 		E62C67B52638503D00F1FDFE /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		E62C67BA2638546200F1FDFE /* ReusableRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableRow.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				E62C67BA2638546200F1FDFE /* ReusableRow.swift */,
 				E62C67BF2638549400F1FDFE /* DescriptionRow.swift */,
 				E62C67C42638703300F1FDFE /* ExifRow.swift */,
+				E62B2F132639223000604A1C /* MapRow.swift */,
 			);
 			path = Photo;
 			sourceTree = "<group>";
@@ -591,6 +594,7 @@
 				E68BFFE5262FFA8500CC908F /* HomeCoordinator.swift in Sources */,
 				E6FE84F5263062770018E269 /* PhotosViewModel.swift in Sources */,
 				E6D9E636263189B2005BB2A7 /* UIView+.swift in Sources */,
+				E62B2F142639223000604A1C /* MapRow.swift in Sources */,
 				E6EF7A9526307F6900CFFE5E /* UIImage+.swift in Sources */,
 				E633AAC2262EE6DB00ACB20E /* SceneDelegate.swift in Sources */,
 				E6504C422635C358008E7CD1 /* PhotoViewModel.swift in Sources */,
