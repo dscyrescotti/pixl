@@ -10,6 +10,7 @@ import SnapKit
 import Then
 import RxCocoa
 import RxSwift
+import RxGesture
 
 class UserProfileRow: UIView {
     private let imageView = UIImageView().then {
@@ -39,6 +40,7 @@ class UserProfileRow: UIView {
     }
     
     lazy var user = PublishRelay<User>()
+    lazy var tapAction = PublishRelay<Void>()
     
     private let bag = DisposeBag()
     
@@ -68,6 +70,28 @@ class UserProfileRow: UIView {
             .map { $0.name }
             .bind(to: displayNameLabel.rx.text)
             .disposed(by: bag)
+        
+        imageView.rx
+            .tapGesture()
+            .when(.recognized)
+            .map { _ in () }
+            .bind(to: tapAction)
+            .disposed(by: bag)
+        
+        displayNameLabel.rx
+            .tapGesture()
+            .when(.recognized)
+            .map { _ in () }
+            .bind(to: tapAction)
+            .disposed(by: bag)
+        
+        userNameLabel.rx
+            .tapGesture()
+            .when(.recognized)
+            .map { _ in () }
+            .bind(to: tapAction)
+            .disposed(by: bag)
+            
     }
     
     override func layoutSubviews() {

@@ -47,6 +47,9 @@
 		E68BFFE5262FFA8500CC908F /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68BFFE4262FFA8500CC908F /* HomeCoordinator.swift */; };
 		E68BFFEE263001FC00CC908F /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68BFFED263001FC00CC908F /* SettingsViewController.swift */; };
 		E6975A632635342C00CA905D /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6975A622635342C00CA905D /* PhotoViewController.swift */; };
+		E699D2B0263A65F900592E24 /* Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E699D2AF263A65F900592E24 /* Orientation.swift */; };
+		E699D2B5263AB7FA00592E24 /* BarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E699D2B4263AB7FA00592E24 /* BarButton.swift */; };
+		E699D2BB263AC23500592E24 /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = E699D2BA263AC23500592E24 /* RxGesture */; };
 		E6A5E910262FD50F006576D5 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E6A5E90F262FD50F006576D5 /* RxSwift */; };
 		E6A5E912262FD50F006576D5 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = E6A5E911262FD50F006576D5 /* RxRelay */; };
 		E6A5E914262FD50F006576D5 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = E6A5E913262FD50F006576D5 /* RxCocoa */; };
@@ -124,6 +127,8 @@
 		E68BFFE4262FFA8500CC908F /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		E68BFFED263001FC00CC908F /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E6975A622635342C00CA905D /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
+		E699D2AF263A65F900592E24 /* Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orientation.swift; sourceTree = "<group>"; };
+		E699D2B4263AB7FA00592E24 /* BarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarButton.swift; sourceTree = "<group>"; };
 		E6A5E92B262FD666006576D5 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		E6D1DA6B26368ED7009C6A78 /* UINavigationController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+.swift"; sourceTree = "<group>"; };
 		E6D1DA74263695E8009C6A78 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +152,7 @@
 				E6A5E914262FD50F006576D5 /* RxCocoa in Frameworks */,
 				E6A5E916262FD50F006576D5 /* RxBlocking in Frameworks */,
 				E6EDACFE263972470062EAD9 /* TagListView in Frameworks */,
+				E699D2BB263AC23500592E24 /* RxGesture in Frameworks */,
 				E6A5E912262FD50F006576D5 /* RxRelay in Frameworks */,
 				E68BFFA8262FDC1E00CC908F /* Action in Frameworks */,
 				E6A5E91C262FD586006576D5 /* RxAlamofire in Frameworks */,
@@ -328,6 +334,7 @@
 				E68BFFAD262FDE5B00CC908F /* Bindable.swift */,
 				E64BB2402632BFED0053C309 /* BlurHash.swift */,
 				E65209682636E2F90047F955 /* AppBarInjectable.swift */,
+				E699D2AF263A65F900592E24 /* Orientation.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -394,6 +401,7 @@
 				E6FE84FE26306B7E0018E269 /* Cells */,
 				E6FE84EE26305F830018E269 /* Layouts */,
 				E65209702636E5750047F955 /* AppBar.swift */,
+				E699D2B4263AB7FA00592E24 /* BarButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -444,6 +452,7 @@
 				E64BB22D263282690053C309 /* CodableX */,
 				E64BB2332632863F0053C309 /* Kingfisher */,
 				E6EDACFD263972470062EAD9 /* TagListView */,
+				E699D2BA263AC23500592E24 /* RxGesture */,
 			);
 			productName = Pixl;
 			productReference = E633AABC262EE6DB00ACB20E /* Pixl.app */;
@@ -526,6 +535,7 @@
 				E64BB22C263282690053C309 /* XCRemoteSwiftPackageReference "CodableX" */,
 				E64BB2322632863F0053C309 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				E6EDACFC263972470062EAD9 /* XCRemoteSwiftPackageReference "TagListView" */,
+				E699D2B9263AC23400592E24 /* XCRemoteSwiftPackageReference "RxGesture" */,
 			);
 			productRefGroup = E633AABD262EE6DB00ACB20E /* Products */;
 			projectDirPath = "";
@@ -584,6 +594,7 @@
 				E6FE84F026305FA90018E269 /* WaterfallLayout.swift in Sources */,
 				E62C67C52638703300F1FDFE /* ExifRow.swift in Sources */,
 				E660BB122631D03200739F15 /* Photo.swift in Sources */,
+				E699D2B5263AB7FA00592E24 /* BarButton.swift in Sources */,
 				E62C67B62638503D00F1FDFE /* Int+.swift in Sources */,
 				E64BB25926330AD50053C309 /* AppCoordinator.swift in Sources */,
 				E6D1DA6C26368ED7009C6A78 /* UINavigationController+.swift in Sources */,
@@ -595,6 +606,7 @@
 				E68BFFAE262FDE5B00CC908F /* Bindable.swift in Sources */,
 				E62C67C02638549400F1FDFE /* DescriptionRow.swift in Sources */,
 				E64BB2412632BFED0053C309 /* BlurHash.swift in Sources */,
+				E699D2B0263A65F900592E24 /* Orientation.swift in Sources */,
 				E68BFFA2262FDB2100CC908F /* LoginViewModel.swift in Sources */,
 				E633AAC0262EE6DB00ACB20E /* AppDelegate.swift in Sources */,
 				E6504C472635D834008E7CD1 /* UIColor+.swift in Sources */,
@@ -969,6 +981,14 @@
 				minimumVersion = 5.0.1;
 			};
 		};
+		E699D2B9263AC23400592E24 /* XCRemoteSwiftPackageReference "RxGesture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxGesture.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.2;
+			};
+		};
 		E6A5E90E262FD50F006576D5 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
@@ -1033,6 +1053,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E68BFFB8262FE6A200CC908F /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		E699D2BA263AC23500592E24 /* RxGesture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E699D2B9263AC23400592E24 /* XCRemoteSwiftPackageReference "RxGesture" */;
+			productName = RxGesture;
 		};
 		E6A5E90F262FD50F006576D5 /* RxSwift */ = {
 			isa = XCSwiftPackageProductDependency;

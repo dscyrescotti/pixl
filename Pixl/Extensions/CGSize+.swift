@@ -11,4 +11,8 @@ extension CGSize {
     func multiple(by value: CGFloat) -> CGSize {
         .init(width: width * value, height: height * value)
     }
+    
+    func orientation<T>(portrait: T, landscape: T) -> T {
+        width > height ? landscape : portrait
+    }
 }

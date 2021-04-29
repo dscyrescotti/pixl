@@ -14,6 +14,7 @@ class PhotoViewModel {
     private let bag = DisposeBag()
     
     var photo: BehaviorRelay<Photo>
+    lazy var profileTrigger = PublishRelay<Void>()
     
     private let router: UnownedRouter<PhotoRoute>
     
@@ -27,9 +28,11 @@ class PhotoViewModel {
         APIService.shared.getPhoto(id: id)
             .bind(to: photo)
             .disposed(by: bag)
-    }
-    
-    func toProfile() {
-        router.trigger(.user(id: ""))
+        
+        profileTrigger
+            .subscribe(onNext: { [unowned self] in
+                router.trigger(.user(id: photo.value.user.id))
+            })
+            .disposed(by: bag)
     }
 }

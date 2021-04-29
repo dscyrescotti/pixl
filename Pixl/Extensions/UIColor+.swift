@@ -8,28 +8,51 @@
 import UIKit
 
 extension UIColor {
-    public convenience init?(hex: String) {
-        let r, g, b: CGFloat
+  convenience init(_ hex: String, alpha: CGFloat = 1.0) {
+    var cString = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+    
+    if cString.hasPrefix("#") { cString.removeFirst() }
+    
+    if cString.count != 6 {
+        self.init(.primary)
+        return
+    }
+    
+    var rgbValue: UInt64 = 0
+    Scanner(string: cString).scanHexInt64(&rgbValue)
+    
+    self.init(red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+              green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+              blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+              alpha: alpha)
+  }
 
-        if hex.hasPrefix("#") {
-            let start = hex.index(hex.startIndex, offsetBy: 1)
-            let hexColor = String(hex[start...])
+}
 
-            if hexColor.count == 6 {
-                let scanner = Scanner(string: hexColor)
-                var hexNumber: UInt64 = 0
 
-                if scanner.scanHexInt64(&hexNumber) {
-                    r = CGFloat((hexNumber & 0xff000000) >> 24) / 255
-                    g = CGFloat((hexNumber & 0x00ff0000) >> 16) / 255
-                    b = CGFloat((hexNumber & 0x0000ff00) >> 8) / 255
+extension UIColor {
+    func isLight(threshold: Float = 0.5) -> Bool? {
+        let originalCGColor = self.cgColor
 
-                    self.init(red: r, green: g, blue: b, alpha: 1)
-                    return
-                }
-            }
+        let RGBCGColor = originalCGColor.converted(to: CGColorSpaceCreateDeviceRGB(), intent: .defaultIntent, options: nil)
+        guard let components = RGBCGColor?.components else {
+            return nil
+        }
+        guard components.count >= 3 else {
+            return nil
         }
 
-        return nil
+        let brightness = Float(((components[0] * 299) + (components[1] * 587) + (components[2] * 114)) / 1000)
+        return (brightness > threshold)
+    }
+    
+    var revert: UIColor {
+        guard let flag = isLight() else { return .label }
+        return flag ? .black : .white
+    }
+    
+    var similar: UIColor {
+        guard let flag = isLight() else { return .label }
+        return flag ? .white : .black
     }
 }
