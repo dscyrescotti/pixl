@@ -28,6 +28,8 @@ class PhotoCoordinator: NavigationCoordinator<PhotoRoute> {
             return .push(photoViewController)
         case .user:
             let userViewController = UserViewController()
+            let userViewModel = UserViewModel()
+            userViewController.bind(userViewModel)
             return .push(userViewController)
         }
     }

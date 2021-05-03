@@ -57,6 +57,11 @@
 		E6A5E91C262FD586006576D5 /* RxAlamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E6A5E91B262FD586006576D5 /* RxAlamofire */; };
 		E6A5E924262FD5F3006576D5 /* XCoordinator in Frameworks */ = {isa = PBXBuildFile; productRef = E6A5E923262FD5F3006576D5 /* XCoordinator */; };
 		E6A5E92C262FD666006576D5 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A5E92B262FD666006576D5 /* AuthCoordinator.swift */; };
+		E6B9617F263FF51300B3003B /* SegementSlide in Frameworks */ = {isa = PBXBuildFile; productRef = E6B9617E263FF51300B3003B /* SegementSlide */; };
+		E6B961882640031600B3003B /* UserPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B961872640031600B3003B /* UserPhotosViewController.swift */; };
+		E6B9618D2640034E00B3003B /* UserPhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B9618C2640034E00B3003B /* UserPhotosViewModel.swift */; };
+		E6B9619226400B2D00B3003B /* ParentAccessible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B9619126400B2D00B3003B /* ParentAccessible.swift */; };
+		E6C0CFF3263E5CE700AEE6DE /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C0CFF2263E5CE700AEE6DE /* UserViewModel.swift */; };
 		E6D1DA6C26368ED7009C6A78 /* UINavigationController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D1DA6B26368ED7009C6A78 /* UINavigationController+.swift */; };
 		E6D1DA75263695E8009C6A78 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D1DA74263695E8009C6A78 /* UserViewController.swift */; };
 		E6D9E636263189B2005BB2A7 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D9E635263189B2005BB2A7 /* UIView+.swift */; };
@@ -130,6 +135,10 @@
 		E699D2AF263A65F900592E24 /* Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orientation.swift; sourceTree = "<group>"; };
 		E699D2B4263AB7FA00592E24 /* BarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarButton.swift; sourceTree = "<group>"; };
 		E6A5E92B262FD666006576D5 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
+		E6B961872640031600B3003B /* UserPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotosViewController.swift; sourceTree = "<group>"; };
+		E6B9618C2640034E00B3003B /* UserPhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotosViewModel.swift; sourceTree = "<group>"; };
+		E6B9619126400B2D00B3003B /* ParentAccessible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentAccessible.swift; sourceTree = "<group>"; };
+		E6C0CFF2263E5CE700AEE6DE /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		E6D1DA6B26368ED7009C6A78 /* UINavigationController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+.swift"; sourceTree = "<group>"; };
 		E6D1DA74263695E8009C6A78 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		E6D9E635263189B2005BB2A7 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
@@ -149,6 +158,7 @@
 				E64BB2342632863F0053C309 /* Kingfisher in Frameworks */,
 				E68BFF9D262FDA2200CC908F /* XCoordinatorRx in Frameworks */,
 				E68BFFB4262FE14500CC908F /* Then in Frameworks */,
+				E6B9617F263FF51300B3003B /* SegementSlide in Frameworks */,
 				E6A5E914262FD50F006576D5 /* RxCocoa in Frameworks */,
 				E6A5E916262FD50F006576D5 /* RxBlocking in Frameworks */,
 				E6EDACFE263972470062EAD9 /* TagListView in Frameworks */,
@@ -335,6 +345,7 @@
 				E64BB2402632BFED0053C309 /* BlurHash.swift */,
 				E65209682636E2F90047F955 /* AppBarInjectable.swift */,
 				E699D2AF263A65F900592E24 /* Orientation.swift */,
+				E6B9619126400B2D00B3003B /* ParentAccessible.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -364,10 +375,21 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		E6B96183263FFC2600B3003B /* Photos */ = {
+			isa = PBXGroup;
+			children = (
+				E6B961872640031600B3003B /* UserPhotosViewController.swift */,
+				E6B9618C2640034E00B3003B /* UserPhotosViewModel.swift */,
+			);
+			path = Photos;
+			sourceTree = "<group>";
+		};
 		E6D1DA70263695A2009C6A78 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				E6B96183263FFC2600B3003B /* Photos */,
 				E6D1DA74263695E8009C6A78 /* UserViewController.swift */,
+				E6C0CFF2263E5CE700AEE6DE /* UserViewModel.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -453,6 +475,7 @@
 				E64BB2332632863F0053C309 /* Kingfisher */,
 				E6EDACFD263972470062EAD9 /* TagListView */,
 				E699D2BA263AC23500592E24 /* RxGesture */,
+				E6B9617E263FF51300B3003B /* SegementSlide */,
 			);
 			productName = Pixl;
 			productReference = E633AABC262EE6DB00ACB20E /* Pixl.app */;
@@ -536,6 +559,7 @@
 				E64BB2322632863F0053C309 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				E6EDACFC263972470062EAD9 /* XCRemoteSwiftPackageReference "TagListView" */,
 				E699D2B9263AC23400592E24 /* XCRemoteSwiftPackageReference "RxGesture" */,
+				E6B9617D263FF51300B3003B /* XCRemoteSwiftPackageReference "SegementSlide" */,
 			);
 			productRefGroup = E633AABD262EE6DB00ACB20E /* Products */;
 			projectDirPath = "";
@@ -580,10 +604,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E68BFFDD262FF31300CC908F /* CollectionsViewController.swift in Sources */,
+				E6B9619226400B2D00B3003B /* ParentAccessible.swift in Sources */,
 				E6D1DA75263695E8009C6A78 /* UserViewController.swift in Sources */,
 				E6FEA14A2637D6210062AE72 /* UserProfileRow.swift in Sources */,
 				E6EDAD0326397A8D0062EAD9 /* TagRow.swift in Sources */,
 				E62C67BB2638546200F1FDFE /* ReusableRow.swift in Sources */,
+				E6C0CFF3263E5CE700AEE6DE /* UserViewModel.swift in Sources */,
 				E6559E40263701DD00F6F041 /* UIEdgeInsets+.swift in Sources */,
 				E660BB0C2631B83200739F15 /* APIService.swift in Sources */,
 				E62C67B1263842FB00F1FDFE /* StatisticsRow.swift in Sources */,
@@ -599,6 +625,7 @@
 				E64BB25926330AD50053C309 /* AppCoordinator.swift in Sources */,
 				E6D1DA6C26368ED7009C6A78 /* UINavigationController+.swift in Sources */,
 				E68BFFC9262FEF9C00CC908F /* PhotosViewController.swift in Sources */,
+				E6B9618D2640034E00B3003B /* UserPhotosViewModel.swift in Sources */,
 				E64AB366263006540099101C /* MainViewController.swift in Sources */,
 				E6FE850026306BB30018E269 /* PhotoCell.swift in Sources */,
 				E6A5E92C262FD666006576D5 /* AuthCoordinator.swift in Sources */,
@@ -618,6 +645,7 @@
 				E6EF7A9526307F6900CFFE5E /* UIImage+.swift in Sources */,
 				E633AAC2262EE6DB00ACB20E /* SceneDelegate.swift in Sources */,
 				E6504C422635C358008E7CD1 /* PhotoViewModel.swift in Sources */,
+				E6B961882640031600B3003B /* UserPhotosViewController.swift in Sources */,
 				E68BFFD7262FF19400CC908F /* MainCoordinator.swift in Sources */,
 				E65209712636E5750047F955 /* AppBar.swift in Sources */,
 				E6975A632635342C00CA905D /* PhotoViewController.swift in Sources */,
@@ -1013,6 +1041,14 @@
 				kind = branch;
 			};
 		};
+		E6B9617D263FF51300B3003B /* XCRemoteSwiftPackageReference "SegementSlide" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dscyrescotti/SegementSlide.git";
+			requirement = {
+				branch = "spm-support";
+				kind = branch;
+			};
+		};
 		E6EDACFC263972470062EAD9 /* XCRemoteSwiftPackageReference "TagListView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ElaWorkshop/TagListView.git";
@@ -1088,6 +1124,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E6A5E920262FD5F3006576D5 /* XCRemoteSwiftPackageReference "XCoordinator" */;
 			productName = XCoordinator;
+		};
+		E6B9617E263FF51300B3003B /* SegementSlide */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E6B9617D263FF51300B3003B /* XCRemoteSwiftPackageReference "SegementSlide" */;
+			productName = SegementSlide;
 		};
 		E6EDACFD263972470062EAD9 /* TagListView */ = {
 			isa = XCSwiftPackageProductDependency;
