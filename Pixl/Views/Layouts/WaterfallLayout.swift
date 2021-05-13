@@ -25,6 +25,7 @@ class WaterfallLayout: UICollectionViewLayout {
     var numberOfColumns: Int = 1
     
     var cellPadding: CGFloat = 0
+    var topPadding: CGFloat = 0
     
     
     private var cache = [WaterfallLayoutAttributes]()
@@ -105,6 +106,8 @@ class WaterfallLayout: UICollectionViewLayout {
                     
                     contentHeight = headerFrame.maxY
                 }
+                
+                contentHeight += topPadding
                 
                 var yOffsets = [CGFloat](
                     repeating: contentHeight,

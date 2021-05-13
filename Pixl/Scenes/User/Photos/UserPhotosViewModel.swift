@@ -16,6 +16,8 @@ class UserPhotosViewModel {
     
     private var isLoading = false
     private let bag = DisposeBag()
+    private let username: String
+    private let type: PhotoType
     
     lazy var photos = BehaviorRelay<[Photo]>(value: [])
     private lazy var page = BehaviorRelay<Int>(value: 1)
@@ -24,8 +26,11 @@ class UserPhotosViewModel {
     lazy var didScrollToBottom = PublishRelay<Void>()
     lazy var willDisplayCell = PublishRelay<(cell: UICollectionViewCell, at: IndexPath)>()
     lazy var selectedItem = PublishRelay<IndexPath>()
+    lazy var labelHidden = PublishRelay<Bool>()
     
-    init() {
+    init(username: String, type: PhotoType = .photos) {
+        self.username = username
+        self.type = type
         bind()
     }
     
@@ -73,11 +78,16 @@ class UserPhotosViewModel {
             })
             .flatMap { [unowned self] page -> Observable<[Photo]> in
                 self.isLoading = true
-                return APIService.shared.getPhotos(page: page)
+                return APIService.shared.getUserPhotos(username: username, type: type.rawValue, page: page)
             }
             .asDriver(onErrorRecover: { [unowned self] _ in
                 self.isLoading = false
                 return Driver.just([])
+            })
+            .do(onNext: { [unowned self] in
+                if $0.isEmpty {
+                    labelHidden.accept(false)
+                }
             })
             .filter { !$0.isEmpty }
             .map { [unowned self] new in
@@ -94,5 +104,9 @@ class UserPhotosViewModel {
                 photoCell.configure(with: photos.value[indexPath.item])
             })
             .disposed(by: bag)
+    }
+    
+    enum PhotoType: String {
+        case photos, likes
     }
 }

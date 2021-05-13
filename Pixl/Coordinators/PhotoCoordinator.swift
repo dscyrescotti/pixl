@@ -10,7 +10,7 @@ import UIKit
 
 enum PhotoRoute: Route {
     case details(photo: Photo)
-    case user(id: String)
+    case user(user: User)
 }
 
 class PhotoCoordinator: NavigationCoordinator<PhotoRoute> {
@@ -26,9 +26,9 @@ class PhotoCoordinator: NavigationCoordinator<PhotoRoute> {
             let photoViewModel = PhotoViewModel(unownedRouter, photo: photo)
             photoViewController.bind(photoViewModel)
             return .push(photoViewController)
-        case .user:
+        case let .user(user):
             let userViewController = UserViewController()
-            let userViewModel = UserViewModel()
+            let userViewModel = UserViewModel(user: user)
             userViewController.bind(userViewModel)
             return .push(userViewController)
         }

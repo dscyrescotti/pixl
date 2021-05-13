@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import SegementSlide
+import Then
 
 class UserPhotosViewController: UIViewController, SegementSlideContentScrollViewDelegate, Bindable, ParentAccessible {
     var parentView: UIView!
@@ -17,6 +18,13 @@ class UserPhotosViewController: UIViewController, SegementSlideContentScrollView
     
     private var collectionView: UICollectionView
     private var layout: WaterfallLayout
+    
+    private let label = UILabel().then {
+        $0.text = "There's no photos of user in this tab."
+        $0.font = .preferredFont(forTextStyle: .callout)
+        $0.textAlignment = .center
+        $0.isHidden = true
+    }
     
     init() {
         self.layout = WaterfallLayout()
@@ -38,6 +46,7 @@ class UserPhotosViewController: UIViewController, SegementSlideContentScrollView
 
         setUp()
         setUpCollectionView()
+        setUpLabel()
     }
     
     func bindViewModel() {
@@ -63,6 +72,12 @@ class UserPhotosViewController: UIViewController, SegementSlideContentScrollView
         collectionView.rx.itemSelected
             .bind(to: viewModel.selectedItem)
             .disposed(by: bag)
+        
+        viewModel.labelHidden
+            .asObservable()
+            .debug()
+            .bind(to: label.rx.isHidden)
+            .disposed(by: bag)
             
     }
 }
@@ -75,18 +90,29 @@ extension UserPhotosViewController {
     func setUpCollectionView() {
         layout.delegate = self
         layout.cellPadding = 5
+        layout.topPadding = 5
         layout.numberOfColumns = parentView.orientation(portrait: 2, landscape: 3)
         
         collectionView.contentInset = .init(top: 5, left: 5, bottom: 5, right: 5)
         collectionView.backgroundColor = .systemBackground
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: PhotoCell.identifier)
+        collectionView.alwaysBounceVertical = true
         view.addSubview(collectionView)
+    }
+    
+    func setUpLabel() {
+        view.addSubview(label)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(view)
+        }
+        
+        label.snp.makeConstraints { make in
+            make.leading.trailing.centerX.centerY.equalTo(view.layoutMarginsGuide)
         }
     }
     

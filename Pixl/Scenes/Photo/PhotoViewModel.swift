@@ -31,7 +31,7 @@ class PhotoViewModel {
         
         profileTrigger
             .subscribe(onNext: { [unowned self] in
-                router.trigger(.user(id: photo.value.user.id))
+                router.trigger(.user(user: photo.value.user))
             })
             .disposed(by: bag)
     }

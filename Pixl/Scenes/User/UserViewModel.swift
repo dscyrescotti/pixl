@@ -11,5 +11,10 @@ import RxCocoa
 import XCoordinator
 
 class UserViewModel {
+    let user: User
+    
+    init(user: User) {
+        self.user = user
+    }
     
 }

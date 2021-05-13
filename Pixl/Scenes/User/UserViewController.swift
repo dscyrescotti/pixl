@@ -82,7 +82,13 @@ extension UserViewController {
         case 0:
             let controller = UserPhotosViewController()
             controller.parentView = self.view
-            let viewModel = UserPhotosViewModel()
+            let viewModel = UserPhotosViewModel(username: self.viewModel.user.username)
+            controller.bind(viewModel)
+            return controller
+        case 2:
+            let controller = UserPhotosViewController()
+            controller.parentView = self.view
+            let viewModel = UserPhotosViewModel(username: self.viewModel.user.username, type: .likes)
             controller.bind(viewModel)
             return controller
         default:
