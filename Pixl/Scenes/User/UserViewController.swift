@@ -17,12 +17,13 @@ class UserViewController: SegementSlideDefaultViewController, Bindable, AppBarIn
     var viewModel: UserViewModel!
     private let bag = DisposeBag()
     
+    private let profileHeader = UserProfileHeader().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.heightAnchor.constraint(equalToConstant: 250).isActive = true
+    }
+    
     override func segementSlideHeaderView() -> UIView? {
-        let headerView = UIView()
-        headerView.backgroundColor = .clear
-        headerView.translatesAutoresizingMaskIntoConstraints = false
-        headerView.heightAnchor.constraint(equalToConstant: view.bounds.height/4).isActive = true
-        return headerView
+        return profileHeader
     }
     
     override var titlesInSwitcher: [String] {
@@ -55,6 +56,10 @@ class UserViewController: SegementSlideDefaultViewController, Bindable, AppBarIn
     }
     
     func bindViewModel() {
+        viewModel.user
+            .skip(1)
+            .bind(to: profileHeader.user)
+            .disposed(by: bag)
     }
 }
 
@@ -82,13 +87,13 @@ extension UserViewController {
         case 0:
             let controller = UserPhotosViewController()
             controller.parentView = self.view
-            let viewModel = UserPhotosViewModel(username: self.viewModel.user.username)
+            let viewModel = UserPhotosViewModel(username: self.viewModel.user.value.username)
             controller.bind(viewModel)
             return controller
         case 2:
             let controller = UserPhotosViewController()
             controller.parentView = self.view
-            let viewModel = UserPhotosViewModel(username: self.viewModel.user.username, type: .likes)
+            let viewModel = UserPhotosViewModel(username: self.viewModel.user.value.username, type: .likes)
             controller.bind(viewModel)
             return controller
         default:
@@ -136,9 +141,4 @@ class ContentViewController: UICollectionViewController, SegementSlideContentScr
         150
     }
     
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let offsetY = self.collectionView.contentOffset.y
-//        let contentHeight = self.collectionView.contentSize.height
-//        print(offsetY > contentHeight - self.collectionView.frame.size.height - 100)
-    }
 }

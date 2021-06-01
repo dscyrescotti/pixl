@@ -11,10 +11,18 @@ import RxCocoa
 import XCoordinator
 
 class UserViewModel {
-    let user: User
+    private let bag = DisposeBag()
+    let user: BehaviorRelay<User>
     
     init(user: User) {
-        self.user = user
+        self.user = BehaviorRelay(value: user)
+        bindUser(username: user.username)
+    }
+    
+    func bindUser(username: String) {
+        APIService.shared.getUser(username: username)
+            .bind(to: user)
+            .disposed(by: bag)
     }
     
 }

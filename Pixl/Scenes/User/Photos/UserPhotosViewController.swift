@@ -75,7 +75,6 @@ class UserPhotosViewController: UIViewController, SegementSlideContentScrollView
         
         viewModel.labelHidden
             .asObservable()
-            .debug()
             .bind(to: label.rx.isHidden)
             .disposed(by: bag)
             
@@ -107,8 +106,8 @@ extension UserPhotosViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
-            make.top.equalTo(view)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.top.bottom.equalTo(view)
         }
         
         label.snp.makeConstraints { make in
