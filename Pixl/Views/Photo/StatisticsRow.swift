@@ -13,6 +13,9 @@ import RxCocoa
 
 class StatisticsRow: UIView {
     
+    var withBorder: Bool = true
+    var captionFont: UIFont = .preferredFont(forTextStyle: .body)
+    
     lazy var observer = PublishRelay<[(String, String)]>()
     private let bag = DisposeBag()
     
@@ -40,7 +43,7 @@ class StatisticsRow: UIView {
             .subscribe(onNext: { [unowned self] value in
                 boxes.enumerated().forEach { index, box in
                     let data = value[index]
-                    box.configure(title: data.0, value: data.1)
+                    box.configure(title: data.0, value: data.1, withBorder: withBorder, font: captionFont)
                 }
                 self.hstack.isHidden = false
             })
@@ -84,9 +87,6 @@ class StatisticsBox: UIView {
         $0.alignment = .center
         $0.distribution = .fillEqually
         $0.layer.masksToBounds = true
-        $0.layer.cornerRadius = 10
-        $0.layer.borderWidth = 0.5
-        $0.layer.borderColor = UIColor.label.cgColor
     }
     
     override init(frame: CGRect) {
@@ -111,9 +111,15 @@ class StatisticsBox: UIView {
         }
     }
     
-    func configure(title: String, value: String) {
+    func configure(title: String, value: String, withBorder: Bool, font: UIFont) {
         textLabel.text = title
         digitLabel.text = value
+        textLabel.font = font
+        if withBorder {
+            vstack.layer.cornerRadius = 10
+            vstack.layer.borderWidth = 0.5
+            vstack.layer.borderColor = UIColor.label.cgColor
+        }
     }
 }
 

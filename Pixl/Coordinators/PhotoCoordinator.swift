@@ -30,6 +30,7 @@ class PhotoCoordinator: NavigationCoordinator<PhotoRoute> {
             let userViewController = UserViewController()
             let userViewModel = UserViewModel(user: user)
             userViewController.bind(userViewModel)
+            userViewController.title = user.username
             return .push(userViewController)
         }
     }

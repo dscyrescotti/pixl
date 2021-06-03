@@ -148,8 +148,8 @@ struct User: Codable {
     var instagramUsername, twitterUsername: String?
     var profileImage: ProfileImage
     var links: UserLinks
-    @Defaultable var followersCount: Int
-    @Defaultable var followingCount: Int
+    var followersCount: Int?
+    var followingCount: Int?
     var followedByUser: Bool?
 
     enum CodingKeys: String, CodingKey {
@@ -165,6 +165,10 @@ struct User: Codable {
         case links
         case followersCount = "followers_count"
         case followingCount = "following_count"
+    }
+    
+    var statsitics: [(String, String)] {
+        [("Photos", totalPhotos.shorted()), ("Collections", totalCollections.shorted()), ("Likes", totalLikes.shorted())]
     }
 }
 

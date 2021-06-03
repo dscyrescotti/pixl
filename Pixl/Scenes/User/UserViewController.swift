@@ -53,11 +53,11 @@ class UserViewController: SegementSlideDefaultViewController, Bindable, AppBarIn
         super.viewDidLayoutSubviews()
         registerLayout()
         reloadSwitcher()
+        reloadHeader()
     }
     
     func bindViewModel() {
         viewModel.user
-            .skip(1)
             .bind(to: profileHeader.user)
             .disposed(by: bag)
     }
