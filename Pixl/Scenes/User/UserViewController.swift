@@ -13,13 +13,15 @@ import SegementSlide
 
 class UserViewController: SegementSlideDefaultViewController, Bindable, AppBarInjectable {
     internal var appBar = AppBar()
+    private let backButton = BarButton(systemName: "arrow.backward")
+    lazy var orientationChange = PublishRelay<Orientation>()
     
     var viewModel: UserViewModel!
     private let bag = DisposeBag()
     
     private let profileHeader = UserProfileHeader().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        $0.heightAnchor.constraint(equalToConstant: 180).isActive = true
     }
     
     override func segementSlideHeaderView() -> UIView? {
@@ -45,7 +47,7 @@ class UserViewController: SegementSlideDefaultViewController, Bindable, AppBarIn
         super.viewDidLoad()
         defaultSelectedIndex = 0
         reloadData()
-        
+        backButton.configure(with: .systemBackground)
         setUp()
     }
     
@@ -59,6 +61,19 @@ class UserViewController: SegementSlideDefaultViewController, Bindable, AppBarIn
     func bindViewModel() {
         viewModel.user
             .bind(to: profileHeader.user)
+            .disposed(by: bag)
+        
+        let orientation = orientationChange
+            .distinctUntilChanged()
+        
+        orientation
+            .bind(to: backButton.orientationChange)
+            .disposed(by: bag)
+        
+        backButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                navigationController?.popViewController(animated: true)
+            })
             .disposed(by: bag)
     }
 }
@@ -82,23 +97,40 @@ extension UserViewController {
         }
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        orientationChange.accept(size.orientation(portrait: Orientation.portrait, landscape: .landscape))
+    }
+    
     func getChildController(_ index: Int) -> SegementSlideContentScrollViewDelegate {
         switch index {
         case 0:
             let controller = UserPhotosViewController()
             controller.parentView = self.view
-            let viewModel = UserPhotosViewModel(username: self.viewModel.user.value.username)
+            let viewModel = UserPhotosViewModel(username: self.viewModel.user.value.username, router: self.viewModel.router)
             controller.bind(viewModel)
             return controller
         case 2:
             let controller = UserPhotosViewController()
             controller.parentView = self.view
-            let viewModel = UserPhotosViewModel(username: self.viewModel.user.value.username, type: .likes)
+            let viewModel = UserPhotosViewModel(username: self.viewModel.user.value.username, type: .likes, router: self.viewModel.router)
             controller.bind(viewModel)
             return controller
         default:
             return ContentViewController()
         }
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setUpBarButtons()
+    }
+    
+    func setUpBarButtons() {
+        orientationChange.accept(view.orientation(portrait: Orientation.portrait, landscape: .landscape))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
     }
 }
 

@@ -31,15 +31,7 @@ class MainCoordinator: TabBarCoordinator<MainRoute> {
         
         let vc = MainViewController()
         let viewModel = MainViewModel(router)
-        vc.bind(viewModel)
-        
-//        photosViewModel.shouldHideNavigationBar
-//            .observe(on: MainScheduler.asyncInstance)
-//            .subscribe(onNext: {
-//                vc.navigationController?.setNavigationBarHidden($0, animated: true)
-//            })
-//            .disposed(by: bag)
-        
+        vc.bind(viewModel)        
         
         super.init(rootViewController: vc, tabs: [photosViewController, collectionsViewController], select: 0)
     }

@@ -19,6 +19,8 @@ class UserPhotosViewModel {
     private let username: String
     private let type: PhotoType
     
+    private let router: UnownedRouter<UserRoute>
+    
     lazy var photos = BehaviorRelay<[Photo]>(value: [])
     private lazy var page = BehaviorRelay<Int>(value: 1)
     private lazy var isFetching = BehaviorRelay<Bool>(value: false)
@@ -28,9 +30,10 @@ class UserPhotosViewModel {
     lazy var selectedItem = PublishRelay<IndexPath>()
     lazy var labelHidden = PublishRelay<Bool>()
     
-    init(username: String, type: PhotoType = .photos) {
+    init(username: String, type: PhotoType = .photos, router: UnownedRouter<UserRoute>) {
         self.username = username
         self.type = type
+        self.router = router
         bind()
     }
     
@@ -40,16 +43,25 @@ class UserPhotosViewModel {
         bindSelectedItem()
         bindWillDisplayCell()
         bindDidScrollToBottom()
+        bindHiddenLabel()
+    }
+    
+    func bindHiddenLabel() {
+        labelHidden
+            .subscribe(onNext: { _ in
+                self.isLoading = false
+            })
+            .disposed(by: bag)
     }
     
     private func bindSelectedItem() {
-//        selectedItem
-//            .flatMap { [unowned self] indexPath -> Observable<Void> in
-//                let photo = self.photos.value[indexPath.item]
-//                return self.router.rx.trigger(.photo(.details(photo: photo)))
-//            }
-//            .subscribe()
-//            .disposed(by: bag)
+        selectedItem
+            .flatMap { [unowned self] indexPath -> Observable<Void> in
+                let photo = self.photos.value[indexPath.item]
+                return self.router.rx.trigger(.photo(photo: .details(photo: photo)))
+            }
+            .subscribe()
+            .disposed(by: bag)
     }
     
     private func bindPhotos() {
@@ -85,7 +97,7 @@ class UserPhotosViewModel {
                 return Driver.just([])
             })
             .do(onNext: { [unowned self] in
-                if $0.isEmpty {
+                if $0.isEmpty && photos.value.isEmpty {
                     labelHidden.accept(false)
                 }
             })

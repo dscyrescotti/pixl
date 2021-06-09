@@ -18,25 +18,40 @@ class UserProfileHeader: UIView {
     
     private var profileImage = UIImageView().then {
         $0.backgroundColor = .secondarySystemBackground
+        $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 40
         $0.layer.masksToBounds = true
+        $0.layer.borderWidth = 0.5
+        $0.layer.borderColor = UIColor.lightGray.cgColor
     }
     
     private var nameLabel = UILabel().then {
-        $0.font = .preferredFont(forTextStyle: .title2)
-        $0.numberOfLines = 1
-        $0.sizeToFit()
-    }
-    
-    private var usernameLabel = UILabel().then {
         $0.font = .preferredFont(forTextStyle: .title3)
         $0.numberOfLines = 1
         $0.sizeToFit()
     }
     
-    private var statisticsRow = StatisticsRow().then {
-        $0.withBorder = false
-        $0.captionFont = .systemFont(ofSize: 14.5)
+    private var usernameLabel = UILabel().then {
+        $0.font = .preferredFont(forTextStyle: .subheadline)
+        $0.numberOfLines = 1
+        $0.sizeToFit()
+    }
+    
+    private var followerLabel = UILabel().then {
+        $0.font = .preferredFont(forTextStyle: .headline)
+        $0.numberOfLines = 1
+        $0.sizeToFit()
+        $0.textAlignment = .center
+    }
+    
+    private var followButton = UIButton(type: .custom).then {
+        $0.setTitle("Follow", for: .normal)
+        $0.titleLabel?.font = .preferredFont(forTextStyle: .subheadline)
+        $0.setTitleColor(.white, for: .normal)
+        $0.backgroundColor = .systemBlue
+        $0.contentEdgeInsets = .init(v: 7.5, h: 45)
+        $0.layer.cornerRadius = 10
+        $0.layer.masksToBounds = true
     }
     
     override init(frame: CGRect) {
@@ -45,7 +60,8 @@ class UserProfileHeader: UIView {
         bind()
         
         view.addSubview(profileImage)
-        view.addSubview(statisticsRow)
+        view.addSubview(followButton)
+        view.addSubview(followerLabel)
         view.addSubview(nameLabel)
         view.addSubview(usernameLabel)
     }
@@ -56,22 +72,25 @@ class UserProfileHeader: UIView {
             make.leading.equalTo(view.safeAreaLayoutGuide).inset(10)
             make.top.equalTo(view).inset(10)
         }
-
-        statisticsRow.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            make.top.equalTo(profileImage.snp.bottomMargin).offset(10)
+        
+        followerLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(profileImage.snp.centerY).offset(-4)
+            make.centerX.equalTo(followButton).inset(10)
+        }
+        
+        followButton.snp.makeConstraints { make in
+            make.top.equalTo(profileImage.snp.centerY).offset(4)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).inset(10)
         }
 
         nameLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(profileImage.snp.centerY).offset(-4)
-            make.trailing.equalTo(view.safeAreaLayoutGuide).inset(10)
-            make.leading.equalTo(profileImage.snp.trailing).offset(10)
+            make.top.equalTo(profileImage.snp.bottom).offset(10)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(10)
         }
 
         usernameLabel.snp.makeConstraints { make in
-            make.top.equalTo(profileImage.snp.centerY).offset(4)
-            make.trailing.equalTo(view.safeAreaLayoutGuide).inset(10)
-            make.leading.equalTo(profileImage.snp.trailing).offset(10)
+            make.top.equalTo(nameLabel.snp.bottom).offset(5)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(10)
         }
     }
     
@@ -84,7 +103,10 @@ class UserProfileHeader: UIView {
             profile(with: user.profileImage.large)
             nameLabel.text = user.name
             usernameLabel.text = "@\(user.username)"
-            statisticsRow.observer.accept(user.statsitics)
+//            biographyLabel.text = user.bio
+            if let followersCount = user.followersCount {
+                followerLabel.text = "\(followersCount.shorted()) Follower\(followersCount == 0 ? "" : "s")"
+            }
         })
         .disposed(by: bag)
         

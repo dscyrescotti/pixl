@@ -14,8 +14,11 @@ class UserViewModel {
     private let bag = DisposeBag()
     let user: BehaviorRelay<User>
     
-    init(user: User) {
+    let router: UnownedRouter<UserRoute>
+    
+    init(user: User, router: UnownedRouter<UserRoute>) {
         self.user = BehaviorRelay(value: user)
+        self.router = router
         bindUser(username: user.username)
     }
     

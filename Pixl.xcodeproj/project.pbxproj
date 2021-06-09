@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E612051A2670A7710010C64C /* UserCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61205192670A7710010C64C /* UserCoordinator.swift */; };
 		E62B2F142639223000604A1C /* MapRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B2F132639223000604A1C /* MapRow.swift */; };
 		E62C67B1263842FB00F1FDFE /* StatisticsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62C67B0263842FB00F1FDFE /* StatisticsRow.swift */; };
 		E62C67B62638503D00F1FDFE /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62C67B52638503D00F1FDFE /* Int+.swift */; };
@@ -93,6 +94,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E61205192670A7710010C64C /* UserCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoordinator.swift; sourceTree = "<group>"; };
 		E62B2F132639223000604A1C /* MapRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRow.swift; sourceTree = "<group>"; };
 		E62C67B0263842FB00F1FDFE /* StatisticsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsRow.swift; sourceTree = "<group>"; };
 		E62C67B52638503D00F1FDFE /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				E68BFFE4262FFA8500CC908F /* HomeCoordinator.swift */,
 				E68BFFD6262FF19400CC908F /* MainCoordinator.swift */,
 				E635599A2633DD9E00146CB6 /* PhotoCoordinator.swift */,
+				E61205192670A7710010C64C /* UserCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -609,6 +612,7 @@
 				E68BFFDD262FF31300CC908F /* CollectionsViewController.swift in Sources */,
 				E6B9619226400B2D00B3003B /* ParentAccessible.swift in Sources */,
 				E6D1DA75263695E8009C6A78 /* UserViewController.swift in Sources */,
+				E612051A2670A7710010C64C /* UserCoordinator.swift in Sources */,
 				E6FEA14A2637D6210062AE72 /* UserProfileRow.swift in Sources */,
 				E6EDAD0326397A8D0062EAD9 /* TagRow.swift in Sources */,
 				E62C67BB2638546200F1FDFE /* ReusableRow.swift in Sources */,

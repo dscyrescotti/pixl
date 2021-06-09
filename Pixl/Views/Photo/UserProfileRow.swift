@@ -19,6 +19,8 @@ class UserProfileRow: UIView {
         $0.contentMode = .scaleAspectFill
         $0.backgroundColor = .secondarySystemBackground
         $0.isHidden = true
+        $0.layer.borderWidth = 0.5
+        $0.layer.borderColor = UIColor.lightGray.cgColor
     }
     
     private let displayNameLabel = UILabel().then {
