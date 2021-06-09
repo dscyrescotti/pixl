@@ -10,7 +10,7 @@ import UIKit
 
 indirect enum UserRoute: Route {
     case details(user: User)
-    case photo(photo: PhotoRoute)
+    case photo(PhotoRoute)
 }
 
 class UserCoordinator: NavigationCoordinator<UserRoute> {

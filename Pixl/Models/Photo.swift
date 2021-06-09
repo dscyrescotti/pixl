@@ -26,7 +26,6 @@ struct Photo: Codable, Equatable {
     var likedByUser: Bool
     var photoDescription: String?
     var user: User
-//    var currentUserCollections: [CurrentUserCollection]
     var urls: Urls
     var links: PhotoLinks
     var exif: Exif?
@@ -107,23 +106,6 @@ struct Position: Codable {
 struct Tag: AnyCodable {
     var title: String
 }
-
-
-//struct CurrentUserCollection: Codable {
-//    var id: Int
-//    var title: String
-//    var publishedAt, lastCollectedAt, updatedAt: Date
-//    var coverPhoto, user: JSONNull?
-//
-//    enum CodingKeys: String, CodingKey {
-//        case id, title
-//        case publishedAt = "published_at"
-//        case lastCollectedAt = "last_collected_at"
-//        case updatedAt = "updated_at"
-//        case coverPhoto = "cover_photo"
-//        case user
-//    }
-//}
 
 struct PhotoLinks: Codable {
     var linksSelf, html, download, downloadLocation: String

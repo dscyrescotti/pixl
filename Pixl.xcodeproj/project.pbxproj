@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		E612051A2670A7710010C64C /* UserCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61205192670A7710010C64C /* UserCoordinator.swift */; };
+		E612051C2670B6680010C64C /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E612051B2670B6680010C64C /* Collection.swift */; };
+		E612051E2670B9A00010C64C /* CollectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E612051D2670B9A00010C64C /* CollectionsViewModel.swift */; };
+		E61205202670BCEF0010C64C /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E612051F2670BCEF0010C64C /* CollectionCell.swift */; };
+		E61205232670CBD90010C64C /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61205222670CBD90010C64C /* CollectionViewController.swift */; };
+		E61205252670CCC10010C64C /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61205242670CCC10010C64C /* CollectionViewModel.swift */; };
+		E61205272670DB160010C64C /* CollectionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61205262670DB160010C64C /* CollectionCoordinator.swift */; };
 		E62B2F142639223000604A1C /* MapRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B2F132639223000604A1C /* MapRow.swift */; };
 		E62C67B1263842FB00F1FDFE /* StatisticsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62C67B0263842FB00F1FDFE /* StatisticsRow.swift */; };
 		E62C67B62638503D00F1FDFE /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62C67B52638503D00F1FDFE /* Int+.swift */; };
@@ -95,6 +101,12 @@
 
 /* Begin PBXFileReference section */
 		E61205192670A7710010C64C /* UserCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoordinator.swift; sourceTree = "<group>"; };
+		E612051B2670B6680010C64C /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
+		E612051D2670B9A00010C64C /* CollectionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsViewModel.swift; sourceTree = "<group>"; };
+		E612051F2670BCEF0010C64C /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
+		E61205222670CBD90010C64C /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		E61205242670CCC10010C64C /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
+		E61205262670DB160010C64C /* CollectionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCoordinator.swift; sourceTree = "<group>"; };
 		E62B2F132639223000604A1C /* MapRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRow.swift; sourceTree = "<group>"; };
 		E62C67B0263842FB00F1FDFE /* StatisticsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsRow.swift; sourceTree = "<group>"; };
 		E62C67B52638503D00F1FDFE /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
@@ -194,6 +206,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E61205212670CBAA0010C64C /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				E61205222670CBD90010C64C /* CollectionViewController.swift */,
+				E61205242670CCC10010C64C /* CollectionViewModel.swift */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
 		E633AAB3262EE6DB00ACB20E = {
 			isa = PBXGroup;
 			children = (
@@ -269,6 +290,7 @@
 				E68BFFD6262FF19400CC908F /* MainCoordinator.swift */,
 				E635599A2633DD9E00146CB6 /* PhotoCoordinator.swift */,
 				E61205192670A7710010C64C /* UserCoordinator.swift */,
+				E61205262670DB160010C64C /* CollectionCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -302,6 +324,7 @@
 			isa = PBXGroup;
 			children = (
 				E660BB112631D03200739F15 /* Photo.swift */,
+				E612051B2670B6680010C64C /* Collection.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -318,6 +341,7 @@
 		E68BFF94262FD92000CC908F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				E61205212670CBAA0010C64C /* Collection */,
 				E6D1DA70263695A2009C6A78 /* User */,
 				E677E542263317F6007AAB6A /* Photo */,
 				E68BFFEC263001E900CC908F /* Settings */,
@@ -368,6 +392,7 @@
 			isa = PBXGroup;
 			children = (
 				E68BFFDC262FF31300CC908F /* CollectionsViewController.swift */,
+				E612051D2670B9A00010C64C /* CollectionsViewModel.swift */,
 			);
 			path = Collections;
 			sourceTree = "<group>";
@@ -446,6 +471,7 @@
 			isa = PBXGroup;
 			children = (
 				E6FE84FF26306BB30018E269 /* PhotoCell.swift */,
+				E612051F2670BCEF0010C64C /* CollectionCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -609,6 +635,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E61205232670CBD90010C64C /* CollectionViewController.swift in Sources */,
 				E68BFFDD262FF31300CC908F /* CollectionsViewController.swift in Sources */,
 				E6B9619226400B2D00B3003B /* ParentAccessible.swift in Sources */,
 				E6D1DA75263695E8009C6A78 /* UserViewController.swift in Sources */,
@@ -620,6 +647,7 @@
 				E6559E40263701DD00F6F041 /* UIEdgeInsets+.swift in Sources */,
 				E65F1CC52665F9B00097FFBF /* UserProfileHeader.swift in Sources */,
 				E660BB0C2631B83200739F15 /* APIService.swift in Sources */,
+				E61205202670BCEF0010C64C /* CollectionCell.swift in Sources */,
 				E62C67B1263842FB00F1FDFE /* StatisticsRow.swift in Sources */,
 				E635599B2633DD9E00146CB6 /* PhotoCoordinator.swift in Sources */,
 				E64BB2462632C7070053C309 /* CGSize+.swift in Sources */,
@@ -628,11 +656,13 @@
 				E6FE84F026305FA90018E269 /* WaterfallLayout.swift in Sources */,
 				E62C67C52638703300F1FDFE /* ExifRow.swift in Sources */,
 				E660BB122631D03200739F15 /* Photo.swift in Sources */,
+				E612051C2670B6680010C64C /* Collection.swift in Sources */,
 				E699D2B5263AB7FA00592E24 /* BarButton.swift in Sources */,
 				E62C67B62638503D00F1FDFE /* Int+.swift in Sources */,
 				E64BB25926330AD50053C309 /* AppCoordinator.swift in Sources */,
 				E6D1DA6C26368ED7009C6A78 /* UINavigationController+.swift in Sources */,
 				E68BFFC9262FEF9C00CC908F /* PhotosViewController.swift in Sources */,
+				E61205252670CCC10010C64C /* CollectionViewModel.swift in Sources */,
 				E6B9618D2640034E00B3003B /* UserPhotosViewModel.swift in Sources */,
 				E64AB366263006540099101C /* MainViewController.swift in Sources */,
 				E6FE850026306BB30018E269 /* PhotoCell.swift in Sources */,
@@ -644,10 +674,12 @@
 				E699D2B0263A65F900592E24 /* Orientation.swift in Sources */,
 				E68BFFA2262FDB2100CC908F /* LoginViewModel.swift in Sources */,
 				E633AAC0262EE6DB00ACB20E /* AppDelegate.swift in Sources */,
+				E612051E2670B9A00010C64C /* CollectionsViewModel.swift in Sources */,
 				E6504C472635D834008E7CD1 /* UIColor+.swift in Sources */,
 				E68BFF97262FD96700CC908F /* LoginViewController.swift in Sources */,
 				E68BFFE5262FFA8500CC908F /* HomeCoordinator.swift in Sources */,
 				E6FE84F5263062770018E269 /* PhotosViewModel.swift in Sources */,
+				E61205272670DB160010C64C /* CollectionCoordinator.swift in Sources */,
 				E6D9E636263189B2005BB2A7 /* UIView+.swift in Sources */,
 				E62B2F142639223000604A1C /* MapRow.swift in Sources */,
 				E6EF7A9526307F6900CFFE5E /* UIImage+.swift in Sources */,

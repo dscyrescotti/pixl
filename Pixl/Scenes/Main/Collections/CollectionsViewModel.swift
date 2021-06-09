@@ -1,8 +1,8 @@
 //
-//  UserPhotosViewModel.swift
+//  CollectionsViewModel.swift
 //  Pixl
 //
-//  Created by Dscyre Scotti on 03/05/2021.
+//  Created by Dscyre Scotti on 09/06/2021.
 //
 
 import Foundation
@@ -12,60 +12,46 @@ import XCoordinator
 import UIKit
 import Action
 
-class UserPhotosViewModel {
+class CollectionsViewModel {
     
     private var isLoading = false
     private let bag = DisposeBag()
-    private let username: String
-    private let type: PhotoType
     
-    private let router: UnownedRouter<UserRoute>
-    
-    lazy var photos = BehaviorRelay<[Photo]>(value: [])
+    lazy var collections = BehaviorRelay<[PhotoCollection]>(value: [])
     private lazy var page = BehaviorRelay<Int>(value: 1)
     private lazy var isFetching = BehaviorRelay<Bool>(value: false)
     
     lazy var didScrollToBottom = PublishRelay<Void>()
     lazy var willDisplayCell = PublishRelay<(cell: UICollectionViewCell, at: IndexPath)>()
     lazy var selectedItem = PublishRelay<IndexPath>()
-    lazy var labelHidden = PublishRelay<Bool>()
     
-    init(username: String, type: PhotoType = .photos, router: UnownedRouter<UserRoute>) {
-        self.username = username
-        self.type = type
+    private let router: UnownedRouter<HomeRoute>
+    
+    init(_ router: UnownedRouter<HomeRoute>) {
         self.router = router
         bind()
     }
     
     func bind() {
-        bindPhotos()
+        bindCollections()
         bindPage()
         bindSelectedItem()
         bindWillDisplayCell()
         bindDidScrollToBottom()
-        bindHiddenLabel()
-    }
-    
-    func bindHiddenLabel() {
-        labelHidden
-            .subscribe(onNext: { _ in
-                self.isLoading = false
-            })
-            .disposed(by: bag)
     }
     
     private func bindSelectedItem() {
         selectedItem
             .flatMap { [unowned self] indexPath -> Observable<Void> in
-                let photo = self.photos.value[indexPath.item]
-                return self.router.rx.trigger(.photo(.details(photo: photo)))
+                let collection = self.collections.value[indexPath.item]
+                return self.router.rx.trigger(.collection(.details(collection: collection)))
             }
             .subscribe()
             .disposed(by: bag)
     }
     
-    private func bindPhotos() {
-        photos
+    private func bindCollections() {
+        collections
             .subscribe(onNext: { _ in
                 self.isLoading = false
             })
@@ -86,39 +72,30 @@ class UserPhotosViewModel {
     private func bindPage() {
         page
             .do(onNext: {
-                print("[Fetch]: Start fetching page \($0) of user")
+                print("[Fetch]: Start fetching page \($0)")
             })
-            .flatMap { [unowned self] page -> Observable<[Photo]> in
+            .flatMap { [unowned self] page -> Observable<[PhotoCollection]> in
                 self.isLoading = true
-                return APIService.shared.getUserPhotos(username: username, type: type.rawValue, page: page)
+                return APIService.shared.getCollections(page: page)
             }
             .asDriver(onErrorRecover: { [unowned self] _ in
                 self.isLoading = false
                 return Driver.just([])
             })
-            .do(onNext: { [unowned self] in
-                if $0.isEmpty && photos.value.isEmpty {
-                    labelHidden.accept(false)
-                }
-            })
             .filter { !$0.isEmpty }
             .map { [unowned self] new in
-                self.photos.value + new
+                self.collections.value + new
             }
-            .drive(photos)
+            .drive(self.collections)
             .disposed(by: bag)
     }
     
     private func bindWillDisplayCell() {
         willDisplayCell
             .subscribe(onNext: { [unowned self] cell, indexPath in
-                guard let photoCell = cell as? PhotoCell else { return }
-                photoCell.configure(with: photos.value[indexPath.item])
+                guard let collectionCell = cell as? CollectionCell else { return }
+                collectionCell.configure(with: collections.value[indexPath.item])
             })
             .disposed(by: bag)
-    }
-    
-    enum PhotoType: String {
-        case photos, likes
     }
 }

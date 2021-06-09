@@ -27,6 +27,8 @@ class MainCoordinator: TabBarCoordinator<MainRoute> {
         photosViewController.tabBarItem = .init(title: "Photos", image: UIImage(systemName: "photo.on.rectangle.angled"), tag: 0)        
         
         let collectionsViewController = CollectionsViewController()
+        let collectionsViewModel = CollectionsViewModel(router)
+        collectionsViewController.bind(collectionsViewModel)
         collectionsViewController.tabBarItem = .init(title: "Collections", image: UIImage(systemName: "rectangle.3.offgrid"), tag: 1)
         
         let vc = MainViewController()

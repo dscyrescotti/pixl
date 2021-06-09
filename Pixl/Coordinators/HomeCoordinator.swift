@@ -14,6 +14,7 @@ enum HomeRoute: Route {
     case settings
     case logout
     case photo(PhotoRoute)
+    case collection(CollectionRoute)
 }
 
 class HomeCoordinator: NavigationCoordinator<HomeRoute> {
@@ -43,6 +44,10 @@ class HomeCoordinator: NavigationCoordinator<HomeRoute> {
             let coordinator = PhotoCoordinator(rootViewController: rootViewController)
             addChild(coordinator)
             return .trigger(photoRoute, on: coordinator)
+        case let .collection(collectionRoute):
+            let coordinator = CollectionCoordinator(rootViewController: rootViewController)
+            addChild(coordinator)
+            return .trigger(collectionRoute, on: coordinator)
         }
     }
 }
