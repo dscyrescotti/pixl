@@ -47,7 +47,6 @@ class UserViewController: SegementSlideDefaultViewController, Bindable, AppBarIn
         super.viewDidLoad()
         defaultSelectedIndex = 0
         reloadData()
-        backButton.configure(with: .systemBackground)
         setUp()
     }
     

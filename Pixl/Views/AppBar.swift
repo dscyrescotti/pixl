@@ -12,7 +12,7 @@ import SnapKit
 class AppBar: UIView {
     
     let bar = UIView().then {
-        $0.backgroundColor = .systemBackground
+        $0.backgroundColor = .secondarySystemBackground
     }
     
     override init(frame: CGRect) {
@@ -25,7 +25,7 @@ class AppBar: UIView {
         super.layoutSubviews()
         bar.snp.makeConstraints {
             $0.top.left.right.equalTo(self)
-            $0.bottom.equalTo(self).offset(-0.5)
+            $0.bottom.equalTo(self)
         }
     }
     

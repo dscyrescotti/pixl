@@ -114,7 +114,7 @@ class CollectionViewModel {
         willDisplaySupplementaryView
             .subscribe(onNext: { header, _, _ in
                 guard let header = header as? CollectionHeader else { return }
-//                header.backgroundColor = .systemPink
+                header.backgroundColor = .systemPink
             })
             .disposed(by: bag)
     }

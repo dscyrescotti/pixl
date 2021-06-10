@@ -31,6 +31,8 @@ class CollectionViewController: UIViewController, Bindable, AppBarInjectable {
 
         setUp()
         setUpCollectionView()
+        
+        addAppBar()
     }
     
     func bindViewModel() {
@@ -85,7 +87,6 @@ class CollectionViewController: UIViewController, Bindable, AppBarInjectable {
                 print(collection)
             })
             .disposed(by: bag)
-        
     }
 
 }
@@ -94,7 +95,6 @@ extension CollectionViewController {
     func setUp() {
         view.backgroundColor = .systemBackground
         
-        addAppBar()
     }
     
     func setUpCollectionView() {
@@ -115,11 +115,18 @@ extension CollectionViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            make.bottom.equalTo(view)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.top.bottom.equalToSuperview()
         }
         
         registerLayout()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        guard let layout = collectionView.collectionViewLayout as? WaterfallLayout else { return }
+        layout.numberOfColumns = view.orientation(portrait: 2, landscape: 3)
+        layout.invalidateLayout()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -131,9 +138,6 @@ extension CollectionViewController {
         super.viewWillAppear(animated)
         
         setUpBarButtons()
-        guard let layout = collectionView.collectionViewLayout as? WaterfallLayout else { return }
-        layout.numberOfColumns = view.orientation(portrait: 2, landscape: 3)
-        layout.invalidateLayout()
     }
     
     func setUpBarButtons() {
