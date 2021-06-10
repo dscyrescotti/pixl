@@ -85,7 +85,7 @@ struct Location: Codable {
     var position: Position
     
     var title: String {
-        let name = [city, country].compactMap { $0 }.joined(separator: ", ")
+        let name = [city, country].compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: ", ")
         if name.isEmpty {
             return "Unknown place"
         }

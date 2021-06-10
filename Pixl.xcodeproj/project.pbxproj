@@ -36,12 +36,15 @@
 		E64BB25926330AD50053C309 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64BB25826330AD50053C309 /* AppCoordinator.swift */; };
 		E6504C422635C358008E7CD1 /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6504C412635C358008E7CD1 /* PhotoViewModel.swift */; };
 		E6504C472635D834008E7CD1 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6504C462635D834008E7CD1 /* UIColor+.swift */; };
+		E650BBCC26720A83003A698D /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = E650BBCB26720A83003A698D /* Differentiator */; };
+		E650BBCE26720A83003A698D /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = E650BBCD26720A83003A698D /* RxDataSources */; };
 		E65209692636E2F90047F955 /* AppBarInjectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65209682636E2F90047F955 /* AppBarInjectable.swift */; };
 		E65209712636E5750047F955 /* AppBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65209702636E5750047F955 /* AppBar.swift */; };
 		E6559E40263701DD00F6F041 /* UIEdgeInsets+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6559E3F263701DD00F6F041 /* UIEdgeInsets+.swift */; };
 		E65F1CC52665F9B00097FFBF /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65F1CC42665F9B00097FFBF /* UserProfileHeader.swift */; };
 		E660BB0C2631B83200739F15 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660BB0B2631B83200739F15 /* APIService.swift */; };
 		E660BB122631D03200739F15 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660BB112631D03200739F15 /* Photo.swift */; };
+		E670CD322671F6D800ACF5E6 /* CollectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E670CD312671F6D800ACF5E6 /* CollectionHeader.swift */; };
 		E68BFF97262FD96700CC908F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68BFF96262FD96700CC908F /* LoginViewController.swift */; };
 		E68BFF9D262FDA2200CC908F /* XCoordinatorRx in Frameworks */ = {isa = PBXBuildFile; productRef = E68BFF9C262FDA2200CC908F /* XCoordinatorRx */; };
 		E68BFFA2262FDB2100CC908F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68BFFA1262FDB2100CC908F /* LoginViewModel.swift */; };
@@ -139,6 +142,7 @@
 		E65F1CC42665F9B00097FFBF /* UserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
 		E660BB0B2631B83200739F15 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		E660BB112631D03200739F15 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		E670CD312671F6D800ACF5E6 /* CollectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHeader.swift; sourceTree = "<group>"; };
 		E68BFF96262FD96700CC908F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E68BFFA1262FDB2100CC908F /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E68BFFAD262FDE5B00CC908F /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
@@ -175,12 +179,14 @@
 				E68BFF9D262FDA2200CC908F /* XCoordinatorRx in Frameworks */,
 				E68BFFB4262FE14500CC908F /* Then in Frameworks */,
 				E6B9617F263FF51300B3003B /* SegementSlide in Frameworks */,
+				E650BBCC26720A83003A698D /* Differentiator in Frameworks */,
 				E6A5E914262FD50F006576D5 /* RxCocoa in Frameworks */,
 				E6A5E916262FD50F006576D5 /* RxBlocking in Frameworks */,
 				E6EDACFE263972470062EAD9 /* TagListView in Frameworks */,
 				E699D2BB263AC23500592E24 /* RxGesture in Frameworks */,
 				E6A5E912262FD50F006576D5 /* RxRelay in Frameworks */,
 				E68BFFA8262FDC1E00CC908F /* Action in Frameworks */,
+				E650BBCE26720A83003A698D /* RxDataSources in Frameworks */,
 				E6A5E91C262FD586006576D5 /* RxAlamofire in Frameworks */,
 				E64BB22E263282690053C309 /* CodableX in Frameworks */,
 				E6A5E924262FD5F3006576D5 /* XCoordinator in Frameworks */,
@@ -329,6 +335,15 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		E670CD302671F69F00ACF5E6 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				E65F1CC42665F9B00097FFBF /* UserProfileHeader.swift */,
+				E670CD312671F6D800ACF5E6 /* CollectionHeader.swift */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
 		E677E542263317F6007AAB6A /* Photo */ = {
 			isa = PBXGroup;
 			children = (
@@ -454,7 +469,7 @@
 				E6FE84EE26305F830018E269 /* Layouts */,
 				E65209702636E5750047F955 /* AppBar.swift */,
 				E699D2B4263AB7FA00592E24 /* BarButton.swift */,
-				E65F1CC42665F9B00097FFBF /* UserProfileHeader.swift */,
+				E670CD302671F69F00ACF5E6 /* Headers */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -508,6 +523,8 @@
 				E6EDACFD263972470062EAD9 /* TagListView */,
 				E699D2BA263AC23500592E24 /* RxGesture */,
 				E6B9617E263FF51300B3003B /* SegementSlide */,
+				E650BBCB26720A83003A698D /* Differentiator */,
+				E650BBCD26720A83003A698D /* RxDataSources */,
 			);
 			productName = Pixl;
 			productReference = E633AABC262EE6DB00ACB20E /* Pixl.app */;
@@ -592,6 +609,7 @@
 				E6EDACFC263972470062EAD9 /* XCRemoteSwiftPackageReference "TagListView" */,
 				E699D2B9263AC23400592E24 /* XCRemoteSwiftPackageReference "RxGesture" */,
 				E6B9617D263FF51300B3003B /* XCRemoteSwiftPackageReference "SegementSlide" */,
+				E650BBCA26720A83003A698D /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			productRefGroup = E633AABD262EE6DB00ACB20E /* Products */;
 			projectDirPath = "";
@@ -654,6 +672,7 @@
 				E65209692636E2F90047F955 /* AppBarInjectable.swift in Sources */,
 				E68BFFEE263001FC00CC908F /* SettingsViewController.swift in Sources */,
 				E6FE84F026305FA90018E269 /* WaterfallLayout.swift in Sources */,
+				E670CD322671F6D800ACF5E6 /* CollectionHeader.swift in Sources */,
 				E62C67C52638703300F1FDFE /* ExifRow.swift in Sources */,
 				E660BB122631D03200739F15 /* Photo.swift in Sources */,
 				E612051C2670B6680010C64C /* Collection.swift in Sources */,
@@ -1025,6 +1044,14 @@
 				minimumVersion = 6.3.0;
 			};
 		};
+		E650BBCA26720A83003A698D /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
 		E68BFFA6262FDC1E00CC908F /* XCRemoteSwiftPackageReference "Action" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RxSwiftCommunity/Action.git";
@@ -1109,6 +1136,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E64BB2322632863F0053C309 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		E650BBCB26720A83003A698D /* Differentiator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E650BBCA26720A83003A698D /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = Differentiator;
+		};
+		E650BBCD26720A83003A698D /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E650BBCA26720A83003A698D /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
 		};
 		E68BFF9C262FDA2200CC908F /* XCoordinatorRx */ = {
 			isa = XCSwiftPackageProductDependency;

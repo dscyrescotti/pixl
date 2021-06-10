@@ -44,7 +44,7 @@ class UserProfileHeader: UIView {
         $0.textAlignment = .center
     }
     
-    private var followButton = UIButton(type: .custom).then {
+    private var followButton = UIButton(type: .system).then {
         $0.setTitle("Follow", for: .normal)
         $0.titleLabel?.font = .preferredFont(forTextStyle: .subheadline)
         $0.setTitleColor(.white, for: .normal)
