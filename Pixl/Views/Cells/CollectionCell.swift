@@ -77,15 +77,19 @@ class CollectionCell: UICollectionViewCell {
     }
     
     func placeholder(with collection: PhotoCollection) {
-        placeholder = UIImage(blurHash: collection.coverPhoto.blurHash, size: CGSize(width: 20, height: 20))
-        imageView.image = placeholder
-        imageView.backgroundColor = UIColor(collection.coverPhoto.color)
+        if let photo = collection.coverPhoto {
+            placeholder = UIImage(blurHash: photo.blurHash, size: CGSize(width: 20, height: 20))
+            imageView.image = placeholder
+            imageView.backgroundColor = UIColor(photo.color)
+        }
         titleLabel.text = collection.title
         photoCountLabel.text = "\(collection.totalPhotos) Photo\(collection.totalPhotos == 0 ? "" : "s")"
     }
     
     func configure(with collection: PhotoCollection) {
-        self.imageView.kf.setImage(with: URL(string: collection.coverPhoto.urls.thumb), placeholder: self.placeholder, options: [.cacheOriginalImage, .diskCacheExpiration(.days(2))])
+        if let photo = collection.coverPhoto {
+            self.imageView.kf.setImage(with: URL(string: photo.urls.thumb), placeholder: self.placeholder, options: [.cacheOriginalImage, .diskCacheExpiration(.days(2))])
+        }
     }
     
     override func prepareForReuse() {

@@ -87,7 +87,7 @@ class CollectionViewModel {
             })
             .flatMap { [unowned self] page -> Observable<[Photo]> in
                 self.isLoading = true
-                return APIService.shared.getPhotos(page: page)
+                return APIService.shared.getCollectionPhotos(id: collection.value.id, page: page)
             }
             .asDriver(onErrorRecover: { [unowned self] _ in
                 self.isLoading = false
@@ -112,9 +112,12 @@ class CollectionViewModel {
     
     private func bindWillDisplaySupplementaryView() {
         willDisplaySupplementaryView
-            .subscribe(onNext: { header, _, _ in
+            .subscribe(onNext: { [unowned self] header, _, _ in
                 guard let header = header as? CollectionHeader else { return }
-                header.backgroundColor = .systemPink
+                header.tapTrigger = { [unowned self] in
+                    router.trigger(.user(.details(user: collection.value.user)))
+                }
+                header.configure(collection: collection.value)
             })
             .disposed(by: bag)
     }

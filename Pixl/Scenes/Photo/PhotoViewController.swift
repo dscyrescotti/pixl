@@ -36,7 +36,9 @@ class PhotoViewController: UIViewController, Bindable {
         $0.distribution = .fill
     }
     
-    private let userProfileRow = UserProfileRow()
+    private let userProfileRow = UserProfileRow().then {
+        $0.style = .large
+    }
     private let descriptionRow = DescriptionRow()
     private let statisticsRow = StatisticsRow()
     private let exifRow = ExifRow()

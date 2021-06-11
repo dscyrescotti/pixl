@@ -82,11 +82,7 @@ class CollectionViewController: UIViewController, Bindable, AppBarInjectable {
             .bind(to: viewModel.selectedItem)
             .disposed(by: bag)
         
-        viewModel.collection
-            .subscribe(onNext: { collection in
-                print(collection)
-            })
-            .disposed(by: bag)
+        
     }
 
 }
@@ -157,6 +153,6 @@ extension CollectionViewController: WaterfallLayoutDelegate {
     }
     
     func collectionView(collectionView: UICollectionView, sizeForSectionHeaderViewForSection section: Int) -> CGSize {
-        .init(width: view.bounds.width, height: 200)
+        .init(width: view.bounds.width, height: 150)
     }
 }

@@ -19,7 +19,7 @@ struct PhotoCollection: Codable {
     @Defaultable var tags: [Tag]
     var links: CollectionLinks
     var user: User
-    var coverPhoto: Photo
+    var coverPhoto: Photo?
 
     enum CodingKeys: String, CodingKey {
         case id, title

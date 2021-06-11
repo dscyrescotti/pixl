@@ -12,20 +12,27 @@ import SnapKit
 class AppBar: UIView {
     
     let bar = UIView().then {
-        $0.backgroundColor = .secondarySystemBackground
+        $0.backgroundColor = .systemBackground
+    }
+    
+    let seperator = UIView().then {
+        $0.backgroundColor = .systemGray
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .secondaryLabel
         addSubview(bar)
+        addSubview(seperator)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         bar.snp.makeConstraints {
-            $0.top.left.right.equalTo(self)
-            $0.bottom.equalTo(self)
+            $0.edges.equalTo(self)
+        }
+        seperator.snp.makeConstraints {
+            $0.bottom.leading.trailing.equalTo(self)
+            $0.height.equalTo(0.5)
         }
     }
     

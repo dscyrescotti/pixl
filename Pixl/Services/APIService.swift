@@ -98,4 +98,12 @@ class APIService {
         
         return alamofireRequest(PhotoCollection.self, request: request)
     }
+    
+    func getCollectionPhotos(id: String, page: Int, perPage: Int = 50) -> Observable<[Photo]> {
+        guard let request = urlRequest(endpoint: "collections/\(id)/photos", query: ["page": page, "per_page": perPage]) else {
+            print("[Error]: Invalid url")
+            return Observable.empty()
+        }
+        return alamofireRequest([Photo].self, request: request)
+    }
 }

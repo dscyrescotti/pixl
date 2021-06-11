@@ -45,6 +45,8 @@
 		E660BB0C2631B83200739F15 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660BB0B2631B83200739F15 /* APIService.swift */; };
 		E660BB122631D03200739F15 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660BB112631D03200739F15 /* Photo.swift */; };
 		E670CD322671F6D800ACF5E6 /* CollectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E670CD312671F6D800ACF5E6 /* CollectionHeader.swift */; };
+		E67E94A726734E58009C431F /* UserCollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67E94A626734E58009C431F /* UserCollectionsViewController.swift */; };
+		E67E94A926734E6B009C431F /* UserCollectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67E94A826734E6B009C431F /* UserCollectionsViewModel.swift */; };
 		E68BFF97262FD96700CC908F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68BFF96262FD96700CC908F /* LoginViewController.swift */; };
 		E68BFF9D262FDA2200CC908F /* XCoordinatorRx in Frameworks */ = {isa = PBXBuildFile; productRef = E68BFF9C262FDA2200CC908F /* XCoordinatorRx */; };
 		E68BFFA2262FDB2100CC908F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68BFFA1262FDB2100CC908F /* LoginViewModel.swift */; };
@@ -143,6 +145,8 @@
 		E660BB0B2631B83200739F15 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		E660BB112631D03200739F15 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		E670CD312671F6D800ACF5E6 /* CollectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHeader.swift; sourceTree = "<group>"; };
+		E67E94A626734E58009C431F /* UserCollectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionsViewController.swift; sourceTree = "<group>"; };
+		E67E94A826734E6B009C431F /* UserCollectionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionsViewModel.swift; sourceTree = "<group>"; };
 		E68BFF96262FD96700CC908F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E68BFFA1262FDB2100CC908F /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E68BFFAD262FDE5B00CC908F /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
@@ -353,6 +357,15 @@
 			path = Photo;
 			sourceTree = "<group>";
 		};
+		E67E94A526734E39009C431F /* Collections */ = {
+			isa = PBXGroup;
+			children = (
+				E67E94A626734E58009C431F /* UserCollectionsViewController.swift */,
+				E67E94A826734E6B009C431F /* UserCollectionsViewModel.swift */,
+			);
+			path = Collections;
+			sourceTree = "<group>";
+		};
 		E68BFF94262FD92000CC908F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
@@ -432,6 +445,7 @@
 		E6D1DA70263695A2009C6A78 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				E67E94A526734E39009C431F /* Collections */,
 				E6B96183263FFC2600B3003B /* Photos */,
 				E6D1DA74263695E8009C6A78 /* UserViewController.swift */,
 				E6C0CFF2263E5CE700AEE6DE /* UserViewModel.swift */,
@@ -680,11 +694,13 @@
 				E62C67B62638503D00F1FDFE /* Int+.swift in Sources */,
 				E64BB25926330AD50053C309 /* AppCoordinator.swift in Sources */,
 				E6D1DA6C26368ED7009C6A78 /* UINavigationController+.swift in Sources */,
+				E67E94A726734E58009C431F /* UserCollectionsViewController.swift in Sources */,
 				E68BFFC9262FEF9C00CC908F /* PhotosViewController.swift in Sources */,
 				E61205252670CCC10010C64C /* CollectionViewModel.swift in Sources */,
 				E6B9618D2640034E00B3003B /* UserPhotosViewModel.swift in Sources */,
 				E64AB366263006540099101C /* MainViewController.swift in Sources */,
 				E6FE850026306BB30018E269 /* PhotoCell.swift in Sources */,
+				E67E94A926734E6B009C431F /* UserCollectionsViewModel.swift in Sources */,
 				E6A5E92C262FD666006576D5 /* AuthCoordinator.swift in Sources */,
 				E64AB36B263006D50099101C /* MainViewModel.swift in Sources */,
 				E68BFFAE262FDE5B00CC908F /* Bindable.swift in Sources */,

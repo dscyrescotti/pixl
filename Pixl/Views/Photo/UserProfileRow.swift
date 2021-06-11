@@ -13,8 +13,19 @@ import RxSwift
 import RxGesture
 
 class UserProfileRow: UIView {
+    
+    enum Style {
+        case large, small
+    }
+    
+    var style: Style = .large {
+        didSet {
+            imageView.layer.cornerRadius = style == .large ? 30 : 20
+            displayNameLabel.font = .preferredFont(forTextStyle: style == .large ? .title2 : .headline)
+        }
+    }
+    
     private let imageView = UIImageView().then {
-        $0.layer.cornerRadius = 30
         $0.layer.masksToBounds = true
         $0.contentMode = .scaleAspectFill
         $0.backgroundColor = .secondarySystemBackground
@@ -25,7 +36,6 @@ class UserProfileRow: UIView {
     
     private let displayNameLabel = UILabel().then {
         $0.numberOfLines = 1
-        $0.font = .preferredFont(forTextStyle: .title2)
         $0.sizeToFit()
     }
     
@@ -100,7 +110,7 @@ class UserProfileRow: UIView {
         super.layoutSubviews()
         
         imageView.snp.makeConstraints { make in
-            make.height.width.equalTo(60)
+            make.height.width.equalTo(style == .large ? 60 : 40)
             make.leading.equalTo(self).offset(10)
             make.top.bottom.equalTo(self).inset(10)
         }
