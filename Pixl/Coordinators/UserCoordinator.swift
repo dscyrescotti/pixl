@@ -11,6 +11,7 @@ import UIKit
 indirect enum UserRoute: Route {
     case details(user: User)
     case photo(PhotoRoute)
+    case collection(CollectionRoute)
 }
 
 class UserCoordinator: NavigationCoordinator<UserRoute> {
@@ -27,11 +28,16 @@ class UserCoordinator: NavigationCoordinator<UserRoute> {
             userViewController.bind(userViewModel)
             userViewController.title = user.username
             return .push(userViewController)
-            
         case let .photo(photoRoute):
             let coordinator = PhotoCoordinator(rootViewController: rootViewController)
             addChild(coordinator)
             return .trigger(photoRoute, on: coordinator)
+        case let .collection(collectionRoute):
+            let coordinator = CollectionCoordinator(rootViewController: rootViewController)
+            addChild(coordinator)
+            return .trigger(collectionRoute, on: coordinator)
+            
+            
         }
     }
     

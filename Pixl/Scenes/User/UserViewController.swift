@@ -45,7 +45,7 @@ class UserViewController: SegementSlideDefaultViewController, Bindable, AppBarIn
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        defaultSelectedIndex = 0
+        defaultSelectedIndex = 1
         reloadData()
         setUp()
     }
@@ -53,6 +53,11 @@ class UserViewController: SegementSlideDefaultViewController, Bindable, AppBarIn
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         registerLayout()
+    }
+
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         reloadSwitcher()
         reloadHeader()
     }
@@ -68,6 +73,12 @@ class UserViewController: SegementSlideDefaultViewController, Bindable, AppBarIn
         orientation
             .bind(to: backButton.orientationChange)
             .disposed(by: bag)
+        
+//        orientation
+//            .subscribe(onNext: { [unowned self] _ in
+//                currentSegementSlideContentViewController?.viewWillLayoutSubviews()
+//            })
+//            .disposed(by: bag)
         
         backButton.rx.tap
             .subscribe(onNext: { [unowned self] in
@@ -109,6 +120,12 @@ extension UserViewController {
             let viewModel = UserPhotosViewModel(username: self.viewModel.user.value.username, router: self.viewModel.router)
             controller.bind(viewModel)
             return controller
+        case 1:
+            let controller = UserCollectionsViewController()
+            controller.parentView = self.view
+            let viewModel = UserCollectionsViewModel(username: self.viewModel.user.value.username, router: self.viewModel.router)
+            controller.bind(viewModel)
+            return controller
         case 2:
             let controller = UserPhotosViewController()
             controller.parentView = self.view
@@ -116,7 +133,7 @@ extension UserViewController {
             controller.bind(viewModel)
             return controller
         default:
-            return ContentViewController()
+            fatalError()
         }
     }
     
@@ -131,45 +148,4 @@ extension UserViewController {
         orientationChange.accept(view.orientation(portrait: Orientation.portrait, landscape: .landscape))
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
     }
-}
-
-class ContentViewController: UICollectionViewController, SegementSlideContentScrollViewDelegate, WaterfallLayoutDelegate {
-    
-    init() {
-        super.init(nibName: nil, bundle: nil)
-        
-        let layout = WaterfallLayout()
-        layout.delegate = self
-        layout.cellPadding = 5
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        collectionView.backgroundColor = .systemBackground
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    @objc var scrollView: UIScrollView {
-        return collectionView
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        20
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .systemIndigo
-        return cell
-    }
-    
-    func collectionView(collectionView: UICollectionView, heightForCellAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
-        150
-    }
-    
 }

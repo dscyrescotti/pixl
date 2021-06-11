@@ -34,14 +34,12 @@ class CollectionCell: UICollectionViewCell {
         $0.numberOfLines = 1
     }
     
+    let gradient = CAGradientLayer()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        let gradient = CAGradientLayer()
-
-        gradient.frame = view.bounds
         gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
-
         gradientView.layer.insertSublayer(gradient, at: 0)
         
         addSubview(imageView)
@@ -61,6 +59,8 @@ class CollectionCell: UICollectionViewCell {
         imageView.snp.makeConstraints { make in
             make.top.bottom.leading.trailing.equalTo(self)
         }
+        
+        gradient.frame = view.bounds
         
         gradientView.snp.makeConstraints { make in
             make.edges.equalTo(self)
@@ -82,14 +82,14 @@ class CollectionCell: UICollectionViewCell {
             imageView.image = placeholder
             imageView.backgroundColor = UIColor(photo.color)
         }
-        titleLabel.text = collection.title
-        photoCountLabel.text = "\(collection.totalPhotos) Photo\(collection.totalPhotos == 0 ? "" : "s")"
     }
     
     func configure(with collection: PhotoCollection) {
         if let photo = collection.coverPhoto {
             self.imageView.kf.setImage(with: URL(string: photo.urls.thumb), placeholder: self.placeholder, options: [.cacheOriginalImage, .diskCacheExpiration(.days(2))])
         }
+        titleLabel.text = collection.title
+        photoCountLabel.text = "\(collection.totalPhotos) Photo\(collection.totalPhotos == 0 ? "" : "s")"
     }
     
     override func prepareForReuse() {
