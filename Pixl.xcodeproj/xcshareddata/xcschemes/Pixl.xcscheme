@@ -73,12 +73,12 @@
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "ACCESS_KEY"
-            value = "y0-sw8-NuGdSgUqGmhKFmP2_aOzeEKZ1fu6TMs8ww7w"
+            value = "qGOl7ox4BaR8D_2mnvpFILboAReyJ9RMU5j2tXyQ_sI"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "SECRET_KEY"
-            value = "1yTr8QTC1mSLlsKD-wwGJ4C-VXQZ1fW5B8sJZruHLnw"
+            value = "kYdoWLGTu593IydmjC__4G1aOydJdblmVni8wMqz3WU"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>

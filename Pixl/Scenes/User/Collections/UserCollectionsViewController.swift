@@ -83,7 +83,7 @@ class UserCollectionsViewController: UIViewController, SegementSlideContentScrol
 
 extension UserCollectionsViewController {
     func setUp() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .systemTeal
     }
     
     func setUpCollectionView() {
@@ -106,7 +106,7 @@ extension UserCollectionsViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.equalTo(view)
             make.top.bottom.equalTo(view)
         }
         

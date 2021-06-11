@@ -45,7 +45,7 @@ class UserViewController: SegementSlideDefaultViewController, Bindable, AppBarIn
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        defaultSelectedIndex = 1
+        defaultSelectedIndex = 0
         reloadData()
         setUp()
     }
@@ -60,6 +60,9 @@ class UserViewController: SegementSlideDefaultViewController, Bindable, AppBarIn
         super.viewWillLayoutSubviews()
         reloadSwitcher()
         reloadHeader()
+        contentView.snp.makeConstraints { make in
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+        }
     }
     
     func bindViewModel() {
@@ -74,11 +77,11 @@ class UserViewController: SegementSlideDefaultViewController, Bindable, AppBarIn
             .bind(to: backButton.orientationChange)
             .disposed(by: bag)
         
-//        orientation
-//            .subscribe(onNext: { [unowned self] _ in
-//                currentSegementSlideContentViewController?.viewWillLayoutSubviews()
-//            })
-//            .disposed(by: bag)
+        orientation
+            .subscribe(onNext: { [unowned self] _ in
+                selectItem(at: 0, animated: false)
+            })
+            .disposed(by: bag)
         
         backButton.rx.tap
             .subscribe(onNext: { [unowned self] in

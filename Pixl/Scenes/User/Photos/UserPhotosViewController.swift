@@ -83,7 +83,7 @@ class UserPhotosViewController: UIViewController, SegementSlideContentScrollView
 
 extension UserPhotosViewController {
     func setUp() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .systemPink
     }
     
     func setUpCollectionView() {
@@ -106,7 +106,7 @@ extension UserPhotosViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.equalTo(view)
             make.top.bottom.equalTo(view)
         }
         
