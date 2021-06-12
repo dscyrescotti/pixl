@@ -70,6 +70,8 @@
 		E6A5E91C262FD586006576D5 /* RxAlamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E6A5E91B262FD586006576D5 /* RxAlamofire */; };
 		E6A5E924262FD5F3006576D5 /* XCoordinator in Frameworks */ = {isa = PBXBuildFile; productRef = E6A5E923262FD5F3006576D5 /* XCoordinator */; };
 		E6A5E92C262FD666006576D5 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A5E92B262FD666006576D5 /* AuthCoordinator.swift */; };
+		E6B8AC902674D54B0038606F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B8AC8F2674D54B0038606F /* SearchViewController.swift */; };
+		E6B8AC922674D5600038606F /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B8AC912674D5600038606F /* SearchViewModel.swift */; };
 		E6B9617F263FF51300B3003B /* SegementSlide in Frameworks */ = {isa = PBXBuildFile; productRef = E6B9617E263FF51300B3003B /* SegementSlide */; };
 		E6B961882640031600B3003B /* UserPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B961872640031600B3003B /* UserPhotosViewController.swift */; };
 		E6B9618D2640034E00B3003B /* UserPhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B9618C2640034E00B3003B /* UserPhotosViewModel.swift */; };
@@ -159,6 +161,8 @@
 		E699D2AF263A65F900592E24 /* Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orientation.swift; sourceTree = "<group>"; };
 		E699D2B4263AB7FA00592E24 /* BarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarButton.swift; sourceTree = "<group>"; };
 		E6A5E92B262FD666006576D5 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
+		E6B8AC8F2674D54B0038606F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		E6B8AC912674D5600038606F /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		E6B961872640031600B3003B /* UserPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotosViewController.swift; sourceTree = "<group>"; };
 		E6B9618C2640034E00B3003B /* UserPhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotosViewModel.swift; sourceTree = "<group>"; };
 		E6B9619126400B2D00B3003B /* ParentAccessible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentAccessible.swift; sourceTree = "<group>"; };
@@ -369,6 +373,7 @@
 		E68BFF94262FD92000CC908F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				E6B8AC8E2674D5360038606F /* Search */,
 				E61205212670CBAA0010C64C /* Collection */,
 				E6D1DA70263695A2009C6A78 /* User */,
 				E677E542263317F6007AAB6A /* Photo */,
@@ -431,6 +436,15 @@
 				E68BFFED263001FC00CC908F /* SettingsViewController.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		E6B8AC8E2674D5360038606F /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				E6B8AC8F2674D54B0038606F /* SearchViewController.swift */,
+				E6B8AC912674D5600038606F /* SearchViewModel.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		E6B96183263FFC2600B3003B /* Photos */ = {
@@ -695,6 +709,7 @@
 				E64BB25926330AD50053C309 /* AppCoordinator.swift in Sources */,
 				E6D1DA6C26368ED7009C6A78 /* UINavigationController+.swift in Sources */,
 				E67E94A726734E58009C431F /* UserCollectionsViewController.swift in Sources */,
+				E6B8AC902674D54B0038606F /* SearchViewController.swift in Sources */,
 				E68BFFC9262FEF9C00CC908F /* PhotosViewController.swift in Sources */,
 				E61205252670CCC10010C64C /* CollectionViewModel.swift in Sources */,
 				E6B9618D2640034E00B3003B /* UserPhotosViewModel.swift in Sources */,
@@ -724,6 +739,7 @@
 				E68BFFD7262FF19400CC908F /* MainCoordinator.swift in Sources */,
 				E65209712636E5750047F955 /* AppBar.swift in Sources */,
 				E6975A632635342C00CA905D /* PhotoViewController.swift in Sources */,
+				E6B8AC922674D5600038606F /* SearchViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

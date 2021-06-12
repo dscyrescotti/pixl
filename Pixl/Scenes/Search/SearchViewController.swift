@@ -1,70 +1,63 @@
 //
-//  MainViewController.swift
+//  SearchViewController.swift
 //  Pixl
 //
-//  Created by Dscyre Scotti on 21/04/2021.
+//  Created by Dscyre Scotti on 12/06/2021.
 //
 
 import UIKit
 import RxSwift
 import RxCocoa
 
-class MainViewController: UITabBarController, Bindable, AppBarInjectable {
+class SearchViewController: UIViewController, Bindable, AppBarInjectable {
+    var viewModel: SearchViewModel!
     
-    var viewModel: MainViewModel!
-    
-//    let barButton = UIBarButtonItem().then {
-//        $0.image = UIImage(systemName: "magnifyingglass")
-//    }
-    private let searchButton = BarButton(systemName: "magnifyingglass").then {
-        $0.configure(with: .systemBackground)
-    }
+    internal var appBar: AppBar = .init()
+    private let backButton = BarButton(systemName: "arrow.backward")
     lazy var orientationChange = PublishRelay<Orientation>()
-    
-    internal var appBar = AppBar()
-    
     private let bag = DisposeBag()
-
+    
+    let searchController = UISearchController().then {
+        $0.hidesNavigationBarDuringPresentation = false
+        $0.obscuresBackgroundDuringPresentation = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUp()
+        addAppBar()
     }
-
+    
     func bindViewModel() {
-        searchButton.rx.tap
-            .bind(to: viewModel.searchTrigger)
-            .disposed(by: bag)
-        
         let orientation = orientationChange
             .distinctUntilChanged()
         
         orientation
-            .bind(to: searchButton.orientationChange)
+            .bind(to: backButton.orientationChange)
+            .disposed(by: bag)
+        
+        backButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                navigationController?.popViewController(animated: true)
+            })
             .disposed(by: bag)
     }
+    
 }
 
-extension MainViewController {
+extension SearchViewController {
     func setUp() {
-        title = "pixl"
-        
         view.backgroundColor = .systemBackground
-        tabBar.barTintColor = .systemBackground
-        tabBar.tintColor = .label
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(logout))
-        
-        addAppBar()
+        navigationItem.titleView = searchController.searchBar
+        definesPresentationContext = true
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
         registerLayout()
-    }
-    
-    @objc func logout() {
-        viewModel.router.trigger(.logout)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -80,7 +73,6 @@ extension MainViewController {
     
     func setUpBarButtons() {
         orientationChange.accept(view.orientation(portrait: Orientation.portrait, landscape: .landscape))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: searchButton)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
     }
 }
-

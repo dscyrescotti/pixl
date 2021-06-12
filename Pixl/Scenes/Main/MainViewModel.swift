@@ -11,10 +11,10 @@ import Action
 
 class MainViewModel {
     
-    private(set) lazy var settingsTrigger = settingsAction.inputs
+    private(set) lazy var searchTrigger = searchAction.inputs
     
-    private lazy var settingsAction = CocoaAction { [unowned self] in
-        self.router.rx.trigger(.settings)
+    private lazy var searchAction = CocoaAction { [unowned self] in
+        self.router.rx.trigger(.search)
     }
     
     let router: UnownedRouter<HomeRoute>

@@ -12,6 +12,7 @@ import UIKit
 enum HomeRoute: Route {
     case main
     case settings
+    case search
     case logout
     case photo(PhotoRoute)
     case collection(CollectionRoute)
@@ -37,6 +38,11 @@ class HomeCoordinator: NavigationCoordinator<HomeRoute> {
         case .settings:
             let settingsViewController = SettingsViewController()
             return .push(settingsViewController)
+        case .search:
+            let searchViewController = SearchViewController()
+            let searchViewModel = SearchViewModel()
+            searchViewController.bind(searchViewModel)
+            return .push(searchViewController)
         case .logout:
             parent?.trigger(.auth)
             return .none()
