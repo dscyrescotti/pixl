@@ -20,6 +20,7 @@ class SearchViewController: UIViewController, Bindable, AppBarInjectable {
     let searchController = UISearchController().then {
         $0.hidesNavigationBarDuringPresentation = false
         $0.obscuresBackgroundDuringPresentation = false
+        $0.searchBar.placeholder = "Search free high-resolution photos"
     }
     
     override func viewDidLoad() {
@@ -40,6 +41,18 @@ class SearchViewController: UIViewController, Bindable, AppBarInjectable {
         backButton.rx.tap
             .subscribe(onNext: { [unowned self] in
                 navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: bag)
+        
+        searchController.searchBar.rx.textDidEndEditing
+            .flatMap { [unowned self] _ -> Observable<String> in
+                guard let query = searchController.searchBar.text else {
+                    return Observable.empty()
+                }
+                return Observable.just(query)
+            }
+            .subscribe(onNext: { query in
+                print(query)
             })
             .disposed(by: bag)
     }
