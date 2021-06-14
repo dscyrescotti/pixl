@@ -36,8 +36,6 @@ class UserCoordinator: NavigationCoordinator<UserRoute> {
             let coordinator = CollectionCoordinator(rootViewController: rootViewController)
             addChild(coordinator)
             return .trigger(collectionRoute, on: coordinator)
-            
-            
         }
     }
     

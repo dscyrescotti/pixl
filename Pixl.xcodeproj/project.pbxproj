@@ -47,6 +47,11 @@
 		E670CD322671F6D800ACF5E6 /* CollectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E670CD312671F6D800ACF5E6 /* CollectionHeader.swift */; };
 		E67E94A726734E58009C431F /* UserCollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67E94A626734E58009C431F /* UserCollectionsViewController.swift */; };
 		E67E94A926734E6B009C431F /* UserCollectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67E94A826734E6B009C431F /* UserCollectionsViewModel.swift */; };
+		E680A53826776797001C7CA1 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E680A53726776797001C7CA1 /* Topic.swift */; };
+		E680A53A267770A1001C7CA1 /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E680A539267770A1001C7CA1 /* TopicCell.swift */; };
+		E680A53D26778061001C7CA1 /* TopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E680A53C26778061001C7CA1 /* TopicViewController.swift */; };
+		E680A53F267780C4001C7CA1 /* TopicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E680A53E267780C4001C7CA1 /* TopicViewModel.swift */; };
+		E680A54126778170001C7CA1 /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E680A54026778170001C7CA1 /* SearchCoordinator.swift */; };
 		E68BFF97262FD96700CC908F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68BFF96262FD96700CC908F /* LoginViewController.swift */; };
 		E68BFF9D262FDA2200CC908F /* XCoordinatorRx in Frameworks */ = {isa = PBXBuildFile; productRef = E68BFF9C262FDA2200CC908F /* XCoordinatorRx */; };
 		E68BFFA2262FDB2100CC908F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68BFFA1262FDB2100CC908F /* LoginViewModel.swift */; };
@@ -149,6 +154,11 @@
 		E670CD312671F6D800ACF5E6 /* CollectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHeader.swift; sourceTree = "<group>"; };
 		E67E94A626734E58009C431F /* UserCollectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionsViewController.swift; sourceTree = "<group>"; };
 		E67E94A826734E6B009C431F /* UserCollectionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionsViewModel.swift; sourceTree = "<group>"; };
+		E680A53726776797001C7CA1 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
+		E680A539267770A1001C7CA1 /* TopicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCell.swift; sourceTree = "<group>"; };
+		E680A53C26778061001C7CA1 /* TopicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicViewController.swift; sourceTree = "<group>"; };
+		E680A53E267780C4001C7CA1 /* TopicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicViewModel.swift; sourceTree = "<group>"; };
+		E680A54026778170001C7CA1 /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
 		E68BFF96262FD96700CC908F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E68BFFA1262FDB2100CC908F /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E68BFFAD262FDE5B00CC908F /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
@@ -305,6 +315,7 @@
 				E635599A2633DD9E00146CB6 /* PhotoCoordinator.swift */,
 				E61205192670A7710010C64C /* UserCoordinator.swift */,
 				E61205262670DB160010C64C /* CollectionCoordinator.swift */,
+				E680A54026778170001C7CA1 /* SearchCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -339,6 +350,7 @@
 			children = (
 				E660BB112631D03200739F15 /* Photo.swift */,
 				E612051B2670B6680010C64C /* Collection.swift */,
+				E680A53726776797001C7CA1 /* Topic.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -370,9 +382,19 @@
 			path = Collections;
 			sourceTree = "<group>";
 		};
+		E680A53B2677804D001C7CA1 /* Topic */ = {
+			isa = PBXGroup;
+			children = (
+				E680A53C26778061001C7CA1 /* TopicViewController.swift */,
+				E680A53E267780C4001C7CA1 /* TopicViewModel.swift */,
+			);
+			path = Topic;
+			sourceTree = "<group>";
+		};
 		E68BFF94262FD92000CC908F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				E680A53B2677804D001C7CA1 /* Topic */,
 				E6B8AC8E2674D5360038606F /* Search */,
 				E61205212670CBAA0010C64C /* Collection */,
 				E6D1DA70263695A2009C6A78 /* User */,
@@ -515,6 +537,7 @@
 			children = (
 				E6FE84FF26306BB30018E269 /* PhotoCell.swift */,
 				E612051F2670BCEF0010C64C /* CollectionCell.swift */,
+				E680A539267770A1001C7CA1 /* TopicCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -682,6 +705,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E61205232670CBD90010C64C /* CollectionViewController.swift in Sources */,
+				E680A53826776797001C7CA1 /* Topic.swift in Sources */,
 				E68BFFDD262FF31300CC908F /* CollectionsViewController.swift in Sources */,
 				E6B9619226400B2D00B3003B /* ParentAccessible.swift in Sources */,
 				E6D1DA75263695E8009C6A78 /* UserViewController.swift in Sources */,
@@ -692,8 +716,10 @@
 				E6C0CFF3263E5CE700AEE6DE /* UserViewModel.swift in Sources */,
 				E6559E40263701DD00F6F041 /* UIEdgeInsets+.swift in Sources */,
 				E65F1CC52665F9B00097FFBF /* UserProfileHeader.swift in Sources */,
+				E680A54126778170001C7CA1 /* SearchCoordinator.swift in Sources */,
 				E660BB0C2631B83200739F15 /* APIService.swift in Sources */,
 				E61205202670BCEF0010C64C /* CollectionCell.swift in Sources */,
+				E680A53D26778061001C7CA1 /* TopicViewController.swift in Sources */,
 				E62C67B1263842FB00F1FDFE /* StatisticsRow.swift in Sources */,
 				E635599B2633DD9E00146CB6 /* PhotoCoordinator.swift in Sources */,
 				E64BB2462632C7070053C309 /* CGSize+.swift in Sources */,
@@ -708,6 +734,7 @@
 				E62C67B62638503D00F1FDFE /* Int+.swift in Sources */,
 				E64BB25926330AD50053C309 /* AppCoordinator.swift in Sources */,
 				E6D1DA6C26368ED7009C6A78 /* UINavigationController+.swift in Sources */,
+				E680A53A267770A1001C7CA1 /* TopicCell.swift in Sources */,
 				E67E94A726734E58009C431F /* UserCollectionsViewController.swift in Sources */,
 				E6B8AC902674D54B0038606F /* SearchViewController.swift in Sources */,
 				E68BFFC9262FEF9C00CC908F /* PhotosViewController.swift in Sources */,
@@ -733,6 +760,7 @@
 				E6D9E636263189B2005BB2A7 /* UIView+.swift in Sources */,
 				E62B2F142639223000604A1C /* MapRow.swift in Sources */,
 				E6EF7A9526307F6900CFFE5E /* UIImage+.swift in Sources */,
+				E680A53F267780C4001C7CA1 /* TopicViewModel.swift in Sources */,
 				E633AAC2262EE6DB00ACB20E /* SceneDelegate.swift in Sources */,
 				E6504C422635C358008E7CD1 /* PhotoViewModel.swift in Sources */,
 				E6B961882640031600B3003B /* UserPhotosViewController.swift in Sources */,

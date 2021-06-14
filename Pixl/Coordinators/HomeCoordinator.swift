@@ -39,10 +39,9 @@ class HomeCoordinator: NavigationCoordinator<HomeRoute> {
             let settingsViewController = SettingsViewController()
             return .push(settingsViewController)
         case .search:
-            let searchViewController = SearchViewController()
-            let searchViewModel = SearchViewModel()
-            searchViewController.bind(searchViewModel)
-            return .push(searchViewController)
+            let coordinator = SearchCoordinator(rootViewController: rootViewController)
+            addChild(coordinator)
+            return .trigger(SearchRoute.search, on: coordinator)
         case .logout:
             parent?.trigger(.auth)
             return .none()

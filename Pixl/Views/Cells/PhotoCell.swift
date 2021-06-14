@@ -18,12 +18,13 @@ class PhotoCell: UICollectionViewCell {
     
     let imageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
-        $0.layer.masksToBounds = true
-        $0.layer.cornerRadius = 10
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        view.layer.cornerRadius = 10
+        view.layer.masksToBounds = true
         
         addSubview(imageView)
     }

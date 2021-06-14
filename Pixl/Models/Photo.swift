@@ -122,7 +122,7 @@ struct Urls: Codable {
     var thumb: String
 }
 
-struct User: Codable {
+struct User: AnyCodable {
     var id, username, name: String
     var portfolioURL: String?
     var bio, location: String?
