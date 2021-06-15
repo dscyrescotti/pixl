@@ -167,3 +167,29 @@ struct UserLinks: Codable {
 struct ProfileImage: Codable {
     var small, medium, large: String
 }
+
+struct SearchPhoto: Codable {
+    var total: Int
+    var totalPages: Int
+    var results: [Photo]
+    
+    enum CodingKeys: String, CodingKey {
+        case total, results
+        case totalPages = "total_pages"
+    }
+    
+    var searchModel: SearchModel {
+        .init(title: "Photo", type: .photo, total: total, results: results.map { SearchResult.photo($0) })
+    }
+}
+
+struct SearchModel {
+    var title: String
+    var type: SearchType
+    var total: Int
+    var results: [SearchResult]
+}
+
+enum SearchType {
+    case photo, collection
+}

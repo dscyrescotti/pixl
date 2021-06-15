@@ -122,4 +122,20 @@ class APIService {
         }
         return alamofireRequest([Topic].self, request: request)
     }
+    
+    func searchPhotos(query: String, page: Int = 1, perPage: Int = 15) -> Observable<SearchPhoto> {
+        guard let request = urlRequest(endpoint: "search/photos", query: ["query": query, "page": page, "per_page": perPage]) else {
+            print("[Error]: Invalid url")
+            return Observable.empty()
+        }
+        return alamofireRequest(SearchPhoto.self, request: request)
+    }
+    
+    func searchCollections(query: String, page: Int = 1, perPage: Int = 15) -> Observable<SearchCollection> {
+        guard let request = urlRequest(endpoint: "search/collections", query: ["query": query, "page": page, "per_page": perPage]) else {
+            print("[Error]: Invalid url")
+            return Observable.empty()
+        }
+        return alamofireRequest(SearchCollection.self, request: request)
+    }
 }

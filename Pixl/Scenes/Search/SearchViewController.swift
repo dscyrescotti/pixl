@@ -26,15 +26,38 @@ class SearchViewController: UIViewController, Bindable, AppBarInjectable {
         $0.searchBar.placeholder = "Search free high-resolution photos"
     }
     
+    var resultCollectionView: UICollectionView!
+    
+    let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<Void, SearchResult>>(configureCell: { (datasource, collectionView, indexPath, result) in
+        switch result {
+        case let .photo(photo):
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.identifier, for: indexPath) as! PhotoCell
+            cell.placeholder(with: photo)
+            return cell
+        case let .collection(collection):
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCell.identifier, for: indexPath) as! CollectionCell
+            cell.placeholder(with: collection)
+            return cell
+        }
+    })
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUp()
         setUpTopicCollectionView()
+        setUpResultCollectionView()
         addAppBar()
     }
     
     func bindViewModel() {
+        dataSource.configureSupplementaryView = { datasource, collectionView, kind, indexPath -> UICollectionReusableView in
+            let result = datasource.sectionModels[indexPath.section]
+            print(result)
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ResultSectionHeader.identifier, for: indexPath) as! ResultSectionHeader
+            return header
+        }
+        
         let orientation = orientationChange
             .distinctUntilChanged()
         
@@ -46,6 +69,13 @@ class SearchViewController: UIViewController, Bindable, AppBarInjectable {
             .subscribe(onNext: { [unowned self] in
                 navigationController?.popViewController(animated: true)
             })
+            .disposed(by: bag)
+        
+        viewModel.results
+            .map { results -> [SectionModel<Void, SearchResult>] in
+                return results.map { SectionModel(model: (), items: $0.results) }
+            }
+            .bind(to: resultCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: bag)
         
         viewModel.topics
@@ -61,12 +91,28 @@ class SearchViewController: UIViewController, Bindable, AppBarInjectable {
                 }
                 return Observable.just(query)
             }
-            .subscribe(onNext: { query in
-                print(query)
+            .bind(to: viewModel.searchTrigger)
+            .disposed(by: bag)
+        
+        searchController.searchBar.rx.textDidBeginEditing
+            .subscribe(onNext: { [unowned self] in
+                resultCollectionView.alpha = 1
+            })
+            .disposed(by: bag)
+        
+        searchController.searchBar.rx.cancelButtonClicked
+            .subscribe(onNext: { [unowned self] in
+                resultCollectionView.alpha = 0
+                resultCollectionView.scrollsToTop = true
+                viewModel.results.accept([])
             })
             .disposed(by: bag)
         
         topicCollectionView.rx.willDisplayCell
+            .bind(to: viewModel.willDisplayCell)
+            .disposed(by: bag)
+        
+        resultCollectionView.rx.willDisplayCell
             .bind(to: viewModel.willDisplayCell)
             .disposed(by: bag)
         
@@ -95,6 +141,24 @@ extension SearchViewController {
         view.addSubview(topicCollectionView)
     }
     
+    func setUpResultCollectionView() {
+        let layout = WaterfallLayout()
+        layout.delegate = self
+        layout.cellPadding = 5
+        layout.numberOfColumns = view.orientation(portrait: 2, landscape: 3)
+        
+        resultCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        resultCollectionView.contentInset = .init(top: 5, left: 5, bottom: 5, right: 5)
+        resultCollectionView.backgroundColor = .systemBackground
+        resultCollectionView.alpha = 0
+        
+        resultCollectionView.register(PhotoCell.self, forCellWithReuseIdentifier: PhotoCell.identifier)
+        resultCollectionView.register(CollectionCell.self, forCellWithReuseIdentifier: CollectionCell.identifier)
+        resultCollectionView.register(ResultSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ResultSectionHeader.identifier)
+        
+        view.addSubview(resultCollectionView)
+    }
+    
     private func sectionProvider(id: Int, environment: NSCollectionLayoutEnvironment) -> Optional<NSCollectionLayoutSection> {
         let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
         item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
@@ -116,6 +180,11 @@ extension SearchViewController {
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             make.top.equalTo(appBar.snp_bottomMargin)
         }
+        
+        resultCollectionView.snp.makeConstraints { make in
+            make.edges.equalTo(topicCollectionView)
+        }
+        
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -132,5 +201,33 @@ extension SearchViewController {
     func setUpBarButtons() {
         orientationChange.accept(view.orientation(portrait: Orientation.portrait, landscape: .landscape))
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        print("Warning")
+    }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        guard let layout = resultCollectionView.collectionViewLayout as? WaterfallLayout else { return }
+        layout.numberOfColumns = view.orientation(portrait: 2, landscape: 3)
+        layout.invalidateLayout()
+    }
+}
+
+extension SearchViewController: WaterfallLayoutDelegate {
+    func collectionView(collectionView: UICollectionView, heightForCellAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
+        let result = viewModel.results.value[indexPath.section].results[indexPath.item]
+        switch result {
+        case .collection:
+            return 250
+        case .photo(let photo):
+            return photo.size(for: withWidth).height
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, sizeForSectionHeaderViewForSection section: Int) -> CGSize {
+        .init(width: view.bounds.width, height: 50)
     }
 }

@@ -44,3 +44,18 @@ struct CollectionLinks: Codable {
         case html, photos, related
     }
 }
+
+struct SearchCollection: Codable {
+    var total: Int
+    var totalPages: Int
+    var results: [PhotoCollection]
+    
+    enum CodingKeys: String, CodingKey {
+        case total, results
+        case totalPages = "total_pages"
+    }
+    
+    var searchModel: SearchModel {
+        .init(title: "Collection", type: .collection, total: total, results: results.map { SearchResult.collection($0) })
+    }
+}

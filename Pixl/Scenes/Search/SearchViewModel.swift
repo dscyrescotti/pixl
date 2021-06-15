@@ -15,9 +15,11 @@ class SearchViewModel {
     private let bag = DisposeBag()
     
     lazy var topics = BehaviorRelay<[Topic]>(value: [])
+    lazy var results = BehaviorRelay<[SearchModel]>(value: [])
     
     lazy var willDisplayCell = PublishRelay<(cell: UICollectionViewCell, at: IndexPath)>()
     lazy var selectedItem = PublishRelay<IndexPath>()
+    lazy var searchTrigger = PublishRelay<String>()
     
     private let router: UnownedRouter<SearchRoute>
     
@@ -30,6 +32,27 @@ class SearchViewModel {
         bindTopics()
         bindWillDisplayCell()
         bindSelectedItem()
+        bindSearchTrigger()
+    }
+    
+    private func bindSearchTrigger() {
+        searchTrigger
+            .flatMap { [unowned self] query -> Observable<[SearchModel]> in
+                return search(query: query)
+            }
+            .bind(to: results)
+            .disposed(by: bag)
+    }
+    
+    private func search(query: String) -> Observable<[SearchModel]> {
+        let searchPhotos = APIService.shared.searchPhotos(query: query, perPage: 7)
+            .map { $0.searchModel }
+        let searchCollections = APIService.shared.searchCollections(query: query, perPage: 7)
+            .map { $0.searchModel }
+        return searchPhotos.concat(searchCollections)
+            .scan([], accumulator: { previous, current in
+                Array(previous + [current]).suffix(2)
+            })
     }
     
     private func bindTopics() {
@@ -41,8 +64,18 @@ class SearchViewModel {
     private func bindWillDisplayCell() {
         willDisplayCell
             .subscribe(onNext: { [unowned self] cell, indexPath in
-                guard let topicCell = cell as? TopicCell else { return }
-                topicCell.configure(with: topics.value[indexPath.item])
+                if let topicCell = cell as? TopicCell {
+                    topicCell.configure(with: topics.value[indexPath.item])
+                } else if cell is PhotoCell || cell is CollectionCell {
+                    let result = results.value[indexPath.section].results[indexPath.item]
+                    switch result {
+                    case let .photo(photo):
+                        (cell as? PhotoCell)?.configure(with: photo)
+                    case let .collection(collection):
+                        (cell as? CollectionCell)?.configure(with: collection)
+                    }
+                }
+                
             })
             .disposed(by: bag)
     }
@@ -56,4 +89,9 @@ class SearchViewModel {
             .subscribe()
             .disposed(by: bag)
     }
+}
+
+enum SearchResult {
+    case photo(Photo)
+    case collection(PhotoCollection)
 }
