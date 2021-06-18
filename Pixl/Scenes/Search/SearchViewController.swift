@@ -24,6 +24,8 @@ class SearchViewController: UIViewController, Bindable, AppBarInjectable {
         $0.hidesNavigationBarDuringPresentation = false
         $0.obscuresBackgroundDuringPresentation = false
         $0.searchBar.placeholder = "Search free high-resolution photos"
+        $0.searchBar.autocapitalizationType = .none
+        $0.searchBar.autocorrectionType = .no
     }
     
     var resultCollectionView: UICollectionView!
@@ -51,10 +53,12 @@ class SearchViewController: UIViewController, Bindable, AppBarInjectable {
     }
     
     func bindViewModel() {
-        dataSource.configureSupplementaryView = { datasource, collectionView, kind, indexPath -> UICollectionReusableView in
-            let result = datasource.sectionModels[indexPath.section]
-            print(result)
+        dataSource.configureSupplementaryView = { [unowned self] datasource, collectionView, kind, indexPath -> UICollectionReusableView in
+            let result = viewModel.results.value[indexPath.section]
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ResultSectionHeader.identifier, for: indexPath) as! ResultSectionHeader
+            header.configure(with: result) {
+                self.viewModel.router.trigger(.result(searchType: result.type, query: searchController.searchBar.text ?? ""))
+            }
             return header
         }
         
@@ -97,6 +101,7 @@ class SearchViewController: UIViewController, Bindable, AppBarInjectable {
         searchController.searchBar.rx.textDidBeginEditing
             .subscribe(onNext: { [unowned self] in
                 resultCollectionView.alpha = 1
+                resultCollectionView.scrollsToTop = true
             })
             .disposed(by: bag)
         
@@ -117,7 +122,11 @@ class SearchViewController: UIViewController, Bindable, AppBarInjectable {
             .disposed(by: bag)
         
         topicCollectionView.rx.itemSelected
-            .bind(to: viewModel.selectedItem)
+            .bind(to: viewModel.selectedItemTopic)
+            .disposed(by: bag)
+        
+        resultCollectionView.rx.itemSelected
+            .bind(to: viewModel.selectedItemResult)
             .disposed(by: bag)
     }
     
@@ -228,6 +237,6 @@ extension SearchViewController: WaterfallLayoutDelegate {
     }
     
     func collectionView(collectionView: UICollectionView, sizeForSectionHeaderViewForSection section: Int) -> CGSize {
-        .init(width: view.bounds.width, height: 50)
+        .init(width: view.bounds.width, height: 40)
     }
 }

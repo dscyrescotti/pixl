@@ -13,9 +13,6 @@ class MainViewController: UITabBarController, Bindable, AppBarInjectable {
     
     var viewModel: MainViewModel!
     
-//    let barButton = UIBarButtonItem().then {
-//        $0.image = UIImage(systemName: "magnifyingglass")
-//    }
     private let searchButton = BarButton(systemName: "magnifyingglass").then {
         $0.configure(with: .systemBackground)
     }

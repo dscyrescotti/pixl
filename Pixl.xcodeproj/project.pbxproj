@@ -14,6 +14,8 @@
 		E61205232670CBD90010C64C /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61205222670CBD90010C64C /* CollectionViewController.swift */; };
 		E61205252670CCC10010C64C /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61205242670CCC10010C64C /* CollectionViewModel.swift */; };
 		E61205272670DB160010C64C /* CollectionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61205262670DB160010C64C /* CollectionCoordinator.swift */; };
+		E62489F8267CA0A200084133 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62489F7267CA0A200084133 /* ResultViewController.swift */; };
+		E62489FA267CA0B700084133 /* ResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62489F9267CA0B700084133 /* ResultViewModel.swift */; };
 		E62B2F142639223000604A1C /* MapRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B2F132639223000604A1C /* MapRow.swift */; };
 		E62C67B1263842FB00F1FDFE /* StatisticsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62C67B0263842FB00F1FDFE /* StatisticsRow.swift */; };
 		E62C67B62638503D00F1FDFE /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62C67B52638503D00F1FDFE /* Int+.swift */; };
@@ -120,6 +122,8 @@
 		E61205222670CBD90010C64C /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		E61205242670CCC10010C64C /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
 		E61205262670DB160010C64C /* CollectionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCoordinator.swift; sourceTree = "<group>"; };
+		E62489F7267CA0A200084133 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		E62489F9267CA0B700084133 /* ResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewModel.swift; sourceTree = "<group>"; };
 		E62B2F132639223000604A1C /* MapRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRow.swift; sourceTree = "<group>"; };
 		E62C67B0263842FB00F1FDFE /* StatisticsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsRow.swift; sourceTree = "<group>"; };
 		E62C67B52638503D00F1FDFE /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
@@ -239,6 +243,15 @@
 				E61205242670CCC10010C64C /* CollectionViewModel.swift */,
 			);
 			path = Collection;
+			sourceTree = "<group>";
+		};
+		E62489F6267CA08900084133 /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				E62489F7267CA0A200084133 /* ResultViewController.swift */,
+				E62489F9267CA0B700084133 /* ResultViewModel.swift */,
+			);
+			path = Result;
 			sourceTree = "<group>";
 		};
 		E633AAB3262EE6DB00ACB20E = {
@@ -466,6 +479,7 @@
 		E6B8AC8E2674D5360038606F /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				E62489F6267CA08900084133 /* Result */,
 				E6B8AC8F2674D54B0038606F /* SearchViewController.swift */,
 				E6B8AC912674D5600038606F /* SearchViewModel.swift */,
 			);
@@ -715,6 +729,7 @@
 				E612051A2670A7710010C64C /* UserCoordinator.swift in Sources */,
 				E6FEA14A2637D6210062AE72 /* UserProfileRow.swift in Sources */,
 				E6EDAD0326397A8D0062EAD9 /* TagRow.swift in Sources */,
+				E62489FA267CA0B700084133 /* ResultViewModel.swift in Sources */,
 				E62C67BB2638546200F1FDFE /* ReusableRow.swift in Sources */,
 				E6C0CFF3263E5CE700AEE6DE /* UserViewModel.swift in Sources */,
 				E6559E40263701DD00F6F041 /* UIEdgeInsets+.swift in Sources */,
@@ -772,6 +787,7 @@
 				E65209712636E5750047F955 /* AppBar.swift in Sources */,
 				E6975A632635342C00CA905D /* PhotoViewController.swift in Sources */,
 				E6B8AC922674D5600038606F /* SearchViewModel.swift in Sources */,
+				E62489F8267CA0A200084133 /* ResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

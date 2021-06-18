@@ -98,9 +98,8 @@ class CollectionHeader: UICollectionReusableView {
     }
     
     override func prepareForReuse() {
-        super.prepareForReuse()
-        
         titleLabel.text = nil
         totalPhotosLabel.text = nil
+        super.prepareForReuse()
     }
 }

@@ -18,10 +18,11 @@ class SearchViewModel {
     lazy var results = BehaviorRelay<[SearchModel]>(value: [])
     
     lazy var willDisplayCell = PublishRelay<(cell: UICollectionViewCell, at: IndexPath)>()
-    lazy var selectedItem = PublishRelay<IndexPath>()
+    lazy var selectedItemTopic = PublishRelay<IndexPath>()
+    lazy var selectedItemResult = PublishRelay<IndexPath>()
     lazy var searchTrigger = PublishRelay<String>()
     
-    private let router: UnownedRouter<SearchRoute>
+    let router: UnownedRouter<SearchRoute>
     
     init(router: UnownedRouter<SearchRoute>) {
         self.router = router
@@ -81,10 +82,23 @@ class SearchViewModel {
     }
     
     private func bindSelectedItem() {
-        selectedItem
+        selectedItemTopic
             .flatMap { [unowned self] indexPath -> Observable<Void> in
                 let topic = self.topics.value[indexPath.item]
                 return self.router.rx.trigger(.topic(topic: topic))
+            }
+            .subscribe()
+            .disposed(by: bag)
+        
+        selectedItemResult
+            .flatMap { [unowned self] indexPath -> Observable<Void> in
+                let result = self.results.value[indexPath.section].results[indexPath.item]
+                switch result {
+                case .photo(let photo):
+                    return self.router.rx.trigger(.photo(.details(photo: photo)))
+                case .collection(let collection):
+                    return self.router.rx.trigger(.collection(.details(collection: collection)))
+                }
             }
             .subscribe()
             .disposed(by: bag)

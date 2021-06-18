@@ -11,6 +11,9 @@ import XCoordinator
 enum SearchRoute: Route {
     case search
     case topic(topic: Topic)
+    case photo(PhotoRoute)
+    case collection(CollectionRoute)
+    case result(searchType: SearchType, query: String)
 }
 
 class SearchCoordinator: NavigationCoordinator<SearchRoute> {
@@ -32,6 +35,20 @@ class SearchCoordinator: NavigationCoordinator<SearchRoute> {
             let topicViewModel = TopicViewModel()
             topicViewController.bind(topicViewModel)
             return .push(topicViewController)
+        case let .photo(photoRoute):
+            let coordinator = PhotoCoordinator(rootViewController: rootViewController)
+            addChild(coordinator)
+            return .trigger(photoRoute, on: coordinator)
+        case let .collection(collectionRoute):
+            let coordinator = CollectionCoordinator(rootViewController: rootViewController)
+            addChild(coordinator)
+            return .trigger(collectionRoute, on: coordinator)
+        case let .result(searchType, query):
+            let resultViewController = ResultViewController()
+            resultViewController.title = "Results"
+            let resultViewModel = ResultViewModel(unownedRouter, searchType: searchType, query: query)
+            resultViewController.bind(resultViewModel)
+            return .push(resultViewController)
         }
     }
     
