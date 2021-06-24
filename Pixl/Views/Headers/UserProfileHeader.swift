@@ -103,7 +103,6 @@ class UserProfileHeader: UIView {
             profile(with: user.profileImage.large)
             nameLabel.text = user.name
             usernameLabel.text = "@\(user.username)"
-//            biographyLabel.text = user.bio
             if let followersCount = user.followersCount {
                 followerLabel.text = "\(followersCount.shorted()) Follower\(followersCount == 0 ? "" : "s")"
             }

@@ -16,6 +16,9 @@ class MainViewController: UITabBarController, Bindable, AppBarInjectable {
     private let searchButton = BarButton(systemName: "magnifyingglass").then {
         $0.configure(with: .systemBackground)
     }
+    private let profileButton = BarButton(systemName: "person.fill").then {
+        $0.configure(with: .systemBackground)
+    }
     lazy var orientationChange = PublishRelay<Orientation>()
     
     internal var appBar = AppBar()
@@ -33,11 +36,18 @@ class MainViewController: UITabBarController, Bindable, AppBarInjectable {
             .bind(to: viewModel.searchTrigger)
             .disposed(by: bag)
         
+        profileButton.rx.tap
+            .bind(to: viewModel.profileTrigger)
+            .disposed(by: bag)
+        
         let orientation = orientationChange
             .distinctUntilChanged()
         
         orientation
             .bind(to: searchButton.orientationChange)
+            .disposed(by: bag)
+        orientation
+            .bind(to: profileButton.orientationChange)
             .disposed(by: bag)
     }
 }
@@ -50,18 +60,12 @@ extension MainViewController {
         tabBar.barTintColor = .systemBackground
         tabBar.tintColor = .label
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(logout))
-        
         addAppBar()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         registerLayout()
-    }
-    
-    @objc func logout() {
-        viewModel.router.trigger(.logout)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -78,6 +82,7 @@ extension MainViewController {
     func setUpBarButtons() {
         orientationChange.accept(view.orientation(portrait: Orientation.portrait, landscape: .landscape))
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: searchButton)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileButton)
     }
 }
 

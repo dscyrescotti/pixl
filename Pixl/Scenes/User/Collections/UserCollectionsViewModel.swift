@@ -16,7 +16,7 @@ class UserCollectionsViewModel {
     
     private var isLoading = false
     private let bag = DisposeBag()
-    private let username: String
+    private let username: String?
     private let type: PhotoType
     
     private let router: UnownedRouter<UserRoute>
@@ -30,7 +30,7 @@ class UserCollectionsViewModel {
     lazy var selectedItem = PublishRelay<IndexPath>()
     lazy var labelHidden = PublishRelay<Bool>()
     
-    init(username: String, type: PhotoType = .photos, router: UnownedRouter<UserRoute>) {
+    init(username: String?, type: PhotoType = .photos, router: UnownedRouter<UserRoute>) {
         self.username = username
         self.type = type
         self.router = router
@@ -90,7 +90,11 @@ class UserCollectionsViewModel {
             })
             .flatMap { [unowned self] page -> Observable<[PhotoCollection]> in
                 self.isLoading = true
-                return APIService.shared.getUserCollections(username: username, page: page)
+                if let username = username {
+                    return APIService.shared.getUserCollections(username: username, page: page)
+                } else {
+                    return Observable.empty()
+                }
             }
             .asDriver(onErrorRecover: { [unowned self] _ in
                 self.isLoading = false

@@ -77,6 +77,11 @@
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
+            key = "REDIRECT_URI"
+            value = "pixl-app://unsplash-authentication"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
             key = "SECRET_KEY"
             value = "kYdoWLGTu593IydmjC__4G1aOydJdblmVni8wMqz3WU"
             isEnabled = "YES">

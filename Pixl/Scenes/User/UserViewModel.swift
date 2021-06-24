@@ -12,20 +12,31 @@ import XCoordinator
 
 class UserViewModel {
     private let bag = DisposeBag()
-    let user: BehaviorRelay<User>
+    let user: BehaviorRelay<User?> = .init(value: nil)
     
     let router: UnownedRouter<UserRoute>
     
-    init(user: User, router: UnownedRouter<UserRoute>) {
-        self.user = BehaviorRelay(value: user)
+    init(_ type: UserType, router: UnownedRouter<UserRoute>) {
         self.router = router
-        bindUser(username: user.username)
+        bindUser(type: type)
     }
     
-    func bindUser(username: String) {
-        APIService.shared.getUser(username: username)
-            .bind(to: user)
-            .disposed(by: bag)
+    func bindUser(type: UserType) {
+        switch type {
+        case .me:
+            APIService.shared.getMe()
+                .bind(to: user)
+                .disposed(by: bag)
+        case .username(let username):
+            APIService.shared.getUser(username: username)
+                .bind(to: user)
+                .disposed(by: bag)
+        }
     }
     
+}
+
+enum UserType {
+    case me
+    case username(String)
 }

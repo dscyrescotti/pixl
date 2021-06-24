@@ -67,7 +67,15 @@ class UserViewController: SegementSlideDefaultViewController, Bindable, AppBarIn
     
     func bindViewModel() {
         viewModel.user
+            .compactMap { $0 }
             .bind(to: profileHeader.user)
+            .disposed(by: bag)
+        
+        viewModel.user
+            .compactMap { $0 }
+            .subscribe(onNext: { [unowned self] _ in
+                reloadContent()
+            })
             .disposed(by: bag)
         
         let orientation = orientationChange
@@ -120,19 +128,19 @@ extension UserViewController {
         case 0:
             let controller = UserPhotosViewController()
             controller.parentView = self.view
-            let viewModel = UserPhotosViewModel(username: self.viewModel.user.value.username, router: self.viewModel.router)
+            let viewModel = UserPhotosViewModel(username: self.viewModel.user.value?.username, router: self.viewModel.router)
             controller.bind(viewModel)
             return controller
         case 1:
             let controller = UserCollectionsViewController()
             controller.parentView = self.view
-            let viewModel = UserCollectionsViewModel(username: self.viewModel.user.value.username, router: self.viewModel.router)
+            let viewModel = UserCollectionsViewModel(username: self.viewModel.user.value?.username, router: self.viewModel.router)
             controller.bind(viewModel)
             return controller
         case 2:
             let controller = UserPhotosViewController()
             controller.parentView = self.view
-            let viewModel = UserPhotosViewModel(username: self.viewModel.user.value.username, type: .likes, router: self.viewModel.router)
+            let viewModel = UserPhotosViewModel(username: self.viewModel.user.value?.username, type: .likes, router: self.viewModel.router)
             controller.bind(viewModel)
             return controller
         default:

@@ -85,6 +85,8 @@
 		E6B9618D2640034E00B3003B /* UserPhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B9618C2640034E00B3003B /* UserPhotosViewModel.swift */; };
 		E6B9619226400B2D00B3003B /* ParentAccessible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B9619126400B2D00B3003B /* ParentAccessible.swift */; };
 		E6C0CFF3263E5CE700AEE6DE /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C0CFF2263E5CE700AEE6DE /* UserViewModel.swift */; };
+		E6C73B19268493AD00179FB9 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C73B18268493AD00179FB9 /* AuthService.swift */; };
+		E6C73B1C2684AA7A00179FB9 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = E6C73B1B2684AA7A00179FB9 /* KeychainAccess */; };
 		E6D1DA6C26368ED7009C6A78 /* UINavigationController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D1DA6B26368ED7009C6A78 /* UINavigationController+.swift */; };
 		E6D1DA75263695E8009C6A78 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D1DA74263695E8009C6A78 /* UserViewController.swift */; };
 		E6D9E636263189B2005BB2A7 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D9E635263189B2005BB2A7 /* UIView+.swift */; };
@@ -183,6 +185,7 @@
 		E6B9618C2640034E00B3003B /* UserPhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotosViewModel.swift; sourceTree = "<group>"; };
 		E6B9619126400B2D00B3003B /* ParentAccessible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentAccessible.swift; sourceTree = "<group>"; };
 		E6C0CFF2263E5CE700AEE6DE /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		E6C73B18268493AD00179FB9 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		E6D1DA6B26368ED7009C6A78 /* UINavigationController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+.swift"; sourceTree = "<group>"; };
 		E6D1DA74263695E8009C6A78 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		E6D9E635263189B2005BB2A7 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
@@ -201,6 +204,7 @@
 			files = (
 				E64BB2342632863F0053C309 /* Kingfisher in Frameworks */,
 				E68BFF9D262FDA2200CC908F /* XCoordinatorRx in Frameworks */,
+				E6C73B1C2684AA7A00179FB9 /* KeychainAccess in Frameworks */,
 				E68BFFB4262FE14500CC908F /* Then in Frameworks */,
 				E6B9617F263FF51300B3003B /* SegementSlide in Frameworks */,
 				E650BBCC26720A83003A698D /* Differentiator in Frameworks */,
@@ -510,6 +514,7 @@
 			isa = PBXGroup;
 			children = (
 				E660BB0B2631B83200739F15 /* APIService.swift */,
+				E6C73B18268493AD00179FB9 /* AuthService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -593,6 +598,7 @@
 				E6B9617E263FF51300B3003B /* SegementSlide */,
 				E650BBCB26720A83003A698D /* Differentiator */,
 				E650BBCD26720A83003A698D /* RxDataSources */,
+				E6C73B1B2684AA7A00179FB9 /* KeychainAccess */,
 			);
 			productName = Pixl;
 			productReference = E633AABC262EE6DB00ACB20E /* Pixl.app */;
@@ -678,6 +684,7 @@
 				E699D2B9263AC23400592E24 /* XCRemoteSwiftPackageReference "RxGesture" */,
 				E6B9617D263FF51300B3003B /* XCRemoteSwiftPackageReference "SegementSlide" */,
 				E650BBCA26720A83003A698D /* XCRemoteSwiftPackageReference "RxDataSources" */,
+				E6C73B1A2684AA7A00179FB9 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 			);
 			productRefGroup = E633AABD262EE6DB00ACB20E /* Products */;
 			projectDirPath = "";
@@ -781,6 +788,7 @@
 				E6EF7A9526307F6900CFFE5E /* UIImage+.swift in Sources */,
 				E680A53F267780C4001C7CA1 /* TopicViewModel.swift in Sources */,
 				E633AAC2262EE6DB00ACB20E /* SceneDelegate.swift in Sources */,
+				E6C73B19268493AD00179FB9 /* AuthService.swift in Sources */,
 				E6504C422635C358008E7CD1 /* PhotoViewModel.swift in Sources */,
 				E6B961882640031600B3003B /* UserPhotosViewController.swift in Sources */,
 				E68BFFD7262FF19400CC908F /* MainCoordinator.swift in Sources */,
@@ -956,6 +964,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2L8NJ89M2P;
 				INFOPLIST_FILE = Pixl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -974,6 +983,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2L8NJ89M2P;
 				INFOPLIST_FILE = Pixl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1196,6 +1206,14 @@
 				kind = branch;
 			};
 		};
+		E6C73B1A2684AA7A00179FB9 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.2;
+			};
+		};
 		E6EDACFC263972470062EAD9 /* XCRemoteSwiftPackageReference "TagListView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ElaWorkshop/TagListView.git";
@@ -1286,6 +1304,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E6B9617D263FF51300B3003B /* XCRemoteSwiftPackageReference "SegementSlide" */;
 			productName = SegementSlide;
+		};
+		E6C73B1B2684AA7A00179FB9 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E6C73B1A2684AA7A00179FB9 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
 		};
 		E6EDACFD263972470062EAD9 /* TagListView */ = {
 			isa = XCSwiftPackageProductDependency;

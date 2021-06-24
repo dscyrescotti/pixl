@@ -10,7 +10,7 @@ import XCoordinator
 
 enum AppRoute {
     case home
-    case auth
+    case login
 }
 
 class AppCoordinator {
@@ -22,7 +22,11 @@ class AppCoordinator {
     }
     
     func start() {
-        coordinator = presenter(.home)
+        if AuthService.shared.hasToken {
+            coordinator = presenter(.home)
+        } else {
+            coordinator = presenter(.login)
+        }
         coordinator?.setRoot(for: window)
     }
     
@@ -40,7 +44,7 @@ class AppCoordinator {
         switch route {
         case .home:
             return HomeCoordinator(self).strongRouter
-        case .auth:
+        case .login:
             return AuthCoordinator(self).strongRouter
         }
     }

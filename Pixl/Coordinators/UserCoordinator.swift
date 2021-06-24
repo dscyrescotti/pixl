@@ -12,6 +12,7 @@ indirect enum UserRoute: Route {
     case details(user: User)
     case photo(PhotoRoute)
     case collection(CollectionRoute)
+    case me
 }
 
 class UserCoordinator: NavigationCoordinator<UserRoute> {
@@ -24,7 +25,7 @@ class UserCoordinator: NavigationCoordinator<UserRoute> {
         switch route {
         case let .details(user):
             let userViewController = UserViewController()
-            let userViewModel = UserViewModel(user: user, router: unownedRouter)
+            let userViewModel = UserViewModel(.username(user.username), router: unownedRouter)
             userViewController.bind(userViewModel)
             userViewController.title = user.username
             return .push(userViewController)
@@ -36,6 +37,11 @@ class UserCoordinator: NavigationCoordinator<UserRoute> {
             let coordinator = CollectionCoordinator(rootViewController: rootViewController)
             addChild(coordinator)
             return .trigger(collectionRoute, on: coordinator)
+        case .me:
+            let userViewController = UserViewController()
+            let userViewModel = UserViewModel(.me, router: unownedRouter)
+            userViewController.bind(userViewModel)
+            return .push(userViewController)
         }
     }
     

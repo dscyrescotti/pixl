@@ -7,6 +7,6 @@
 
 import UIKit
 
-protocol ParentAccessible: class {
+protocol ParentAccessible: AnyObject {
     var parentView: UIView! { get set }
 }

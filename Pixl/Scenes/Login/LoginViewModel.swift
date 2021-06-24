@@ -10,17 +10,74 @@ import RxSwift
 import RxCocoa
 import XCoordinator
 import XCoordinatorRx
+import AuthenticationServices
 
-class LoginViewModel {
-    private(set) lazy var loginTrigger = loginAction.inputs
+class LoginViewModel: NSObject, ASWebAuthenticationPresentationContextProviding {
+    private let bag = DisposeBag()
     
-    private lazy var loginAction = CocoaAction { [unowned self] in
-        self.router.rx.trigger(.home)
-    }
+    lazy var loginTrigger = PublishRelay<Void>()
+    lazy var isLoading = PublishRelay<Void>()
     
     private let router: UnownedRouter<AuthRoute>
     
     init(_ router: UnownedRouter<AuthRoute>) {
         self.router = router
+        super.init()
+        self.bind()
+    }
+    
+    func bind() {
+        loginTrigger
+            .subscribe(onNext: { [unowned self] in
+                isLoading.accept(())
+                signIn()
+            })
+            .disposed(by: bag)
+    }
+    
+    func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+        .init()
+    }
+    
+    func signIn() {
+        let authorize = Single<URL>.create { single in
+            let disposable = Disposables.create()
+            let authSession = ASWebAuthenticationSession(url: AuthService.shared.authorizeURL, callbackURLScheme: AuthService.shared.REDIRECT_URI.scheme) { url, error in
+                if let error = error {
+                    single(.failure(error))
+                } else if let url = url {
+                    single(.success(url))
+                }
+            }
+            authSession.presentationContextProvider = self
+            authSession.prefersEphemeralWebBrowserSession = true
+            authSession.start()
+            return disposable
+        }
+        
+        authorize.subscribe(onSuccess: { [unowned self] url in
+            let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
+            if let queryItems = components?.queryItems, let code = queryItems.filter({ $0.name == "code" }).first?.value {
+                self.requestToken(code: code)
+            }
+            
+        }, onFailure: { error in
+            print(error)
+        })
+        .disposed(by: bag)
+
+    }
+    
+    func requestToken(code: String) {
+        AuthService.shared.requestToken(code: code)
+            .asSingle()
+            .subscribe(onSuccess: { [unowned self] token in
+                AuthService.shared.storeToken(token: token.accessToken)
+                router.trigger(.home)
+            }, onFailure: { error in
+                print(error.localizedDescription)
+            })
+            .disposed(by: bag)
     }
 }
+

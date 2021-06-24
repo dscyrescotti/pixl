@@ -14,15 +14,10 @@ class APIService {
     private init() {
         guard let accessKey = ProcessInfo.processInfo.environment["ACCESS_KEY"] else { fatalError("[Error]: Missing access key")
         }
-        guard let secretKey = ProcessInfo.processInfo.environment["SECRET_KEY"] else {
-            fatalError("[Error]: Missing secret key")
-        }
         self.ACCESS_KEY = accessKey
-        self.SECRET_KEY = secretKey
     }
     
     private let ACCESS_KEY: String
-    private let SECRET_KEY: String
     
     private let BASE_URL = "https://api.unsplash.com/"
     private let JSON_DECODER = JSONDecoder()
@@ -30,10 +25,12 @@ class APIService {
     
     private func urlRequest(endpoint: String, query: [String: Any], header: [String: String] = [:]) -> URLRequest? {
         guard var components = URLComponents(string: "\(BASE_URL)\(endpoint)") else { return nil }
-        components.queryItems = query.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
+        components.queryItems = query.map { URLQueryItem(name: $0.key, value: "\($0.value)") } + [URLQueryItem(name: "client_id", value: ACCESS_KEY)]
         guard let url = components.url else { return nil }
         var request = URLRequest(url: url)
-        request.setValue("Client-ID \(ACCESS_KEY)", forHTTPHeaderField: "Authorization")
+        if let accessToken = AuthService.shared.accessToken {
+            request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        }
         for dict in header {
             request.setValue(dict.value, forHTTPHeaderField: dict.key)
         }
@@ -138,4 +135,13 @@ class APIService {
         }
         return alamofireRequest(SearchCollection.self, request: request)
     }
+    
+    func getMe() -> Observable<User> {
+        guard let request = urlRequest(endpoint: "me", query: [:]) else {
+            print("[Error]: Invalid url")
+            return Observable.empty()
+        }
+        return alamofireRequest(User.self, request: request)
+    }
+    
 }
