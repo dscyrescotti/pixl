@@ -26,7 +26,6 @@ class AuthService {
         self.SECRET_KEY = secretKey
         self.REDIRECT_URI = URL(string: redirectUri)!
         loadToken()
-        print(accessToken)
     }
     
     var accessToken: String?

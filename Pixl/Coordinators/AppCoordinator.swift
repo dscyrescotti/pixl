@@ -31,6 +31,9 @@ class AppCoordinator {
     }
     
     func trigger(_ route: AppRoute) {
+        if route == .login {
+            AuthService.shared.removeToken()
+        }
         let coordinator = presenter(route)
         coordinator.viewController.view.alpha = 0
         coordinator.setRoot(for: window)

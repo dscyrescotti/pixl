@@ -16,10 +16,10 @@ class PhotosViewModel {
     
     private var isLoading = false
     private let bag = DisposeBag()
+    private var isEnd = false
     
     lazy var photos = BehaviorRelay<[Photo]>(value: [])
     private lazy var page = BehaviorRelay<Int>(value: 1)
-    private lazy var isFetching = BehaviorRelay<Bool>(value: false)
     
     lazy var didScrollToBottom = PublishRelay<Void>()
     lazy var willDisplayCell = PublishRelay<(cell: UICollectionViewCell, at: IndexPath)>()
@@ -60,6 +60,7 @@ class PhotosViewModel {
     
     private func bindDidScrollToBottom() {
         didScrollToBottom
+            .filter { !self.isEnd }
             .filter { !self.isLoading }
             .flatMap { [unowned self] _ -> Observable<Int> in
                 let next = self.page.value + 1
@@ -82,7 +83,12 @@ class PhotosViewModel {
                 self.isLoading = false
                 return Driver.just([])
             })
-            .filter { !$0.isEmpty }
+            .filter { [unowned self] photos in
+                if photos.isEmpty {
+                    isEnd = true
+                }
+                return !photos.isEmpty
+            }
             .map { [unowned self] new in
                 self.photos.value + new
             }

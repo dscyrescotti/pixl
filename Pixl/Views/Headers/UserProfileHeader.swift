@@ -44,12 +44,12 @@ class UserProfileHeader: UIView {
         $0.textAlignment = .center
     }
     
-    private var followButton = UIButton(type: .system).then {
+    var followButton = UIButton(type: .system).then {
         $0.setTitle("Follow", for: .normal)
         $0.titleLabel?.font = .preferredFont(forTextStyle: .subheadline)
         $0.setTitleColor(.white, for: .normal)
         $0.backgroundColor = .systemBlue
-        $0.contentEdgeInsets = .init(v: 7.5, h: 45)
+        $0.contentEdgeInsets = .init(v: 7.5, h: 0)
         $0.layer.cornerRadius = 10
         $0.layer.masksToBounds = true
     }
@@ -69,7 +69,7 @@ class UserProfileHeader: UIView {
     override func layoutSubviews() {
         profileImage.snp.makeConstraints { make in
             make.height.width.equalTo(80)
-            make.leading.equalTo(view.safeAreaLayoutGuide).inset(10)
+            make.leading.equalTo(view.safeAreaLayoutGuide).inset(15)
             make.top.equalTo(view).inset(10)
         }
         
@@ -80,17 +80,18 @@ class UserProfileHeader: UIView {
         
         followButton.snp.makeConstraints { make in
             make.top.equalTo(profileImage.snp.centerY).offset(4)
-            make.trailing.equalTo(view.safeAreaLayoutGuide).inset(10)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).inset(15)
+            make.width.equalTo(150)
         }
 
         nameLabel.snp.makeConstraints { make in
             make.top.equalTo(profileImage.snp.bottom).offset(10)
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(10)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(15)
         }
 
         usernameLabel.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(5)
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(10)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(15)
         }
     }
     
@@ -113,5 +114,13 @@ class UserProfileHeader: UIView {
     
     private func profile(with url: String) {
         profileImage.kf.setImage(with: URL(string: url), placeholder: nil, options: [.cacheOriginalImage, .diskCacheExpiration(.days(2))])
+    }
+    
+    func configure(with isMe: Bool) {
+        followButton.isHidden = isMe
+    }
+    
+    func change(label: String) {
+        followButton.setTitle(label, for: .normal)
     }
 }

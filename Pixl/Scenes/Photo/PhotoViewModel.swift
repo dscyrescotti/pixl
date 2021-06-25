@@ -26,7 +26,11 @@ class PhotoViewModel {
     
     private func bindPhoto(id: String) {
         APIService.shared.getPhoto(id: id)
-            .bind(to: photo)
+            .asDriver(onErrorRecover: { error in
+                print(error.localizedDescription)
+                return Driver.empty()
+            })
+            .drive(photo)
             .disposed(by: bag)
         
         profileTrigger

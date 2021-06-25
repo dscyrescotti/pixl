@@ -18,12 +18,12 @@ class UserPhotosViewModel {
     private let bag = DisposeBag()
     private let username: String?
     private let type: PhotoType
+    private var isEnd = false
     
     private let router: UnownedRouter<UserRoute>
     
     lazy var photos = BehaviorRelay<[Photo]>(value: [])
     private lazy var page = BehaviorRelay<Int>(value: 1)
-    private lazy var isFetching = BehaviorRelay<Bool>(value: false)
     
     lazy var didScrollToBottom = PublishRelay<Void>()
     lazy var willDisplayCell = PublishRelay<(cell: UICollectionViewCell, at: IndexPath)>()
@@ -74,6 +74,7 @@ class UserPhotosViewModel {
     
     private func bindDidScrollToBottom() {
         didScrollToBottom
+            .filter { !self.isEnd }
             .filter { !self.isLoading }
             .flatMap { [unowned self] _ -> Observable<Int> in
                 let next = self.page.value + 1
@@ -106,7 +107,12 @@ class UserPhotosViewModel {
                     labelHidden.accept(false)
                 }
             })
-            .filter { !$0.isEmpty }
+            .filter { [unowned self] photos in
+                if photos.isEmpty {
+                    isEnd = true
+                }
+                return !photos.isEmpty
+            }
             .map { [unowned self] new in
                 self.photos.value + new
             }

@@ -18,13 +18,19 @@ class UserViewController: SegementSlideDefaultViewController, Bindable, AppBarIn
     
     var viewModel: UserViewModel!
     private let bag = DisposeBag()
+    var isFollowed = false {
+        didSet {
+            profileHeader.change(label: isFollowed ? "Following" : "Follow")
+        }
+    }
     
     private let profileHeader = UserProfileHeader().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.heightAnchor.constraint(equalToConstant: 180).isActive = true
+        $0.heightAnchor.constraint(equalToConstant: 160).isActive = true
     }
     
     override func segementSlideHeaderView() -> UIView? {
+        profileHeader.configure(with: viewModel.isMe)
         return profileHeader
     }
     
@@ -54,14 +60,17 @@ class UserViewController: SegementSlideDefaultViewController, Bindable, AppBarIn
         super.viewDidLayoutSubviews()
         registerLayout()
     }
-
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         reloadSwitcher()
         reloadHeader()
+        // ignore warnings
+        contentView.snp.removeConstraints()
         contentView.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.left.right.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(switcherView.snp.bottom)
+            make.bottom.equalTo(view)
         }
     }
     
@@ -73,9 +82,23 @@ class UserViewController: SegementSlideDefaultViewController, Bindable, AppBarIn
         
         viewModel.user
             .compactMap { $0 }
-            .subscribe(onNext: { [unowned self] _ in
+            .subscribe(onNext: { [unowned self] user in
+                isFollowed = user.followedByUser
+                title = user.username
                 reloadContent()
             })
+            .disposed(by: bag)
+        
+        profileHeader.followButton.rx.tap
+            .flatMap { [unowned self] _ -> Observable<Void> in
+                guard let user = viewModel.user.value else {
+                    return Observable.empty()
+                }
+                isFollowed.toggle()
+                return APIService.shared.followUser(username: user.username, isFollowed: user.followedByUser)
+            }
+            .asSingle()
+            .subscribe()
             .disposed(by: bag)
         
         let orientation = orientationChange

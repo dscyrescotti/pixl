@@ -132,7 +132,7 @@ struct User: AnyCodable {
     var links: UserLinks
     var followersCount: Int?
     var followingCount: Int?
-    var followedByUser: Bool?
+    @Defaultable var followedByUser: Bool
 
     enum CodingKeys: String, CodingKey {
         case id, username, name
@@ -147,6 +147,7 @@ struct User: AnyCodable {
         case links
         case followersCount = "followers_count"
         case followingCount = "following_count"
+        case followedByUser = "followed_by_user"
     }
     
     var statsitics: [(String, String)] {
@@ -193,3 +194,9 @@ struct SearchModel {
 enum SearchType {
     case photo, collection
 }
+
+struct LikePhoto: Codable {
+    var photo: Photo
+}
+
+struct Empty: Codable { }

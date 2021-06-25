@@ -44,7 +44,6 @@ class UserPhotosViewController: UIViewController, SegementSlideContentScrollView
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setUp()
         setUpCollectionView()
         setUpLabel()
     }
@@ -81,11 +80,7 @@ class UserPhotosViewController: UIViewController, SegementSlideContentScrollView
     }
 }
 
-extension UserPhotosViewController {
-    func setUp() {
-        view.backgroundColor = .systemPink
-    }
-    
+extension UserPhotosViewController {    
     func setUpCollectionView() {
         layout.delegate = self
         layout.cellPadding = 5

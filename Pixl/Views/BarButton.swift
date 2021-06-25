@@ -13,9 +13,16 @@ import RxSwift
 class BarButton: UIButton {
     lazy var orientationChange = PublishRelay<Orientation>()
     private let bag = DisposeBag()
+    private var orientation: Orientation? = nil
     
     private var color: UIColor = .label
-    private let systemName: String
+    private var systemName: String {
+        didSet {
+            if let orientation = orientation {
+                updateButton(orientation: orientation)
+            }
+        }
+    }
     
     override var isHighlighted: Bool {
         didSet {
@@ -32,6 +39,7 @@ class BarButton: UIButton {
     func bind() {
         orientationChange
             .subscribe(onNext: { [unowned self] orientation in
+                self.orientation = orientation
                 updateButton(orientation: orientation)
             })
             .disposed(by: bag)
@@ -58,5 +66,9 @@ class BarButton: UIButton {
         backgroundColor = color.withAlphaComponent(0.7)
         layer.masksToBounds = true
         adjustsImageWhenHighlighted = false
+    }
+    
+    func change(systemName: String) {
+        self.systemName = systemName
     }
 }

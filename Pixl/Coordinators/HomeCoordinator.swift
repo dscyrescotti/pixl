@@ -38,6 +38,8 @@ class HomeCoordinator: NavigationCoordinator<HomeRoute> {
             return .push(coordinator)
         case .settings:
             let settingsViewController = SettingsViewController()
+            settingsViewController.router = unownedRouter
+            settingsViewController.bind()
             return .push(settingsViewController)
         case .search:
             let coordinator = SearchCoordinator(rootViewController: rootViewController)

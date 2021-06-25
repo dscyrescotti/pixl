@@ -16,11 +16,11 @@ class ResultViewModel {
     
     private var isLoading = false
     private let bag = DisposeBag()
+    private var isEnd = false
     
     lazy var results = BehaviorRelay<[SearchResult]>(value: [])
     
     private lazy var page = BehaviorRelay<Int>(value: 1)
-    private lazy var isFetching = BehaviorRelay<Bool>(value: false)
     
     lazy var didScrollToBottom = PublishRelay<Void>()
     lazy var willDisplayCell = PublishRelay<(cell: UICollectionViewCell, at: IndexPath)>()
@@ -70,6 +70,7 @@ class ResultViewModel {
     
     private func bindDidScrollToBottom() {
         didScrollToBottom
+            .filter { !self.isEnd }
             .filter { !self.isLoading }
             .flatMap { [unowned self] _ -> Observable<Int> in
                 let next = self.page.value + 1
@@ -82,7 +83,7 @@ class ResultViewModel {
     private func bindPage() {
         page
             .do(onNext: {
-                print("[Fetch]: Start fetching page \($0)")
+                print("[Fetch]: Start fetching page \($0) of search")
             })
             .flatMap { [unowned self] page -> Observable<[SearchResult]> in
                 self.isLoading = true
@@ -99,7 +100,12 @@ class ResultViewModel {
                 self.isLoading = false
                 return Driver.just([])
             })
-            .filter { !$0.isEmpty }
+            .filter { [unowned self] results in
+                if results.isEmpty {
+                    isEnd = true
+                }
+                return !results.isEmpty
+            }
             .map { [unowned self] new in
                 self.results.value + new
             }

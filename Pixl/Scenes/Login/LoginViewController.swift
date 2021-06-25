@@ -16,7 +16,7 @@ class LoginViewController: UIViewController, Bindable {
     private let bag = DisposeBag()
     
     let loginButton = UIButton(type: .system).then {
-        $0.setTitle("Log In", for: .normal)
+        $0.setTitle("Log in", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 10
@@ -35,9 +35,10 @@ class LoginViewController: UIViewController, Bindable {
             .disposed(by: bag)
         
         viewModel.isLoading
-            .subscribe(onNext: { [unowned self] in
-                loginButton.isEnabled = false
-                loginButton.setTitle("Logging In...", for: .disabled)
+            .distinctUntilChanged()
+            .subscribe(onNext: { [unowned self] value in
+                loginButton.isEnabled = !value
+                loginButton.setTitle(value ? "Logging in..." : "Log in", for: value ? .disabled : .normal)
             })
             .disposed(by: bag)
     }

@@ -13,11 +13,13 @@ import XCoordinator
 class UserViewModel {
     private let bag = DisposeBag()
     let user: BehaviorRelay<User?> = .init(value: nil)
+    let isMe: Bool
     
     let router: UnownedRouter<UserRoute>
     
     init(_ type: UserType, router: UnownedRouter<UserRoute>) {
         self.router = router
+        self.isMe = type.isMe
         bindUser(type: type)
     }
     
@@ -25,11 +27,18 @@ class UserViewModel {
         switch type {
         case .me:
             APIService.shared.getMe()
-                .bind(to: user)
+                .asDriver(onErrorRecover: { error in
+                    print(error.localizedDescription)
+                    return Driver.empty()
+                })
+                .drive(user)
                 .disposed(by: bag)
         case .username(let username):
             APIService.shared.getUser(username: username)
-                .bind(to: user)
+                .asDriver(onErrorRecover: { error in
+                    Driver.empty()
+                })
+                .drive(user)
                 .disposed(by: bag)
         }
     }
@@ -39,4 +48,13 @@ class UserViewModel {
 enum UserType {
     case me
     case username(String)
+    
+    var isMe: Bool {
+        switch self {
+        case .me:
+            return true
+        case .username:
+            return false
+        }
+    }
 }

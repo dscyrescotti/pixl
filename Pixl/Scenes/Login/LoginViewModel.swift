@@ -16,7 +16,7 @@ class LoginViewModel: NSObject, ASWebAuthenticationPresentationContextProviding 
     private let bag = DisposeBag()
     
     lazy var loginTrigger = PublishRelay<Void>()
-    lazy var isLoading = PublishRelay<Void>()
+    lazy var isLoading = PublishRelay<Bool>()
     
     private let router: UnownedRouter<AuthRoute>
     
@@ -29,7 +29,6 @@ class LoginViewModel: NSObject, ASWebAuthenticationPresentationContextProviding 
     func bind() {
         loginTrigger
             .subscribe(onNext: { [unowned self] in
-                isLoading.accept(())
                 signIn()
             })
             .disposed(by: bag)
@@ -58,11 +57,13 @@ class LoginViewModel: NSObject, ASWebAuthenticationPresentationContextProviding 
         authorize.subscribe(onSuccess: { [unowned self] url in
             let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
             if let queryItems = components?.queryItems, let code = queryItems.filter({ $0.name == "code" }).first?.value {
+                isLoading.accept(true)
                 self.requestToken(code: code)
             }
             
-        }, onFailure: { error in
-            print(error)
+        }, onFailure: { [unowned self] error in
+            print(error.localizedDescription)
+            isLoading.accept(false)
         })
         .disposed(by: bag)
 
@@ -74,8 +75,9 @@ class LoginViewModel: NSObject, ASWebAuthenticationPresentationContextProviding 
             .subscribe(onSuccess: { [unowned self] token in
                 AuthService.shared.storeToken(token: token.accessToken)
                 router.trigger(.home)
-            }, onFailure: { error in
+            }, onFailure: { [unowned self] error in
                 print(error.localizedDescription)
+                isLoading.accept(false)
             })
             .disposed(by: bag)
     }

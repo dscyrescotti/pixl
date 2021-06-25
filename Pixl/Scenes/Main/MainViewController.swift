@@ -16,7 +16,7 @@ class MainViewController: UITabBarController, Bindable, AppBarInjectable {
     private let searchButton = BarButton(systemName: "magnifyingglass").then {
         $0.configure(with: .systemBackground)
     }
-    private let profileButton = BarButton(systemName: "person.fill").then {
+    private let settingButton = BarButton(systemName: "gear").then {
         $0.configure(with: .systemBackground)
     }
     lazy var orientationChange = PublishRelay<Orientation>()
@@ -36,8 +36,8 @@ class MainViewController: UITabBarController, Bindable, AppBarInjectable {
             .bind(to: viewModel.searchTrigger)
             .disposed(by: bag)
         
-        profileButton.rx.tap
-            .bind(to: viewModel.profileTrigger)
+        settingButton.rx.tap
+            .bind(to: viewModel.settingTrigger)
             .disposed(by: bag)
         
         let orientation = orientationChange
@@ -47,7 +47,7 @@ class MainViewController: UITabBarController, Bindable, AppBarInjectable {
             .bind(to: searchButton.orientationChange)
             .disposed(by: bag)
         orientation
-            .bind(to: profileButton.orientationChange)
+            .bind(to: settingButton.orientationChange)
             .disposed(by: bag)
     }
 }
@@ -82,7 +82,7 @@ extension MainViewController {
     func setUpBarButtons() {
         orientationChange.accept(view.orientation(portrait: Orientation.portrait, landscape: .landscape))
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: searchButton)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileButton)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: settingButton)
     }
 }
 

@@ -46,6 +46,14 @@ class APIService {
             .asObservable()
     }
     
+    private func alamofireRequest(request: URLRequest) -> Observable<Void> {
+        return RxAlamofire.request(request)
+            .subscribe(on: API_SCHEDULER)
+            .validate(statusCode: 200..<300)
+            .map { _ in () }
+            .asObservable()
+    }
+    
     func getPhotos(page: Int, perPage: Int = 50) -> Observable<[Photo]> {
         guard let request = urlRequest(endpoint: "photos", query: ["page": page, "per_page": perPage]) else {
             print("[Error]: Invalid url")
@@ -142,6 +150,24 @@ class APIService {
             return Observable.empty()
         }
         return alamofireRequest(User.self, request: request)
+    }
+    
+    func likePhoto(id: String, isLiked: Bool) -> Observable<LikePhoto> {
+        guard var request = urlRequest(endpoint: "photos/\(id)/like", query: [:]) else {
+            print("[Error]: Invalid url")
+            return Observable.empty()
+        }
+        request.method = isLiked ? .delete : .post
+        return alamofireRequest(LikePhoto.self, request: request)
+    }
+    
+    func followUser(username: String, isFollowed: Bool) -> Observable<Void> {
+        guard var request = urlRequest(endpoint: "users/\(username)/follow", query: [:]) else {
+            print("[Error]: Invalid url")
+            return Observable.empty()
+        }
+        request.method = isFollowed ? .delete : .post
+        return alamofireRequest(request: request)
     }
     
 }

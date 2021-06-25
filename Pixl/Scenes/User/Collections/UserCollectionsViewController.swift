@@ -44,7 +44,6 @@ class UserCollectionsViewController: UIViewController, SegementSlideContentScrol
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setUp()
         setUpCollectionView()
         setUpLabel()
     }
@@ -81,11 +80,7 @@ class UserCollectionsViewController: UIViewController, SegementSlideContentScrol
     }
 }
 
-extension UserCollectionsViewController {
-    func setUp() {
-        view.backgroundColor = .systemTeal
-    }
-    
+extension UserCollectionsViewController {    
     func setUpCollectionView() {
         layout.delegate = self
         layout.cellPadding = 5

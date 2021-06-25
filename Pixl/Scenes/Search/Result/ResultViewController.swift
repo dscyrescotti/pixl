@@ -87,7 +87,6 @@ class ResultViewController: UIViewController, Bindable, AppBarInjectable {
 extension ResultViewController {
     func setUp() {
         view.backgroundColor = .systemBackground
-        
     }
     
     func setUpCollectionView() {

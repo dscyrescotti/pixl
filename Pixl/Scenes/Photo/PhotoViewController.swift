@@ -16,6 +16,11 @@ class PhotoViewController: UIViewController, Bindable {
     var viewModel: PhotoViewModel!
     
     var color: UIColor
+    var isLiked: Bool = false {
+        didSet {
+            likeButton.change(systemName: isLiked ? "heart.fill" : "heart")
+        }
+    }
     
     private let bag = DisposeBag()
     
@@ -47,6 +52,7 @@ class PhotoViewController: UIViewController, Bindable {
     
     private let backButton = BarButton(systemName: "arrow.backward")
     private let toolButton = BarButton(systemName: "ellipsis")
+    private let likeButton = BarButton(systemName: "heart")
     lazy var orientationChange = PublishRelay<Orientation>()
     
     init(color: UIColor) {
@@ -55,6 +61,7 @@ class PhotoViewController: UIViewController, Bindable {
         headerView.bar.backgroundColor = color
         backButton.configure(with: color)
         toolButton.configure(with: color)
+        likeButton.configure(with: color)
     }
     
     required init?(coder: NSCoder) {
@@ -96,6 +103,12 @@ class PhotoViewController: UIViewController, Bindable {
             .subscribe(onNext: { [unowned self] in
                 let placeholder = UIImage(blurHash: $0.1, size: CGSize(width: 20, height: 20))
                 imageView.kf.setImage(with: URL(string: $0.0), placeholder: placeholder, options: [.cacheOriginalImage, .diskCacheExpiration(.days(2)), .keepCurrentImageWhileLoading])
+            })
+            .disposed(by: bag)
+        
+        photo
+            .subscribe(onNext: { [unowned self] photo in
+                isLiked = photo.likedByUser
             })
             .disposed(by: bag)
         
@@ -153,10 +166,24 @@ class PhotoViewController: UIViewController, Bindable {
             .bind(to: toolButton.orientationChange)
             .disposed(by: bag)
         
+        orientation
+            .bind(to: likeButton.orientationChange)
+            .disposed(by: bag)
+        
         backButton.rx.tap
             .subscribe(onNext: { [unowned self] in
                 navigationController?.popViewController(animated: true)
             })
+            .disposed(by: bag)
+        
+        likeButton.rx.tap
+            .flatMap { [unowned self] _ -> Observable<LikePhoto> in
+                let photo = viewModel.photo.value
+                isLiked.toggle()
+                return APIService.shared.likePhoto(id: photo.id, isLiked: photo.likedByUser)
+            }
+            .asSingle()
+            .subscribe()
             .disposed(by: bag)
         
         userProfileRow.tapAction
@@ -233,7 +260,7 @@ extension PhotoViewController {
     func setUpBarButtons() {
         orientationChange.accept(view.orientation(portrait: Orientation.portrait, landscape: .landscape))
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: toolButton)
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: toolButton), UIBarButtonItem(customView: likeButton)]
     }
 }
 
