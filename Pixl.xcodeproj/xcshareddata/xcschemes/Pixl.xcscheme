@@ -70,23 +70,6 @@
             ReferencedContainer = "container:Pixl.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "ACCESS_KEY"
-            value = "y0-sw8-NuGdSgUqGmhKFmP2_aOzeEKZ1fu6TMs8ww7w"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "REDIRECT_URI"
-            value = "pixl-app://unsplash-authentication"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "SECRET_KEY"
-            value = "1yTr8QTC1mSLlsKD-wwGJ4C-VXQZ1fW5B8sJZruHLnw"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
