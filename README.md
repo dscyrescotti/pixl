@@ -13,8 +13,8 @@ The final thing is to add URL scheme in your project. Go to project target and s
 Here are some snapshots of **pixl**.
 | <img src="https://github.com/dscyrescotti/Pixl/blob/main/Assets/LoginView.png?raw=true" alt="Login View"/> | <img src="https://github.com/dscyrescotti/Pixl/blob/main/Assets/PhotosView.png?raw=true" alt="Photos View"/> | <img src="https://github.com/dscyrescotti/Pixl/blob/main/Assets/CollectionsView.png?raw=true" alt="Collections View"/> | 
 |--|--|--|
-| <img src="https://github.com/dscyrescotti/Pixl/blob/main/Assets/PhotoView.png?raw=true" alt="Photo View"/> | <img src="https://github.com/dscyrescotti/Pixl/blob/main/Assets/UserView.png?raw=true" alt="User View"/> | <img src="https://github.com/dscyrescotti/Pixl/blob/main/Assets/BrowseView.png?raw=true" alt="Browse View"/> |
-| <img src="https://github.com/dscyrescotti/Pixl/blob/main/Assets/SearchResultsView.png?raw=true" alt="Search Results View"/> | <img src="https://github.com/dscyrescotti/Pixl/blob/main/Assets/SettingsView.png?raw=true" alt="Settings View"/> |  |
+| <img src="https://github.com/dscyrescotti/Pixl/blob/main/Assets/CollectionView.png?raw=true" alt="Collection View"/> | <img src="https://github.com/dscyrescotti/Pixl/blob/main/Assets/PhotoView.png?raw=true" alt="Photo View"/> | <img src="https://github.com/dscyrescotti/Pixl/blob/main/Assets/UserView.png?raw=true" alt="User View"/> |
+| <img src="https://github.com/dscyrescotti/Pixl/blob/main/Assets/BrowseView.png?raw=true" alt="Browse View"/> | <img src="https://github.com/dscyrescotti/Pixl/blob/main/Assets/SearchResultsView.png?raw=true" alt="Search Results View"/> | <img src="https://github.com/dscyrescotti/Pixl/blob/main/Assets/SettingsView.png?raw=true" alt="Settings View"/> |
 
 # License
 **pixl** is available under the MIT license. See the [LICENSE](https://github.com/dscyrescotti/Pixl/blob/main/LICENSE) file for more info.
